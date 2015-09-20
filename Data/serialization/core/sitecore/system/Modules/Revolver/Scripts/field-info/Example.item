@@ -1,0 +1,65 @@
+----item----
+version: 1
+id: {9C367229-C22A-4C4A-9AFC-470492E6AD26}
+database: core
+path: /sitecore/system/Modules/Revolver/Scripts/field-info/Example
+parent: {2AC7ACEC-2440-4AF9-9BFA-50F4C8CC7CEC}
+name: Example
+master: {00000000-0000-0000-0000-000000000000}
+template: {ED87F5B2-E924-45E3-820C-EF25B8CADED3}
+templatekey: Script Help Example
+
+----version----
+language: en
+version: 1
+revision: d2d09467-852a-4884-951a-ae8248643655
+
+----field----
+field: {1B274D39-8EFF-4450-8331-1F5349FE8B71}
+name: Example
+key: example
+content-length: 7
+
+fi text
+----field----
+field: {52807595-0F8F-4B20-8D2A-CB71D28C6103}
+name: __Owner
+key: __owner
+content-length: 14
+
+sitecore\admin
+----field----
+field: {25BED78C-4957-4165-998A-CA1B52F67497}
+name: __Created
+key: __created
+content-length: 15
+
+20110401T213425
+----field----
+field: {5DD74568-4D4B-44C1-B513-0AF5F4CDA34F}
+name: __Created by
+key: __created by
+content-length: 14
+
+sitecore\admin
+----field----
+field: {8CDC337E-A112-42FB-BBB4-4143751E123F}
+name: __Revision
+key: __revision
+content-length: 36
+
+d2d09467-852a-4884-951a-ae8248643655
+----field----
+field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
+name: __Updated
+key: __updated
+content-length: 34
+
+20110401T213429:634372904699194985
+----field----
+field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
+name: __Updated by
+key: __updated by
+content-length: 14
+
+sitecore\admin

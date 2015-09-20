@@ -1,0 +1,72 @@
+----item----
+version: 1
+id: {2F4DDED4-D4D2-4815-AA10-66652F7DA0E5}
+database: core
+path: /sitecore/system/Modules/Revolver/Scripts/replace-in-field/fieldname
+parent: {3E06FDB3-A12D-47C5-94A8-E48C469A9246}
+name: fieldname
+master: {00000000-0000-0000-0000-000000000000}
+template: {7B8B523F-9CC8-44E6-A53C-834F7588E555}
+templatekey: Script Help Parameter
+
+----version----
+language: en
+version: 1
+revision: 41edee01-f57e-4a06-9a37-406c23269b6a
+
+----field----
+field: {F3DCD3C2-ADEA-496B-B4A5-599E9623811F}
+name: Name
+key: name
+content-length: 9
+
+fieldname
+----field----
+field: {C93FB3D0-3615-4AD2-8482-60CE1151BF1D}
+name: Description
+key: description
+content-length: 35
+
+The name of the field to operate in
+----field----
+field: {52807595-0F8F-4B20-8D2A-CB71D28C6103}
+name: __Owner
+key: __owner
+content-length: 14
+
+sitecore\admin
+----field----
+field: {25BED78C-4957-4165-998A-CA1B52F67497}
+name: __Created
+key: __created
+content-length: 15
+
+20120904T210500
+----field----
+field: {5DD74568-4D4B-44C1-B513-0AF5F4CDA34F}
+name: __Created by
+key: __created by
+content-length: 14
+
+sitecore\admin
+----field----
+field: {8CDC337E-A112-42FB-BBB4-4143751E123F}
+name: __Revision
+key: __revision
+content-length: 36
+
+41edee01-f57e-4a06-9a37-406c23269b6a
+----field----
+field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
+name: __Updated
+key: __updated
+content-length: 34
+
+20120904T210601:634823895615570460
+----field----
+field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
+name: __Updated by
+key: __updated by
+content-length: 14
+
+sitecore\admin

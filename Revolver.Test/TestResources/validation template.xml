@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<item name="ValidationTest" key="validationtest" id="{F261C590-B924-4B65-B158-3EBF729917D9}" tid="{AB86861A-6030-46C5-B394-E8F99E8B87DB}" mid="{00000000-0000-0000-0000-000000000000}" sortorder="100" template="template" parentid="{B29EE504-861C-492F-95A3-0D890B6FCA09}">
+  <version language="en" version="1">
+    <fields>
+      <field tfid="{5DD74568-4D4B-44C1-B513-0AF5F4CDA34F}" key="__created by" type="text">
+        <content>sitecore\admin</content>
+      </field>
+      <field tfid="{BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}" key="__updated by" type="text">
+        <content>sitecore\admin</content>
+      </field>
+      <field tfid="{8CDC337E-A112-42FB-BBB4-4143751E123F}" key="__revision" type="text">
+        <content>2e90cb14-909c-40a4-955d-fafbd91e0b16</content>
+      </field>
+      <field tfid="{001DD393-96C5-490B-924A-B0F25CD9EFD8}" key="" type="">
+        <content>&lt;r owner="sitecore\admin" date="20140725T223608" /&gt;</content>
+      </field>
+      <field tfid="{25BED78C-4957-4165-998A-CA1B52F67497}" key="__created" type="datetime">
+        <content>20140725T223608</content>
+      </field>
+      <field tfid="{D9CF14B1-FA16-4BA6-9288-E8A174D4D522}" key="__updated" type="datetime">
+        <content>20140725T223905:635419247452849969</content>
+      </field>
+      <field tfid="{12C33F3F-86C5-43A5-AEB4-5598CEC45116}" key="__base template" type="tree list">
+        <content>{1930BBEB-7805-471A-A3BE-4858AC7CF696}</content>
+      </field>
+      <field tfid="{86B52EEF-078E-4D9E-80BF-888287070E6C}" key="__workflow validation rules" type="TreelistEx">
+        <content>{54EB5C9A-822E-43A4-BD60-63C9F2C63C74}</content>
+      </field>
+    </fields>
+  </version>
+  <item name="Data" key="data" id="{3B0F0105-6198-455C-8A22-C5137DAB5389}" tid="{E269FBB5-3750-427A-9149-7AA950B49301}" mid="{00000000-0000-0000-0000-000000000000}" sortorder="100" template="template section" parentid="{F261C590-B924-4B65-B158-3EBF729917D9}">
+    <version language="en" version="1">
+      <fields>
+        <field tfid="{5DD74568-4D4B-44C1-B513-0AF5F4CDA34F}" key="__created by" type="text">
+          <content>sitecore\admin</content>
+        </field>
+        <field tfid="{C8F93AFE-BFD4-4E8F-9C61-152559854661}" key="" type="">
+          <content />
+        </field>
+        <field tfid="{BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}" key="__updated by" type="text">
+          <content>sitecore\admin</content>
+        </field>
+        <field tfid="{8CDC337E-A112-42FB-BBB4-4143751E123F}" key="__revision" type="text">
+          <content>1bfc83fd-a87c-4333-92fa-823a9d094fcd</content>
+        </field>
+        <field tfid="{4C346442-E859-4EFD-89B2-44AEDF467D21}" key="" type="">
+          <content />
+        </field>
+        <field tfid="{25BED78C-4957-4165-998A-CA1B52F67497}" key="__created" type="datetime">
+          <content>20140725T223713</content>
+        </field>
+        <field tfid="{D9CF14B1-FA16-4BA6-9288-E8A174D4D522}" key="__updated" type="datetime">
+          <content>20140725T223905:635419247451479969</content>
+        </field>
+      </fields>
+    </version>
+    <item name="Required Button" key="required button" id="{B42A7D0E-2039-43C9-B4EE-39D4916F5410}" tid="{455A3E98-A627-4B40-8035-E683A0331AC7}" mid="{00000000-0000-0000-0000-000000000000}" sortorder="100" template="template field" parentid="{3B0F0105-6198-455C-8A22-C5137DAB5389}">
+      <version language="en" version="1">
+        <fields>
+          <field tfid="{C8F93AFE-BFD4-4E8F-9C61-152559854661}" key="" type="">
+            <content />
+          </field>
+          <field tfid="{BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}" key="__updated by" type="text">
+            <content>sitecore\admin</content>
+          </field>
+          <field tfid="{8CDC337E-A112-42FB-BBB4-4143751E123F}" key="__revision" type="text">
+            <content>4ee4be49-d637-4cf0-a816-ee99c00e86e5</content>
+          </field>
+          <field tfid="{4C346442-E859-4EFD-89B2-44AEDF467D21}" key="" type="">
+            <content />
+          </field>
+          <field tfid="{25BED78C-4957-4165-998A-CA1B52F67497}" key="__created" type="datetime">
+            <content>20140725T223713</content>
+          </field>
+          <field tfid="{D9CF14B1-FA16-4BA6-9288-E8A174D4D522}" key="__updated" type="datetime">
+            <content>20140725T223905:635419247451739969</content>
+          </field>
+          <field tfid="{21828437-EA4B-40A1-8C61-4CE60EA41DB6}" key="validate button" type="tree list">
+            <content>{59D4EE10-627C-4FD3-A964-61A88B092CBC}</content>
+          </field>
+          <field tfid="{BA3F86A2-4A1C-4D78-B63D-91C2779C1B5E}" key="__sortorder" type="text">
+            <content>100</content>
+          </field>
+          <field tfid="{AB162CC0-DC80-4ABF-8871-998EE5D7BA32}" key="type" type="Grouped Droplist">
+            <content>Single-Line Text</content>
+          </field>
+        </fields>
+      </version>
+    </item>
+    <item name="Required Gutter" key="required gutter" id="{219058FC-EF6C-4D85-B604-55DDE5950686}" tid="{455A3E98-A627-4B40-8035-E683A0331AC7}" mid="{00000000-0000-0000-0000-000000000000}" sortorder="200" template="template field" parentid="{3B0F0105-6198-455C-8A22-C5137DAB5389}">
+      <version language="en" version="1">
+        <fields>
+          <field tfid="{C8F93AFE-BFD4-4E8F-9C61-152559854661}" key="" type="">
+            <content />
+          </field>
+          <field tfid="{BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}" key="__updated by" type="text">
+            <content>sitecore\admin</content>
+          </field>
+          <field tfid="{8CDC337E-A112-42FB-BBB4-4143751E123F}" key="__revision" type="text">
+            <content>6bec5864-0b9c-4799-9386-33ffd1eee29e</content>
+          </field>
+          <field tfid="{4C346442-E859-4EFD-89B2-44AEDF467D21}" key="" type="">
+            <content />
+          </field>
+          <field tfid="{25BED78C-4957-4165-998A-CA1B52F67497}" key="__created" type="datetime">
+            <content>20140725T223714</content>
+          </field>
+          <field tfid="{D9CF14B1-FA16-4BA6-9288-E8A174D4D522}" key="__updated" type="datetime">
+            <content>20140725T223905:635419247451889969</content>
+          </field>
+          <field tfid="{BA3F86A2-4A1C-4D78-B63D-91C2779C1B5E}" key="__sortorder" type="text">
+            <content>200</content>
+          </field>
+          <field tfid="{AB162CC0-DC80-4ABF-8871-998EE5D7BA32}" key="type" type="Grouped Droplist">
+            <content>Single-Line Text</content>
+          </field>
+          <field tfid="{337E20E1-999A-4EEA-85AD-B58A03AE75CC}" key="quick action bar" type="tree list">
+            <content>{59D4EE10-627C-4FD3-A964-61A88B092CBC}</content>
+          </field>
+        </fields>
+      </version>
+    </item>
+    <item name="Required Bar" key="required bar" id="{2801082E-A440-4356-9B0F-2CB6A98A7DF0}" tid="{455A3E98-A627-4B40-8035-E683A0331AC7}" mid="{00000000-0000-0000-0000-000000000000}" sortorder="300" template="template field" parentid="{3B0F0105-6198-455C-8A22-C5137DAB5389}">
+      <version language="en" version="1">
+        <fields>
+          <field tfid="{C8F93AFE-BFD4-4E8F-9C61-152559854661}" key="" type="">
+            <content />
+          </field>
+          <field tfid="{BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}" key="__updated by" type="text">
+            <content>sitecore\admin</content>
+          </field>
+          <field tfid="{8CDC337E-A112-42FB-BBB4-4143751E123F}" key="__revision" type="text">
+            <content>07444faf-0700-455e-9f9d-ed1c18ba4638</content>
+          </field>
+          <field tfid="{4C346442-E859-4EFD-89B2-44AEDF467D21}" key="" type="">
+            <content />
+          </field>
+          <field tfid="{25BED78C-4957-4165-998A-CA1B52F67497}" key="__created" type="datetime">
+            <content>20140725T223714</content>
+          </field>
+          <field tfid="{D9CF14B1-FA16-4BA6-9288-E8A174D4D522}" key="__updated" type="datetime">
+            <content>20140725T223905:635419247451969969</content>
+          </field>
+          <field tfid="{9C903E29-650D-4AF2-B9BD-526D5C14A1A5}" key="validator bar" type="tree list">
+            <content>{59D4EE10-627C-4FD3-A964-61A88B092CBC}</content>
+          </field>
+          <field tfid="{BA3F86A2-4A1C-4D78-B63D-91C2779C1B5E}" key="__sortorder" type="text">
+            <content>300</content>
+          </field>
+          <field tfid="{AB162CC0-DC80-4ABF-8871-998EE5D7BA32}" key="type" type="Grouped Droplist">
+            <content>Single-Line Text</content>
+          </field>
+        </fields>
+      </version>
+    </item>
+    <item name="Integer Workflow" key="integer workflow" id="{FCE0C101-8E38-4F7F-ADF1-BDD1D20D0D78}" tid="{455A3E98-A627-4B40-8035-E683A0331AC7}" mid="{00000000-0000-0000-0000-000000000000}" sortorder="400" template="template field" parentid="{3B0F0105-6198-455C-8A22-C5137DAB5389}">
+      <version language="en" version="1">
+        <fields>
+          <field tfid="{C8F93AFE-BFD4-4E8F-9C61-152559854661}" key="" type="">
+            <content />
+          </field>
+          <field tfid="{BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}" key="__updated by" type="text">
+            <content>sitecore\admin</content>
+          </field>
+          <field tfid="{8CDC337E-A112-42FB-BBB4-4143751E123F}" key="__revision" type="text">
+            <content>70256f7d-6e78-47c5-a140-c87928850ec6</content>
+          </field>
+          <field tfid="{4C346442-E859-4EFD-89B2-44AEDF467D21}" key="" type="">
+            <content />
+          </field>
+          <field tfid="{25BED78C-4957-4165-998A-CA1B52F67497}" key="__created" type="datetime">
+            <content>20140725T223714</content>
+          </field>
+          <field tfid="{D9CF14B1-FA16-4BA6-9288-E8A174D4D522}" key="__updated" type="datetime">
+            <content>20140725T223905:635419247452069969</content>
+          </field>
+          <field tfid="{BA3F86A2-4A1C-4D78-B63D-91C2779C1B5E}" key="__sortorder" type="text">
+            <content>400</content>
+          </field>
+          <field tfid="{AB162CC0-DC80-4ABF-8871-998EE5D7BA32}" key="type" type="Grouped Droplist">
+            <content>Single-Line Text</content>
+          </field>
+          <field tfid="{53C432C4-7122-4E2D-8296-DB4184FD1735}" key="workflow" type="tree list">
+            <content>{7CC88F55-8466-484B-A224-EF4984DCAEDA}</content>
+          </field>
+        </fields>
+      </version>
+    </item>
+  </item>
+</item>

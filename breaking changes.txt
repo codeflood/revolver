@@ -1,0 +1,36 @@
+# Breaking Changes #
+
+## Content Search Command ##
+Introduced: Revolver 3
+Description: If specifying the index name you need the -i named parameter instead of just adding the index name before the query
+
+## Search Command ##
+Introduced: Revolver 3
+Description: If specifying the index name you need the -i named parameter instead of just adding the index name before the query
+
+## Purge Versions ##
+Introduced: Revolver 3
+Description: By default the context version is deleted, not all other versions. Parameter definitions have changed. `-ov` is for all versions except the current. `-l` is for the specified version(s) in all languages. `-v` no longer used as individual version can be specified in path. Changed the class name of the command.
+
+## Find with idlist can also filter ##
+Introduced: Revolver 3
+Description: In previous versions when using `idlist` with `find` no other filters where applied. Now it is.
+
+## Binding and aliases ##
+Introduced: Revolver 3
+Description: Bind can no longer unbind a command added at startup time. Bind can be used to reset command and add new ones as well as add aliases for existing commands. Commands added at startup time cannot have their binding changed, only an additional aliases added for the command.
+
+## System commands removed ##
+Introduced: Revolver 3
+Description: Bind was previously the only system command. With changes to binding and the introduction of aliases in Revolver 3 there was no need to separate this command out. Bind has been made a normal command and the SysCommand class and associated code has been removed.
+
+- Remove CommandHandler.RebindCoreCommand() method
+- Remove CommandHandler.ResetCoreBindings() method
+- CommandHandler.CoreCommands property is readonly dictionary
+- CommandHandler.CustomCommands property is readonly dictionary
+
+## Init script ##
+Introduced: Revolver 3
+Description: The scripts run at session initialization have changed. Scripts are executed in the following order: init, init-roles, init-user. No longer use the startup folder
+
+SessionContext moved to core

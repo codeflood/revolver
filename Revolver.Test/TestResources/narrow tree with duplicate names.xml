@@ -1,0 +1,437 @@
+<item name="Callirrhoe" key="callirrhoe" id="{1356D842-E9B2-4057-A16D-25F540E0DD6C}" tid="{76036F5E-CBCE-46D1-AF0A-4143F9B557AA}" mid="{00000000-0000-0000-0000-000000000000}" sortorder="100" template="sample item" parentid="{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}">
+  <version language="de" version="1">
+    <fields>
+      <field tfid="{A4F985D9-98B3-4B52-AAAF-4344F6E747C6}" key="__workflow" type="reference">
+        <content>{A5BC37E7-ED96-4C1E-8590-A26E64DB55EA}</content>
+      </field>
+    </fields>
+  </version>
+  <version language="en" version="1">
+    <fields>
+      <field tfid="{5DD74568-4D4B-44C1-B513-0AF5F4CDA34F}" key="__created by" type="text">
+        <content>sitecore\admin</content>
+      </field>
+      <field tfid="{3E431DE1-525E-47A3-B6B0-1CCBEC3A8C98}" key="__workflow state" type="reference">
+        <content>{FCA998C5-0CC3-4F91-94D8-0A4E6CAECE88}</content>
+      </field>
+      <field tfid="{BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}" key="__updated by" type="text">
+        <content>sitecore\admin</content>
+      </field>
+      <field tfid="{8CDC337E-A112-42FB-BBB4-4143751E123F}" key="__revision" type="text">
+        <content>1417eebd-57ed-4052-aa45-c6e8ecbb2b36</content>
+      </field>
+      <field tfid="{75577384-3C97-45DA-A847-81B00500E250}" key="title" type="text">
+        <content>Callirrhoe</content>
+      </field>
+      <field tfid="{001DD393-96C5-490B-924A-B0F25CD9EFD8}" key="__lock" type="memo">
+        <content>&lt;r /&gt;</content>
+      </field>
+      <field tfid="{25BED78C-4957-4165-998A-CA1B52F67497}" key="__created" type="datetime">
+        <content>20140103T222943</content>
+      </field>
+      <field tfid="{D9CF14B1-FA16-4BA6-9288-E8A174D4D522}" key="__updated" type="datetime">
+        <content>20140103T223742:635243854629370009</content>
+      </field>
+      <field tfid="{A4F985D9-98B3-4B52-AAAF-4344F6E747C6}" key="__workflow" type="reference">
+        <content>{A5BC37E7-ED96-4C1E-8590-A26E64DB55EA}</content>
+      </field>
+    </fields>
+  </version>
+  <item name="Juliet" key="juliet" id="{B50EAC76-8E76-48E9-AC2F-04D6A1572110}" tid="{76036F5E-CBCE-46D1-AF0A-4143F9B557AA}" mid="{00000000-0000-0000-0000-000000000000}" sortorder="100" template="sample item" parentid="{1356D842-E9B2-4057-A16D-25F540E0DD6C}">
+    <version language="de" version="1">
+      <fields>
+        <field tfid="{5DD74568-4D4B-44C1-B513-0AF5F4CDA34F}" key="__created by" type="text">
+          <content>sitecore\admin</content>
+        </field>
+        <field tfid="{3E431DE1-525E-47A3-B6B0-1CCBEC3A8C98}" key="__workflow state" type="reference">
+          <content>{FCA998C5-0CC3-4F91-94D8-0A4E6CAECE88}</content>
+        </field>
+        <field tfid="{BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}" key="__updated by" type="text">
+          <content>sitecore\admin</content>
+        </field>
+        <field tfid="{8CDC337E-A112-42FB-BBB4-4143751E123F}" key="__revision" type="text">
+          <content>260CD8CC-AEEB-47A7-A55E-AFAB94E8DC86</content>
+        </field>
+        <field tfid="{75577384-3C97-45DA-A847-81B00500E250}" key="title" type="text">
+          <content>Juliet-de</content>
+        </field>
+        <field tfid="{001DD393-96C5-490B-924A-B0F25CD9EFD8}" key="__lock" type="memo">
+          <content>&lt;r /&gt;</content>
+        </field>
+        <field tfid="{25BED78C-4957-4165-998A-CA1B52F67497}" key="__created" type="datetime">
+          <content>20140103T223022</content>
+        </field>
+        <field tfid="{D9CF14B1-FA16-4BA6-9288-E8A174D4D522}" key="__updated" type="datetime">
+          <content>20140103T223743:635243854630210093</content>
+        </field>
+        <field tfid="{A4F985D9-98B3-4B52-AAAF-4344F6E747C6}" key="__workflow" type="reference">
+          <content>{A5BC37E7-ED96-4C1E-8590-A26E64DB55EA}</content>
+        </field>
+      </fields>
+    </version>
+    <version language="de" version="2">
+      <fields>
+        <field tfid="{5DD74568-4D4B-44C1-B513-0AF5F4CDA34F}" key="__created by" type="text">
+          <content>sitecore\admin</content>
+        </field>
+        <field tfid="{3E431DE1-525E-47A3-B6B0-1CCBEC3A8C98}" key="__workflow state" type="reference">
+          <content>{FCA998C5-0CC3-4F91-94D8-0A4E6CAECE88}</content>
+        </field>
+        <field tfid="{BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}" key="__updated by" type="text">
+          <content>sitecore\admin</content>
+        </field>
+        <field tfid="{8CDC337E-A112-42FB-BBB4-4143751E123F}" key="__revision" type="text">
+          <content>286EC1C1-926B-4075-922E-CEB2D263526C</content>
+        </field>
+        <field tfid="{75577384-3C97-45DA-A847-81B00500E250}" key="title" type="text">
+          <content>Juliet-de-2</content>
+        </field>
+        <field tfid="{001DD393-96C5-490B-924A-B0F25CD9EFD8}" key="__lock" type="memo">
+          <content>&lt;r /&gt;</content>
+        </field>
+        <field tfid="{25BED78C-4957-4165-998A-CA1B52F67497}" key="__created" type="datetime">
+          <content>20140103T223022</content>
+        </field>
+        <field tfid="{D9CF14B1-FA16-4BA6-9288-E8A174D4D522}" key="__updated" type="datetime">
+          <content>20140103T223743:635243854630210093</content>
+        </field>
+        <field tfid="{A4F985D9-98B3-4B52-AAAF-4344F6E747C6}" key="__workflow" type="reference">
+          <content>{A5BC37E7-ED96-4C1E-8590-A26E64DB55EA}</content>
+        </field>
+      </fields>
+    </version>
+    <version language="en" version="1">
+      <fields>
+        <field tfid="{5DD74568-4D4B-44C1-B513-0AF5F4CDA34F}" key="__created by" type="text">
+          <content>sitecore\admin</content>
+        </field>
+        <field tfid="{3E431DE1-525E-47A3-B6B0-1CCBEC3A8C98}" key="__workflow state" type="reference">
+          <content>{FCA998C5-0CC3-4F91-94D8-0A4E6CAECE88}</content>
+        </field>
+        <field tfid="{BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}" key="__updated by" type="text">
+          <content>sitecore\admin</content>
+        </field>
+        <field tfid="{8CDC337E-A112-42FB-BBB4-4143751E123F}" key="__revision" type="text">
+          <content>06849786-9135-484c-a285-14e0a14470a6</content>
+        </field>
+        <field tfid="{75577384-3C97-45DA-A847-81B00500E250}" key="title" type="text">
+          <content>Juliet</content>
+        </field>
+        <field tfid="{001DD393-96C5-490B-924A-B0F25CD9EFD8}" key="__lock" type="memo">
+          <content>&lt;r /&gt;</content>
+        </field>
+        <field tfid="{25BED78C-4957-4165-998A-CA1B52F67497}" key="__created" type="datetime">
+          <content>20140103T223022</content>
+        </field>
+        <field tfid="{D9CF14B1-FA16-4BA6-9288-E8A174D4D522}" key="__updated" type="datetime">
+          <content>20140103T223743:635243854630210093</content>
+        </field>
+        <field tfid="{A4F985D9-98B3-4B52-AAAF-4344F6E747C6}" key="__workflow" type="reference">
+          <content>{A5BC37E7-ED96-4C1E-8590-A26E64DB55EA}</content>
+        </field>
+      </fields>
+    </version>
+    <version language="en" version="2">
+      <fields>
+        <field tfid="{5DD74568-4D4B-44C1-B513-0AF5F4CDA34F}" key="__created by" type="text">
+          <content>sitecore\admin</content>
+        </field>
+        <field tfid="{3E431DE1-525E-47A3-B6B0-1CCBEC3A8C98}" key="__workflow state" type="reference">
+          <content>{FCA998C5-0CC3-4F91-94D8-0A4E6CAECE88}</content>
+        </field>
+        <field tfid="{BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}" key="__updated by" type="text">
+          <content>sitecore\admin</content>
+        </field>
+        <field tfid="{8CDC337E-A112-42FB-BBB4-4143751E123F}" key="__revision" type="text">
+          <content>3E23E82A-C5A2-4160-9352-63ED88221482</content>
+        </field>
+        <field tfid="{75577384-3C97-45DA-A847-81B00500E250}" key="title" type="text">
+          <content>Juliet-2</content>
+        </field>
+        <field tfid="{001DD393-96C5-490B-924A-B0F25CD9EFD8}" key="__lock" type="memo">
+          <content>&lt;r /&gt;</content>
+        </field>
+        <field tfid="{25BED78C-4957-4165-998A-CA1B52F67497}" key="__created" type="datetime">
+          <content>20140103T223022</content>
+        </field>
+        <field tfid="{D9CF14B1-FA16-4BA6-9288-E8A174D4D522}" key="__updated" type="datetime">
+          <content>20140103T223743:635243854630210093</content>
+        </field>
+        <field tfid="{A4F985D9-98B3-4B52-AAAF-4344F6E747C6}" key="__workflow" type="reference">
+          <content>{A5BC37E7-ED96-4C1E-8590-A26E64DB55EA}</content>
+        </field>
+      </fields>
+    </version>
+    <version language="en" version="3">
+      <fields>
+        <field tfid="{5DD74568-4D4B-44C1-B513-0AF5F4CDA34F}" key="__created by" type="text">
+          <content>sitecore\admin</content>
+        </field>
+        <field tfid="{3E431DE1-525E-47A3-B6B0-1CCBEC3A8C98}" key="__workflow state" type="reference">
+          <content>{FCA998C5-0CC3-4F91-94D8-0A4E6CAECE88}</content>
+        </field>
+        <field tfid="{BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}" key="__updated by" type="text">
+          <content>sitecore\admin</content>
+        </field>
+        <field tfid="{8CDC337E-A112-42FB-BBB4-4143751E123F}" key="__revision" type="text">
+          <content>5E59089E-D796-4AE5-8ED2-95D26F07BF76</content>
+        </field>
+        <field tfid="{75577384-3C97-45DA-A847-81B00500E250}" key="title" type="text">
+          <content>Juliet-3</content>
+        </field>
+        <field tfid="{001DD393-96C5-490B-924A-B0F25CD9EFD8}" key="__lock" type="memo">
+          <content>&lt;r /&gt;</content>
+        </field>
+        <field tfid="{25BED78C-4957-4165-998A-CA1B52F67497}" key="__created" type="datetime">
+          <content>20140103T223022</content>
+        </field>
+        <field tfid="{D9CF14B1-FA16-4BA6-9288-E8A174D4D522}" key="__updated" type="datetime">
+          <content>20140103T223743:635243854630210093</content>
+        </field>
+        <field tfid="{A4F985D9-98B3-4B52-AAAF-4344F6E747C6}" key="__workflow" type="reference">
+          <content>{A5BC37E7-ED96-4C1E-8590-A26E64DB55EA}</content>
+        </field>
+      </fields>
+    </version>
+  </item>
+  <item name="Sycorax" key="sycorax" id="{A3A137BA-F588-4A90-9FCF-4BCBB0EC1C49}" tid="{76036F5E-CBCE-46D1-AF0A-4143F9B557AA}" mid="{00000000-0000-0000-0000-000000000000}" sortorder="100" template="sample item" parentid="{1356D842-E9B2-4057-A16D-25F540E0DD6C}">
+    <version language="de" version="1">
+      <fields>
+        <field tfid="{A4F985D9-98B3-4B52-AAAF-4344F6E747C6}" key="__workflow" type="reference">
+          <content>{A5BC37E7-ED96-4C1E-8590-A26E64DB55EA}</content>
+        </field>
+      </fields>
+    </version>
+    <version language="en" version="1">
+      <fields>
+        <field tfid="{5DD74568-4D4B-44C1-B513-0AF5F4CDA34F}" key="__created by" type="text">
+          <content>sitecore\admin</content>
+        </field>
+        <field tfid="{3E431DE1-525E-47A3-B6B0-1CCBEC3A8C98}" key="__workflow state" type="reference">
+          <content>{FCA998C5-0CC3-4F91-94D8-0A4E6CAECE88}</content>
+        </field>
+        <field tfid="{BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}" key="__updated by" type="text">
+          <content>sitecore\admin</content>
+        </field>
+        <field tfid="{8CDC337E-A112-42FB-BBB4-4143751E123F}" key="__revision" type="text">
+          <content>e93d9fae-1ce9-47d2-b55b-f7f582c34ff3</content>
+        </field>
+        <field tfid="{75577384-3C97-45DA-A847-81B00500E250}" key="title" type="text">
+          <content>Sycorax</content>
+        </field>
+        <field tfid="{001DD393-96C5-490B-924A-B0F25CD9EFD8}" key="__lock" type="memo">
+          <content>&lt;r /&gt;</content>
+        </field>
+        <field tfid="{25BED78C-4957-4165-998A-CA1B52F67497}" key="__created" type="datetime">
+          <content>20140103T222956</content>
+        </field>
+        <field tfid="{D9CF14B1-FA16-4BA6-9288-E8A174D4D522}" key="__updated" type="datetime">
+          <content>20140103T223743:635243854630480120</content>
+        </field>
+        <field tfid="{A4F985D9-98B3-4B52-AAAF-4344F6E747C6}" key="__workflow" type="reference">
+          <content>{A5BC37E7-ED96-4C1E-8590-A26E64DB55EA}</content>
+        </field>
+      </fields>
+    </version>
+  </item>
+  <item name="Umbriel" key="umbriel" id="{454742AD-BCC8-4487-9A2D-5DFD084076F0}" tid="{76036F5E-CBCE-46D1-AF0A-4143F9B557AA}" mid="{00000000-0000-0000-0000-000000000000}" sortorder="100" template="sample item" parentid="{1356D842-E9B2-4057-A16D-25F540E0DD6C}">
+    <version language="de" version="1">
+      <fields>
+        <field tfid="{A4F985D9-98B3-4B52-AAAF-4344F6E747C6}" key="__workflow" type="reference">
+          <content>{A5BC37E7-ED96-4C1E-8590-A26E64DB55EA}</content>
+        </field>
+      </fields>
+    </version>
+    <version language="en" version="1">
+      <fields>
+        <field tfid="{5DD74568-4D4B-44C1-B513-0AF5F4CDA34F}" key="__created by" type="text">
+          <content>sitecore\admin</content>
+        </field>
+        <field tfid="{3E431DE1-525E-47A3-B6B0-1CCBEC3A8C98}" key="__workflow state" type="reference">
+          <content>{FCA998C5-0CC3-4F91-94D8-0A4E6CAECE88}</content>
+        </field>
+        <field tfid="{BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}" key="__updated by" type="text">
+          <content>sitecore\admin</content>
+        </field>
+        <field tfid="{8CDC337E-A112-42FB-BBB4-4143751E123F}" key="__revision" type="text">
+          <content>ae837ff9-efe1-4d6c-8fb3-18775d28fa63</content>
+        </field>
+        <field tfid="{75577384-3C97-45DA-A847-81B00500E250}" key="title" type="text">
+          <content>Umbriel</content>
+        </field>
+        <field tfid="{001DD393-96C5-490B-924A-B0F25CD9EFD8}" key="__lock" type="memo">
+          <content>&lt;r /&gt;</content>
+        </field>
+        <field tfid="{25BED78C-4957-4165-998A-CA1B52F67497}" key="__created" type="datetime">
+          <content>20140103T223012</content>
+        </field>
+        <field tfid="{D9CF14B1-FA16-4BA6-9288-E8A174D4D522}" key="__updated" type="datetime">
+          <content>20140103T223743:635243854630600132</content>
+        </field>
+        <field tfid="{A4F985D9-98B3-4B52-AAAF-4344F6E747C6}" key="__workflow" type="reference">
+          <content>{A5BC37E7-ED96-4C1E-8590-A26E64DB55EA}</content>
+        </field>
+      </fields>
+    </version>
+    <item name="Skoll" key="skoll" id="{D7BC63F0-A762-422F-841B-A228EB42FC04}" tid="{76036F5E-CBCE-46D1-AF0A-4143F9B557AA}" mid="{00000000-0000-0000-0000-000000000000}" sortorder="100" template="sample item" parentid="{454742AD-BCC8-4487-9A2D-5DFD084076F0}">
+      <version language="de" version="1">
+        <fields>
+          <field tfid="{A4F985D9-98B3-4B52-AAAF-4344F6E747C6}" key="__workflow" type="reference">
+            <content>{A5BC37E7-ED96-4C1E-8590-A26E64DB55EA}</content>
+          </field>
+        </fields>
+      </version>
+      <version language="en" version="1">
+        <fields>
+          <field tfid="{5DD74568-4D4B-44C1-B513-0AF5F4CDA34F}" key="__created by" type="text">
+            <content>sitecore\admin</content>
+          </field>
+          <field tfid="{3E431DE1-525E-47A3-B6B0-1CCBEC3A8C98}" key="__workflow state" type="reference">
+            <content>{FCA998C5-0CC3-4F91-94D8-0A4E6CAECE88}</content>
+          </field>
+          <field tfid="{BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}" key="__updated by" type="text">
+            <content>sitecore\admin</content>
+          </field>
+          <field tfid="{8CDC337E-A112-42FB-BBB4-4143751E123F}" key="__revision" type="text">
+            <content>e13e2eb5-9f83-4433-ac55-d822f13ff8df</content>
+          </field>
+          <field tfid="{75577384-3C97-45DA-A847-81B00500E250}" key="title" type="text">
+            <content>Skoll 0</content>
+          </field>
+          <field tfid="{001DD393-96C5-490B-924A-B0F25CD9EFD8}" key="__lock" type="memo">
+            <content>&lt;r /&gt;</content>
+          </field>
+          <field tfid="{25BED78C-4957-4165-998A-CA1B52F67497}" key="__created" type="datetime">
+            <content>20140103T223058</content>
+          </field>
+          <field tfid="{D9CF14B1-FA16-4BA6-9288-E8A174D4D522}" key="__updated" type="datetime">
+            <content>20140103T223743:635243854630710143</content>
+          </field>
+          <field tfid="{A4F985D9-98B3-4B52-AAAF-4344F6E747C6}" key="__workflow" type="reference">
+            <content>{A5BC37E7-ED96-4C1E-8590-A26E64DB55EA}</content>
+          </field>
+        </fields>
+      </version>
+    </item>
+    <item name="Skoll" key="skoll" id="{B7AF87A4-3C24-43E9-9EB1-0A402EFE0B56}" tid="{76036F5E-CBCE-46D1-AF0A-4143F9B557AA}" mid="{00000000-0000-0000-0000-000000000000}" sortorder="200" template="sample item" parentid="{454742AD-BCC8-4487-9A2D-5DFD084076F0}">
+      <version language="de" version="1">
+        <fields>
+          <field tfid="{A4F985D9-98B3-4B52-AAAF-4344F6E747C6}" key="__workflow" type="reference">
+            <content>{A5BC37E7-ED96-4C1E-8590-A26E64DB55EA}</content>
+          </field>
+        </fields>
+      </version>
+      <version language="en" version="1">
+        <fields>
+          <field tfid="{5DD74568-4D4B-44C1-B513-0AF5F4CDA34F}" key="__created by" type="text">
+            <content>sitecore\admin</content>
+          </field>
+          <field tfid="{3E431DE1-525E-47A3-B6B0-1CCBEC3A8C98}" key="__workflow state" type="reference">
+            <content>{FCA998C5-0CC3-4F91-94D8-0A4E6CAECE88}</content>
+          </field>
+          <field tfid="{BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}" key="__updated by" type="text">
+            <content>sitecore\admin</content>
+          </field>
+          <field tfid="{8CDC337E-A112-42FB-BBB4-4143751E123F}" key="__revision" type="text">
+            <content>b6cdd008-904d-41bb-8bfb-36a1920238c1</content>
+          </field>
+          <field tfid="{75577384-3C97-45DA-A847-81B00500E250}" key="title" type="text">
+            <content>Skoll 1</content>
+          </field>
+          <field tfid="{001DD393-96C5-490B-924A-B0F25CD9EFD8}" key="__lock" type="memo">
+            <content>&lt;r /&gt;</content>
+          </field>
+          <field tfid="{25BED78C-4957-4165-998A-CA1B52F67497}" key="__created" type="datetime">
+            <content>20140103T223102</content>
+          </field>
+          <field tfid="{D9CF14B1-FA16-4BA6-9288-E8A174D4D522}" key="__updated" type="datetime">
+            <content>20140103T223743:635243854630810153</content>
+          </field>
+          <field tfid="{A4F985D9-98B3-4B52-AAAF-4344F6E747C6}" key="__workflow" type="reference">
+            <content>{A5BC37E7-ED96-4C1E-8590-A26E64DB55EA}</content>
+          </field>
+        </fields>
+      </version>
+    </item>
+    <item name="Skoll" key="skoll" id="{AFB6FBB6-B05B-4D8D-9E1A-C1C47D201B4D}" tid="{76036F5E-CBCE-46D1-AF0A-4143F9B557AA}" mid="{00000000-0000-0000-0000-000000000000}" sortorder="300" template="sample item" parentid="{454742AD-BCC8-4487-9A2D-5DFD084076F0}">
+      <version language="de" version="1">
+        <fields>
+          <field tfid="{A4F985D9-98B3-4B52-AAAF-4344F6E747C6}" key="__workflow" type="reference">
+            <content>{A5BC37E7-ED96-4C1E-8590-A26E64DB55EA}</content>
+          </field>
+        </fields>
+      </version>
+      <version language="en" version="1">
+        <fields>
+          <field tfid="{5DD74568-4D4B-44C1-B513-0AF5F4CDA34F}" key="__created by" type="text">
+            <content>sitecore\admin</content>
+          </field>
+          <field tfid="{3E431DE1-525E-47A3-B6B0-1CCBEC3A8C98}" key="__workflow state" type="reference">
+            <content>{FCA998C5-0CC3-4F91-94D8-0A4E6CAECE88}</content>
+          </field>
+          <field tfid="{BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}" key="__updated by" type="text">
+            <content>sitecore\admin</content>
+          </field>
+          <field tfid="{8CDC337E-A112-42FB-BBB4-4143751E123F}" key="__revision" type="text">
+            <content>0e12f00e-6235-4f9b-a18a-357f28d467bf</content>
+          </field>
+          <field tfid="{75577384-3C97-45DA-A847-81B00500E250}" key="title" type="text">
+            <content>Skoll 2</content>
+          </field>
+          <field tfid="{001DD393-96C5-490B-924A-B0F25CD9EFD8}" key="__lock" type="memo">
+            <content>&lt;r /&gt;</content>
+          </field>
+          <field tfid="{25BED78C-4957-4165-998A-CA1B52F67497}" key="__created" type="datetime">
+            <content>20140103T223055</content>
+          </field>
+          <field tfid="{D9CF14B1-FA16-4BA6-9288-E8A174D4D522}" key="__updated" type="datetime">
+            <content>20140103T223743:635243854631220194</content>
+          </field>
+          <field tfid="{A4F985D9-98B3-4B52-AAAF-4344F6E747C6}" key="__workflow" type="reference">
+            <content>{A5BC37E7-ED96-4C1E-8590-A26E64DB55EA}</content>
+          </field>
+        </fields>
+      </version>
+    </item>
+    <item name="Ymir" key="ymir" id="{86C0B056-76F0-4869-A71E-2377CEF9A7FC}" tid="{76036F5E-CBCE-46D1-AF0A-4143F9B557AA}" mid="{00000000-0000-0000-0000-000000000000}" sortorder="100" template="sample item" parentid="{454742AD-BCC8-4487-9A2D-5DFD084076F0}">
+      <version language="de" version="1">
+        <fields>
+          <field tfid="{A4F985D9-98B3-4B52-AAAF-4344F6E747C6}" key="__workflow" type="reference">
+            <content>{A5BC37E7-ED96-4C1E-8590-A26E64DB55EA}</content>
+          </field>
+        </fields>
+      </version>
+      <version language="en" version="1">
+        <fields>
+          <field tfid="{5DD74568-4D4B-44C1-B513-0AF5F4CDA34F}" key="__created by" type="text">
+            <content>sitecore\admin</content>
+          </field>
+          <field tfid="{3E431DE1-525E-47A3-B6B0-1CCBEC3A8C98}" key="__workflow state" type="reference">
+            <content>{FCA998C5-0CC3-4F91-94D8-0A4E6CAECE88}</content>
+          </field>
+          <field tfid="{BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}" key="__updated by" type="text">
+            <content>sitecore\admin</content>
+          </field>
+          <field tfid="{8CDC337E-A112-42FB-BBB4-4143751E123F}" key="__revision" type="text">
+            <content>1c5782f3-9f79-4977-be6a-607fd840642b</content>
+          </field>
+          <field tfid="{75577384-3C97-45DA-A847-81B00500E250}" key="title" type="text">
+            <content>Ymir</content>
+          </field>
+          <field tfid="{001DD393-96C5-490B-924A-B0F25CD9EFD8}" key="__lock" type="memo">
+            <content>&lt;r /&gt;</content>
+          </field>
+          <field tfid="{25BED78C-4957-4165-998A-CA1B52F67497}" key="__created" type="datetime">
+            <content>20140103T223041</content>
+          </field>
+          <field tfid="{D9CF14B1-FA16-4BA6-9288-E8A174D4D522}" key="__updated" type="datetime">
+            <content>20140103T223743:635243854631400212</content>
+          </field>
+          <field tfid="{A4F985D9-98B3-4B52-AAAF-4344F6E747C6}" key="__workflow" type="reference">
+            <content>{A5BC37E7-ED96-4C1E-8590-A26E64DB55EA}</content>
+          </field>
+        </fields>
+      </version>
+    </item>
+  </item>
+</item>

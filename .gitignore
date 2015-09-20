@@ -1,32 +1,11 @@
-# Object files
-*.o
-*.ko
-*.obj
-*.elf
+# Build outputs
+bin
+obj
 
-# Precompiled Headers
-*.gch
-*.pch
+# Machine specific files
+*proj.user
+*.DotSettings.user
+*.suo
 
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
-
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
-
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
-
-# Debug files
-*.dSYM/
+# Local build config
+deploy.targets

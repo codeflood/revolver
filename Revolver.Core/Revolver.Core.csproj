@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <Import Project="..\build configurations.targets" />
+  <Import Project="..\deploy.targets" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug 8.0</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Revolver.Core</RootNamespace>
+    <AssemblyName>Revolver.Core</AssemblyName>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <OutputPath>bin\</OutputPath>
+    <TargetFrameworkProfile />
+    <ProjectGuid>{A7C5DE34-061F-47AF-B99C-9B74C781714F}</ProjectGuid>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(Configuration.Contains('Debug'))">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(Configuration.Contains('Release'))">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <Import Project="..\sc version props.targets" />
+  <ItemGroup>
+    <Reference Include="Sitecore.Kernel">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(SitecorePath)\bin\Sitecore.Kernel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sitecore.ContentSearch" Condition="$(DefineConstants.Contains('FEATURE_ITEM_BUCKETS'))">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(SitecorePath)\bin\Sitecore.ContentSearch.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sitecore.ContentSearch.Linq" Condition="$(DefineConstants.Contains('FEATURE_ITEM_BUCKETS'))">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(SitecorePath)\bin\Sitecore.ContentSearch.Linq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sitecore.Buckets" Condition="$(DefineConstants.Contains('FEATURE_ITEM_BUCKETS'))">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(SitecorePath)\bin\Sitecore.Buckets.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Lucene.net">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(SitecorePath)\bin\Lucene.Net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="HtmlAgilityPack">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(SitecorePath)\bin\HtmlAgilityPack.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Mobile" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionInfo.cs">
+      <Link>Properties\SolutionInfo.cs</Link>
+    </Compile>
+    <Compile Include="CommandArgs.cs" />
+    <Compile Include="CommandHandler.cs" />
+    <Compile Include="CommandInspector.cs" />
+    <Compile Include="CommandResult.cs" />
+    <Compile Include="CommandStatus.cs" />
+    <Compile Include="Commands\Attributes\NoSubstitutionAttribute.cs" />
+    <Compile Include="Commands\BaseCommand.cs" />
+    <Compile Include="Commands\Cache.cs" />
+    <Compile Include="Commands\ChangeDatabase.cs" />
+    <Compile Include="Commands\ChangeItem.cs" />
+    <Compile Include="Commands\ChangeLanguage.cs" />
+    <Compile Include="Commands\ChangeTemplate.cs" />
+    <Compile Include="Commands\ChangeVersion.cs" />
+    <Compile Include="Commands\CheckIn.cs" />
+    <Compile Include="Commands\CheckOut.cs" />
+    <Compile Include="Commands\CloneItem.cs" Condition="$(DefineConstants.Contains('FEATURE_ITEM_CLONES'))" />
+    <Compile Include="Commands\Attributes\CommandAttribute.cs" />
+    <Compile Include="Commands\ContentSearch.cs" Condition="$(DefineConstants.Contains('FEATURE_ITEM_BUCKETS'))" />
+    <Compile Include="Commands\Attributes\DescriptionAttribute.cs" />
+    <Compile Include="Commands\Attributes\FlagParameterAttribute.cs" />
+    <Compile Include="Commands\HelpCommand.cs" />
+    <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="Commands\IManualParseCommand.cs" />
+    <Compile Include="Commands\Attributes\ListParameterAttribute.cs" />
+    <Compile Include="Commands\ListPublishQueue.cs" />
+    <Compile Include="Commands\ListScripts.cs" />
+    <Compile Include="Commands\MathModulus.cs" />
+    <Compile Include="Commands\MathDivide.cs" />
+    <Compile Include="Commands\MathMultiply.cs" />
+    <Compile Include="Commands\MathSubtract.cs" />
+    <Compile Include="Commands\CopyItem.cs" />
+    <Compile Include="Commands\CopyItemToLanguage.cs" />
+    <Compile Include="Commands\CopyPresentation.cs" />
+    <Compile Include="Commands\CreateItem.cs" />
+    <Compile Include="Commands\DeleteItem.cs" />
+    <Compile Include="Commands\EchoInput.cs" />
+    <Compile Include="Commands\Exit.cs" />
+    <Compile Include="Commands\FindItems.cs" />
+    <Compile Include="Commands\GetAttributes.cs" />
+    <Compile Include="Commands\GetFields.cs" />
+    <Compile Include="Commands\GetItem.cs" />
+    <Compile Include="Commands\Grep.cs" />
+    <Compile Include="Commands\IndexSearch.cs" />
+    <Compile Include="Commands\JobManager.cs" />
+    <Compile Include="Commands\Links.cs" />
+    <Compile Include="Commands\List.cs" />
+    <Compile Include="Commands\ListDatabases.cs" />
+    <Compile Include="Commands\ListManipulator.cs" />
+    <Compile Include="Commands\ListVersions.cs" />
+    <Compile Include="Commands\MathAdd.cs" />
+    <Compile Include="Commands\MoveItem.cs" />
+    <Compile Include="Commands\Attributes\NamedParameterAttribute.cs" />
+    <Compile Include="Commands\Attributes\NumberedParameterAttribute.cs" />
+    <Compile Include="Commands\Attributes\OptionalAttribute.cs" />
+    <Compile Include="Commands\Parameters\KeyValueConverter.cs" />
+    <Compile Include="Commands\PrettyPrint.cs" />
+    <Compile Include="Commands\PrintCurrentDatabase.cs" />
+    <Compile Include="Commands\PrintCurrentItem.cs" />
+    <Compile Include="Commands\PrintCurrentLanguage.cs" />
+    <Compile Include="Commands\PrintCurrentVersion.cs" />
+    <Compile Include="Commands\PublishItem.cs" />
+    <Compile Include="Commands\DeleteVersions.cs" />
+    <Compile Include="Commands\Random.cs" />
+    <Compile Include="Commands\RegexMatch.cs" />
+    <Compile Include="Commands\Repeat.cs" />
+    <Compile Include="Commands\SetAttribute.cs" />
+    <Compile Include="Commands\SetEnvironmentVariable.cs" />
+    <Compile Include="Commands\SetField.cs" />
+    <Compile Include="Commands\SimpleConditional.cs" />
+    <Compile Include="Commands\SitecoreQuery.cs" />
+    <Compile Include="Commands\SplitString.cs" />
+    <Compile Include="Commands\StringReplace.cs" />
+    <Compile Include="Commands\Timer.cs" />
+    <Compile Include="Commands\UserManager.cs" />
+    <Compile Include="Commands\ValidateFields.cs" />
+    <Compile Include="Commands\ValidateItem.cs" />
+    <Compile Include="Commands\WorkflowCommand.cs" />
+    <Compile Include="Commands\XPathMatch.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="Context.cs" />
+    <Compile Include="ContextSwitcher.cs" />
+    <Compile Include="Exceptions\ExpressionException.cs" />
+    <Compile Include="Exceptions\MultipleScriptsFoundException.cs" />
+    <Compile Include="Exceptions\RevolverException.cs" />
+    <Compile Include="ExpressionParser.cs" />
+    <Compile Include="ExtendedHelp.cs" />
+    <Compile Include="Formatting\TextOutputFormatter.cs" />
+    <Compile Include="HelpDetails.cs" />
+    <Compile Include="IContext.cs" />
+    <Compile Include="IFormatContext.cs" />
+    <Compile Include="Formatting\ICommandFormatter.cs" />
+    <Compile Include="ItemInspector.cs" />
+    <Compile Include="ParameterUtil.cs" />
+    <Compile Include="Parser.cs" />
+    <Compile Include="PathParser.cs" />
+    <Compile Include="ProductInfo.cs" />
+    <Compile Include="Prompt.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo-6.2.cs" Condition="$(Configuration.Contains('6.2'))" />
+    <Compile Include="Properties\AssemblyInfo-6.4.cs" Condition="$(Configuration.Contains('6.4'))" />
+    <Compile Include="Properties\AssemblyInfo-6.6.cs" Condition="$(Configuration.Contains('6.6'))" />
+    <Compile Include="Properties\AssemblyInfo-7.0.cs" Condition="$(Configuration.Contains('7.0'))" />
+    <Compile Include="Properties\AssemblyInfo-7.5.cs" Condition="$(Configuration.Contains('7.5'))" />
+    <Compile Include="ExecutionDirective.cs" />
+    <Compile Include="ScriptLocator\DatabaseScriptLocator.cs" />
+    <Compile Include="ScriptLocator\FileScriptLocator.cs" />
+    <Compile Include="ScriptLocator\IScriptLocator.cs" />
+    <Compile Include="ScriptLocator\ScriptLocator.cs" />
+    <Compile Include="Commands\BindCommand.cs" />
+    <Compile Include="Util.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Config\Include\Revolver.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.-->
+  <Target Name="BeforeBuild">
+    <Message Text="Configuration=$(Configuration)" />
+    <Message Text="Using Sitecore path $(SitecorePath)" />
+  </Target>
+  <Target Name="AfterBuild">
+    <Copy SourceFiles="@(Content)" DestinationFiles="$(SitecorePath)\%(RelativeDir)%(Filename)%(Extension)" SkipUnchangedFiles="true" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:50611/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

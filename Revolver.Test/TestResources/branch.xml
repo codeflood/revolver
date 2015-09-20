@@ -1,0 +1,93 @@
+<item name="Sample Branch" key="sample branch" id="{7EEFE2B1-D978-487C-9E2D-1428CDC976D7}" tid="{35E75C72-4985-4E09-88C3-0EAC6CD1E64F}" mid="{00000000-0000-0000-0000-000000000000}" sortorder="100" template="branch" parentid="{F03DED1F-B02B-49A1-B4C0-793C6F092CFD}">
+  <version language="en" version="1">
+    <fields>
+      <field tfid="{5DD74568-4D4B-44C1-B513-0AF5F4CDA34F}" key="__created by" type="text">
+        <content>sitecore\admin</content>
+      </field>
+      <field tfid="{BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}" key="__updated by" type="text">
+        <content>sitecore\admin</content>
+      </field>
+      <field tfid="{8CDC337E-A112-42FB-BBB4-4143751E123F}" key="__revision" type="text">
+        <content>ef7e47f9-f5e4-41ab-84b5-594e90b5c1a7</content>
+      </field>
+      <field tfid="{25BED78C-4957-4165-998A-CA1B52F67497}" key="__created" type="datetime">
+        <content>20140418T223015</content>
+      </field>
+      <field tfid="{52807595-0F8F-4B20-8D2A-CB71D28C6103}" key="__owner" type="text">
+        <content>sitecore\admin</content>
+      </field>
+      <field tfid="{D9CF14B1-FA16-4BA6-9288-E8A174D4D522}" key="__updated" type="datetime">
+        <content>20140418T223015:635334570151926142</content>
+      </field>
+    </fields>
+  </version>
+  <item name="$name" key="$name" id="{A81C27D9-063E-4503-AE27-A22945B7714A}" tid="{76036F5E-CBCE-46D1-AF0A-4143F9B557AA}" mid="{00000000-0000-0000-0000-000000000000}" sortorder="100" template="sample item" parentid="{7EEFE2B1-D978-487C-9E2D-1428CDC976D7}">
+    <version language="en" version="1">
+      <fields>
+        <field tfid="{5DD74568-4D4B-44C1-B513-0AF5F4CDA34F}" key="__created by" type="text">
+          <content>sitecore\admin</content>
+        </field>
+        <field tfid="{BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}" key="__updated by" type="text">
+          <content>sitecore\admin</content>
+        </field>
+        <field tfid="{8CDC337E-A112-42FB-BBB4-4143751E123F}" key="__revision" type="text">
+          <content>0521011c-e267-44eb-b560-f06abb0195a9</content>
+        </field>
+        <field tfid="{25BED78C-4957-4165-998A-CA1B52F67497}" key="__created" type="datetime">
+          <content>20140418T223015</content>
+        </field>
+        <field tfid="{D9CF14B1-FA16-4BA6-9288-E8A174D4D522}" key="__updated" type="datetime">
+          <content>20140418T223015:635334570153816331</content>
+        </field>
+      </fields>
+    </version>
+    <item name="child1" key="child1" id="{5BC26833-492B-47EA-A65F-4552F89AD561}" tid="{76036F5E-CBCE-46D1-AF0A-4143F9B557AA}" mid="{00000000-0000-0000-0000-000000000000}" sortorder="100" template="sample item" parentid="{A81C27D9-063E-4503-AE27-A22945B7714A}">
+      <version language="en" version="1">
+        <fields>
+          <field tfid="{5DD74568-4D4B-44C1-B513-0AF5F4CDA34F}" key="__created by" type="text">
+            <content>sitecore\admin</content>
+          </field>
+          <field tfid="{BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}" key="__updated by" type="text">
+            <content>sitecore\admin</content>
+          </field>
+          <field tfid="{8CDC337E-A112-42FB-BBB4-4143751E123F}" key="__revision" type="text">
+            <content>32221800-5019-48bf-8d19-853c6fe7d6a5</content>
+          </field>
+          <field tfid="{75577384-3C97-45DA-A847-81B00500E250}" key="title" type="text">
+            <content>child1</content>
+          </field>
+          <field tfid="{25BED78C-4957-4165-998A-CA1B52F67497}" key="__created" type="datetime">
+            <content>20140418T223127</content>
+          </field>
+          <field tfid="{D9CF14B1-FA16-4BA6-9288-E8A174D4D522}" key="__updated" type="datetime">
+            <content>20140418T223127:635334570875638506</content>
+          </field>
+        </fields>
+      </version>
+    </item>
+    <item name="child2" key="child2" id="{46EF1F8F-CECF-4893-B3F7-CD28EAF0A099}" tid="{76036F5E-CBCE-46D1-AF0A-4143F9B557AA}" mid="{00000000-0000-0000-0000-000000000000}" sortorder="100" template="sample item" parentid="{A81C27D9-063E-4503-AE27-A22945B7714A}">
+      <version language="en" version="1">
+        <fields>
+          <field tfid="{5DD74568-4D4B-44C1-B513-0AF5F4CDA34F}" key="__created by" type="text">
+            <content>sitecore\admin</content>
+          </field>
+          <field tfid="{BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}" key="__updated by" type="text">
+            <content>sitecore\admin</content>
+          </field>
+          <field tfid="{8CDC337E-A112-42FB-BBB4-4143751E123F}" key="__revision" type="text">
+            <content>206ef146-0f70-41d8-834c-91d3e0658c14</content>
+          </field>
+          <field tfid="{75577384-3C97-45DA-A847-81B00500E250}" key="title" type="text">
+            <content>child2</content>
+          </field>
+          <field tfid="{25BED78C-4957-4165-998A-CA1B52F67497}" key="__created" type="datetime">
+            <content>20140418T223134</content>
+          </field>
+          <field tfid="{D9CF14B1-FA16-4BA6-9288-E8A174D4D522}" key="__updated" type="datetime">
+            <content>20140418T223134:635334570941315073</content>
+          </field>
+        </fields>
+      </version>
+    </item>
+  </item>
+</item>

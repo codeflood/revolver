@@ -1,0 +1,72 @@
+----item----
+version: 1
+id: {1D77FA32-1A0B-4385-8262-E30B9D384EAB}
+database: core
+path: /sitecore/system/Modules/Revolver/Scripts/replace-in-field/example 1
+parent: {3E06FDB3-A12D-47C5-94A8-E48C469A9246}
+name: example 1
+master: {00000000-0000-0000-0000-000000000000}
+template: {ED87F5B2-E924-45E3-820C-EF25B8CADED3}
+templatekey: Script Help Example
+
+----field----
+field: {BA3F86A2-4A1C-4D78-B63D-91C2779C1B5E}
+name: __Sortorder
+key: __sortorder
+content-length: 3
+
+300
+----version----
+language: en
+version: 1
+revision: eee162ed-b4e4-447e-b45d-c83a2166a09a
+
+----field----
+field: {1B274D39-8EFF-4450-8331-1F5349FE8B71}
+name: Example
+key: example
+content-length: 29
+
+<cmd> title oldvalue newvalue
+----field----
+field: {52807595-0F8F-4B20-8D2A-CB71D28C6103}
+name: __Owner
+key: __owner
+content-length: 14
+
+sitecore\admin
+----field----
+field: {25BED78C-4957-4165-998A-CA1B52F67497}
+name: __Created
+key: __created
+content-length: 15
+
+20120904T210900
+----field----
+field: {5DD74568-4D4B-44C1-B513-0AF5F4CDA34F}
+name: __Created by
+key: __created by
+content-length: 14
+
+sitecore\admin
+----field----
+field: {8CDC337E-A112-42FB-BBB4-4143751E123F}
+name: __Revision
+key: __revision
+content-length: 36
+
+eee162ed-b4e4-447e-b45d-c83a2166a09a
+----field----
+field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
+name: __Updated
+key: __updated
+content-length: 34
+
+20120904T211020:634823898202448421
+----field----
+field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
+name: __Updated by
+key: __updated by
+content-length: 14
+
+sitecore\admin

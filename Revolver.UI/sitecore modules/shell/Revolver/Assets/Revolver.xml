@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<control xmlns:def="Definition" xmlns="http://schemas.sitecore.net/Visual-Studio-Intellisense">
+	<Revolver>
+		<FormPage Background="#e9e9e9">
+			<CodeBeside Type="Revolver.UI.RevolverForm,Revolver.UI"/>
+			<Script Src="/sitecore modules/shell/Revolver/Assets/RevolverClient.js"/>
+			<Stylesheet Src="/sitecore modules/shell/Revolver/Assets/Revolver.css" DeviceDependant="true"/>
+			<Edit Mode="hidden" ID="hdnSessionId" Height="0" Width="0" Visible="false"/>
+			<GridPanel Width="100%" Height="100%" class="revolver-form">
+				<Scrollbox id="scrollbox" Height="100%" Width="100%" GridPanel.Width="100%" GridPanel.Height="100%" Padding="0px">
+					<Border id="output" Height="100%" Width="100%" GridPanel.Width="100%" GridPanel.Height="100%" Padding="0px"/>
+				</Scrollbox>
+				<Border id="prompt" Width="100%"/>
+				<Memo id="input" Width="100%" OnKeyDown="return Revolver.keyPress(event);" OnKeyUp="Revolver.checkInputDimension();" spellcheck="false" Height="20px"/>
+				<Border id="statusBorder" Background="#e9e9e9" Style="border-top:2px groove" Padding="2px">
+					<Literal ID="status" Text="awaiting input"/>
+				</Border>
+			</GridPanel>
+		</FormPage>
+	</Revolver>
+</control>

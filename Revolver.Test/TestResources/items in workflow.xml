@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<item name="test root" key="test root" id="{DA897CCE-F0A8-4B1F-BC3F-4648D0455EB0}" tid="{A87A00B1-E6DB-45AB-8B54-636FEC3B5523}" mid="{00000000-0000-0000-0000-000000000000}" sortorder="100" template="folder" parentid="{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}">
+  <version language="en" version="1">
+    <fields>
+      <field tfid="{5DD74568-4D4B-44C1-B513-0AF5F4CDA34F}" key="__created by" type="text">
+        <content>sitecore\admin</content>
+      </field>
+      <field tfid="{BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}" key="__updated by" type="text">
+        <content>sitecore\admin</content>
+      </field>
+      <field tfid="{8CDC337E-A112-42FB-BBB4-4143751E123F}" key="__revision" type="text">
+        <content>08498e04-1dc3-42f7-abf8-159fbdf68184</content>
+      </field>
+      <field tfid="{25BED78C-4957-4165-998A-CA1B52F67497}" key="__created" type="datetime">
+        <content>20131113T063705</content>
+      </field>
+      <field tfid="{D9CF14B1-FA16-4BA6-9288-E8A174D4D522}" key="__updated" type="datetime">
+        <content>20131113T063705:635199214259705861</content>
+      </field>
+    </fields>
+  </version>
+  <item name="in draft" key="in draft" id="{68B1D2EF-A2EE-4B72-BD89-ACFA2768E660}" tid="{76036F5E-CBCE-46D1-AF0A-4143F9B557AA}" mid="{00000000-0000-0000-0000-000000000000}" sortorder="100" template="sample item" parentid="{DA897CCE-F0A8-4B1F-BC3F-4648D0455EB0}">
+    <version language="en" version="1">
+      <fields>
+        <field tfid="{5DD74568-4D4B-44C1-B513-0AF5F4CDA34F}" key="__created by" type="text">
+          <content>sitecore\admin</content>
+        </field>
+        <field tfid="{3E431DE1-525E-47A3-B6B0-1CCBEC3A8C98}" key="__workflow state" type="reference">
+          <content>{190B1C84-F1BE-47ED-AA41-F42193D9C8FC}</content>
+        </field>
+        <field tfid="{BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}" key="__updated by" type="text">
+          <content>sitecore\admin</content>
+        </field>
+        <field tfid="{8CDC337E-A112-42FB-BBB4-4143751E123F}" key="__revision" type="text">
+          <content>e66308f1-fc24-4951-ab55-4b41f0a6485f</content>
+        </field>
+        <field tfid="{75577384-3C97-45DA-A847-81B00500E250}" key="title" type="text">
+          <content>in draft</content>
+        </field>
+        <field tfid="{25BED78C-4957-4165-998A-CA1B52F67497}" key="__created" type="datetime">
+          <content>20131113T063828</content>
+        </field>
+        <field tfid="{D9CF14B1-FA16-4BA6-9288-E8A174D4D522}" key="__updated" type="datetime">
+          <content>20131113T063828:635199215087853228</content>
+        </field>
+        <field tfid="{A4F985D9-98B3-4B52-AAAF-4344F6E747C6}" key="__workflow" type="reference">
+          <content>{A5BC37E7-ED96-4C1E-8590-A26E64DB55EA}</content>
+        </field>
+      </fields>
+    </version>
+  </item>
+  <item name="publishable" key="publishable" id="{C1BB7488-8392-4F5B-B710-2DC5A5A7B105}" tid="{76036F5E-CBCE-46D1-AF0A-4143F9B557AA}" mid="{00000000-0000-0000-0000-000000000000}" sortorder="100" template="sample item" parentid="{DA897CCE-F0A8-4B1F-BC3F-4648D0455EB0}">
+    <version language="en" version="1">
+      <fields>
+        <field tfid="{5DD74568-4D4B-44C1-B513-0AF5F4CDA34F}" key="__created by" type="text">
+          <content>sitecore\admin</content>
+        </field>
+        <field tfid="{3E431DE1-525E-47A3-B6B0-1CCBEC3A8C98}" key="__workflow state" type="reference">
+          <content>{FCA998C5-0CC3-4F91-94D8-0A4E6CAECE88}</content>
+        </field>
+        <field tfid="{BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}" key="__updated by" type="text">
+          <content>sitecore\admin</content>
+        </field>
+        <field tfid="{8CDC337E-A112-42FB-BBB4-4143751E123F}" key="__revision" type="text">
+          <content>ea2b3be3-fdd6-468c-86f2-7033dae01588</content>
+        </field>
+        <field tfid="{75577384-3C97-45DA-A847-81B00500E250}" key="title" type="text">
+          <content>publishable</content>
+        </field>
+        <field tfid="{001DD393-96C5-490B-924A-B0F25CD9EFD8}" key="__lock" type="memo">
+          <content>&lt;r /&gt;</content>
+        </field>
+        <field tfid="{25BED78C-4957-4165-998A-CA1B52F67497}" key="__created" type="datetime">
+          <content>20131113T063741</content>
+        </field>
+        <field tfid="{D9CF14B1-FA16-4BA6-9288-E8A174D4D522}" key="__updated" type="datetime">
+          <content>20131113T063802:635199214826328270</content>
+        </field>
+        <field tfid="{A4F985D9-98B3-4B52-AAAF-4344F6E747C6}" key="__workflow" type="reference">
+          <content>{A5BC37E7-ED96-4C1E-8590-A26E64DB55EA}</content>
+        </field>
+      </fields>
+    </version>
+  </item>
+  <item name="no workflow" key="no workflow" id="{25F68AE9-6158-43CD-A959-8E52C86FC02F}" tid="{76036F5E-CBCE-46D1-AF0A-4143F9B557AA}" mid="{00000000-0000-0000-0000-000000000000}" sortorder="100" template="sample item" parentid="{DA897CCE-F0A8-4B1F-BC3F-4648D0455EB0}">
+    <version language="en" version="1">
+      <fields>
+        <field tfid="{5DD74568-4D4B-44C1-B513-0AF5F4CDA34F}" key="__created by" type="text">
+          <content>sitecore\admin</content>
+        </field>
+        <field tfid="{3E431DE1-525E-47A3-B6B0-1CCBEC3A8C98}" key="__workflow state" type="reference">
+          <content />
+        </field>
+        <field tfid="{BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}" key="__updated by" type="text">
+          <content>sitecore\admin</content>
+        </field>
+        <field tfid="{8CDC337E-A112-42FB-BBB4-4143751E123F}" key="__revision" type="text">
+          <content>03c0068d-dde7-44ce-9631-a7b6d3b08b60</content>
+        </field>
+        <field tfid="{75577384-3C97-45DA-A847-81B00500E250}" key="title" type="text">
+          <content>no workflow</content>
+        </field>
+        <field tfid="{25BED78C-4957-4165-998A-CA1B52F67497}" key="__created" type="datetime">
+          <content>20131113T070029</content>
+        </field>
+        <field tfid="{D9CF14B1-FA16-4BA6-9288-E8A174D4D522}" key="__updated" type="datetime">
+          <content>20131113T070054:635199228541072708</content>
+        </field>
+        <field tfid="{A4F985D9-98B3-4B52-AAAF-4344F6E747C6}" key="__workflow" type="reference">
+          <content />
+        </field>
+      </fields>
+    </version>
+  </item>
+</item>

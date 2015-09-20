@@ -1,0 +1,75 @@
+----item----
+version: 1
+id: {5FEB0DB9-CD38-4213-A59B-625FBB09781F}
+database: core
+path: /sitecore/system/Modules/Revolver/Scripts/updates
+parent: {08B4B5B2-FBEA-4558-8FDC-5AED3FE8A574}
+name: updates
+master: {00000000-0000-0000-0000-000000000000}
+template: {89330AFB-66E4-40E8-92D6-79D9C793A985}
+templatekey: Script
+
+----version----
+language: en
+version: 1
+revision: a9a26717-bcf4-44dc-a21c-1d9d8e218f0d
+
+----field----
+field: {5777540D-336C-402B-8666-98CC83C49CF5}
+name: Script
+key: script
+content-length: 255
+
+@stoponerror
+
+if($1$ = \$1\$) (exit (Missing required parameter date))
+
+echo Updated Items
+echo \-------------
+find -r -e (@__updated > ($1$) as date) pwd
+echo ()
+echo Created Items
+echo \-------------
+find -r -e (@__created > ($1$) as date) pwd
+----field----
+field: {41F14C52-ED01-41CB-8C35-297FB7A70C59}
+name: Usage
+key: usage
+content-length: 10
+
+<cmd> date
+----field----
+field: {F2606B79-E8AE-4D6E-B4F0-446C5009040D}
+name: Description
+key: description
+content-length: 65
+
+Shows any created or updated descendant item since the given date
+----field----
+field: {25BED78C-4957-4165-998A-CA1B52F67497}
+name: __Created
+key: __created
+content-length: 15
+
+20120813T173200
+----field----
+field: {8CDC337E-A112-42FB-BBB4-4143751E123F}
+name: __Revision
+key: __revision
+content-length: 36
+
+a9a26717-bcf4-44dc-a21c-1d9d8e218f0d
+----field----
+field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
+name: __Updated
+key: __updated
+content-length: 34
+
+20120925T210237:634842037579648688
+----field----
+field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
+name: __Updated by
+key: __updated by
+content-length: 14
+
+sitecore\admin

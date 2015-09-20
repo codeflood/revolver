@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- debug -->
+  <PropertyGroup Condition="$(Configuration.Contains('Debug'))">
+    <DefineConstants>$(DefineConstants);DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <!-- release -->
+  <PropertyGroup Condition="$(Configuration.Contains('Release'))">
+    <DefineConstants>$(DefineConstants);TRACE</DefineConstants>
+  </PropertyGroup>
+  <!-- version specific -->
+  <PropertyGroup Condition="$(Configuration.Contains('6.2'))">
+    <DefineConstants>$(DefineConstants);NET35;SC62</DefineConstants>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+	<OutputPath>bin\6.2</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(Configuration.Contains('6.4'))">
+    <DefineConstants>$(DefineConstants);NET35;FEATURE_ITEM_CLONES</DefineConstants>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+	<OutputPath>bin\6.4</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(Configuration.Contains('6.6'))">
+    <DefineConstants>$(DefineConstants);NET35;FEATURE_ITEM_CLONES</DefineConstants>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+	<OutputPath>bin\6.6</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(Configuration.Contains('7.0'))">
+  <!-- only allow specific SC70 token as there is a specific SC7 behaviour we need to deal with -->
+    <DefineConstants>$(DefineConstants);NET45;FEATURE_ITEM_CLONES;FEATURE_ITEM_BUCKETS;SC70</DefineConstants>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+	<OutputPath>bin\7.0</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(Configuration.Contains('7.5'))">
+    <DefineConstants>$(DefineConstants);NET45;FEATURE_ITEM_CLONES;FEATURE_ITEM_BUCKETS</DefineConstants>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+	<OutputPath>bin\7.5</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(Configuration.Contains('8.0'))">
+    <DefineConstants>$(DefineConstants);NET45;FEATURE_ITEM_CLONES;FEATURE_ITEM_BUCKETS</DefineConstants>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+	<OutputPath>bin\8.0</OutputPath>
+  </PropertyGroup>
+</Project>

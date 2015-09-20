@@ -1,0 +1,35 @@
+﻿.revolver-form {
+    background-color: #ffffff;
+    color: #222222;
+    font-size: 1em;
+}
+
+#input, #output, #prompt {
+    font-family: monospace;
+    border: none;
+    padding: 2px;
+    font-size: 12px;
+}
+
+#output pre {
+    white-space: pre-wrap;
+}
+
+.error {
+    color: #ff0000;
+}
+
+#input {
+    border: none;
+    overflow: hidden;    
+    outline: 0;
+}
+
+#prompt {
+    margin-top: 1em;
+}
+
+.scScrollbox {
+    background-color: #ffffff;
+    border: none;
+}
