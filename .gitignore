@@ -9,3 +9,13 @@ obj
 
 # Local build config
 deploy.targets
+
+# Ignore NuGet Packages
+*.nupkg
+**/packages/*
+
+# except build/, which is used as an MSBuild target.
+!**/packages/build/
+
+# Other binaries
+*.exe
