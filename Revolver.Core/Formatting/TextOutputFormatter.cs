@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Sitecore.Web.UI.HtmlControls;
 
 namespace Revolver.Core.Formatting
 {
@@ -15,8 +14,15 @@ namespace Revolver.Core.Formatting
     /// <summary>The default padding to use</summary>
     private const int DefaultPadding = 20;
 
-    /// <summary>The newline character to use for separating lines of input and output</summary>
+    /// <summary>The newline character to use for separating lines of output</summary>
     private readonly string _newLine = Environment.NewLine;
+
+    /// <summary>The characters to use for separating lines of input</summary>
+    private readonly string[] _splittingChars = new[]
+    {
+      Environment.NewLine,
+      "\n"
+    };
 
     /// <summary>
     /// Prints a line to the string builder
@@ -38,7 +44,7 @@ namespace Revolver.Core.Formatting
     /// <returns>The split lines</returns>
     public string[] SplitLines(string input)
     {
-      return input.Split(new [] { _newLine }, StringSplitOptions.RemoveEmptyEntries);
+      return input.Split(_splittingChars, StringSplitOptions.RemoveEmptyEntries);
     }
 
     /// <summary>

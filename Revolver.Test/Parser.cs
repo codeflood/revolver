@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Revolver.Core.Formatting;
 
 namespace Revolver.Test
 {
@@ -68,6 +69,74 @@ namespace Revolver.Test
       var groups = Revolver.Core.Parser.ParseFirstLevelGroups("asd < qwe < dsa >> oi <sad >", '<', '>');
       Assert.That(groups.Length, Is.EqualTo(4));
       Assert.That(groups, Is.EqualTo(new[] { "asd", "qwe < dsa >", "oi", "sad" }));
+    }
+
+    [Test]
+    public void ParseMultipleLinesSingleLine()
+    {
+      var input = "this is input";
+      var formatter = new TextOutputFormatter();
+      var lines = Revolver.Core.Parser.ParseScriptLines(input, formatter);
+
+      Assert.That(lines, Is.EquivalentTo(new[]
+      {
+        input
+      }));
+    }
+
+    [Test]
+    public void ParseMultipleLinesWindowsEndings()
+    {
+      var input = "line 1\r\nline 2";
+      var formatter = new TextOutputFormatter();
+      var lines = Revolver.Core.Parser.ParseScriptLines(input, formatter);
+
+      Assert.That(lines, Is.EquivalentTo(new[]
+      {
+        "line 1",
+        "line 2"
+      }));
+    }
+
+    [Test]
+    public void ParseMultipleLinesUnixEndings()
+    {
+      var input = "line 1\nline 2";
+      var formatter = new TextOutputFormatter();
+      var lines = Revolver.Core.Parser.ParseScriptLines(input, formatter);
+
+      Assert.That(lines, Is.EquivalentTo(new[]
+      {
+        "line 1",
+        "line 2"
+      }));
+    }
+
+    [Test]
+    public void ParseMultipleLinesLineContinued()
+    {
+      var input = "start-\r\nend";
+      var formatter = new TextOutputFormatter();
+      var lines = Revolver.Core.Parser.ParseScriptLines(input, formatter);
+
+      Assert.That(lines, Is.EquivalentTo(new[]
+      {
+        "startend"
+      }));
+    }
+
+    [Test]
+    public void ParseMultipleLinesLineContinuationEscaped()
+    {
+      var input = "start\\-\r\nend";
+      var formatter = new TextOutputFormatter();
+      var lines = Revolver.Core.Parser.ParseScriptLines(input, formatter);
+
+      Assert.That(lines, Is.EquivalentTo(new[]
+      {
+        "start-",
+        "end"
+      }));
     }
 
     // todo: cover other methods

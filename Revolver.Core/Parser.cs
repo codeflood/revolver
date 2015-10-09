@@ -140,23 +140,25 @@ namespace Revolver.Core
     {
       var rawLines = new List<string>(formatter.SplitLines(scriptSource));
 
-      for (var i = rawLines.Count - 1; i >= 0; i--)
-      {
-        var line = rawLines[i];
-        if (line.EndsWith(Constants.LineContinuationIndicator) &&
-            !line.EndsWith(Constants.EscapeCharacter + Constants.LineContinuationIndicator) &&
-            i < rawLines.Count - 1)
+        for (var i = rawLines.Count - 1; i >= 0; i--)
         {
-          var buffer = new StringBuilder();
-          formatter.PrintLine(line.Substring(0, line.Length - Constants.LineContinuationIndicator.Length), buffer);
-          buffer.Append(rawLines[i + 1]);
-
-          rawLines[i] = buffer.ToString();
-          rawLines.RemoveAt(i + 1);
+            var line = rawLines[i];
+            if (line.EndsWith(Constants.LineContinuationIndicator))
+            {
+                if (line.EndsWith(Constants.EscapeCharacter + Constants.LineContinuationIndicator))
+                {
+                    var length = line.Length - (Constants.EscapeCharacter + Constants.LineContinuationIndicator).Length;
+                    rawLines[i] = line.Substring(0, length) + Constants.LineContinuationIndicator;
+                }
+                else if (i < rawLines.Count - 1)
+                {
+                    rawLines[i] = line.Substring(0, line.Length - Constants.LineContinuationIndicator.Length) + rawLines[i + 1];
+                    rawLines.RemoveAt(i + 1);
+                }
+            }
         }
-      }
 
-      return rawLines.ToArray();
+        return rawLines.ToArray();
     }
   }
 }
