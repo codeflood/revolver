@@ -209,6 +209,9 @@
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="sitecore modules\Shell\Revolver\Scripts\args.rs" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
@@ -222,7 +225,7 @@
       <Output TaskParameter="Include" ItemName="Assemblies" />
     </CreateItem>
     <Copy SourceFiles="@(Assemblies)" DestinationFolder="$(SitecorePath)\bin" SkipUnchangedFiles="true" />
-    <CreateItem Include="*.aspx;TestResources\**\*.*">
+    <CreateItem Include="*.aspx;TestResources\**\*.*;sitecore modules\**\*.*">
       <Output TaskParameter="Include" ItemName="DeployFiles" />
     </CreateItem>
     <Copy SourceFiles="@(DeployFiles)" DestinationFiles="$(SitecorePath)\%(RelativeDir)%(Filename)%(Extension)" SkipUnchangedFiles="true" />

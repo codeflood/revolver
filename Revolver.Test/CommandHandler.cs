@@ -3,6 +3,7 @@ using NUnit.Framework.Constraints;
 using Revolver.Core;
 using Revolver.Core.Formatting;
 using Revolver.UI;
+using Sitecore;
 using Sitecore.Data.Items;
 using Mod = Revolver.Core;
 
@@ -248,6 +249,18 @@ namespace Revolver.Test
 
       var result = handler.AddCommandAlias("aa", "ga");
       Assert.That(result.Status, Is.EqualTo(CommandStatus.Failure));
+    }
+
+    [Test]
+    public void ScriptArgsNoEscaping()
+    {
+      var ctx = new Mod.Context();
+      ctx.CurrentItem = ctx.CurrentDatabase.GetRootItem();
+      var handler = new Mod.CommandHandler(ctx, new TextOutputFormatter());
+
+      var result = handler.Execute("args (media library)");
+      Assert.That(result.Status, Is.EqualTo(CommandStatus.Success));
+      Assert.That(result.Message, Is.StringContaining(ItemIDs.MediaLibraryRoot.ToString()));
     }
   }
 }

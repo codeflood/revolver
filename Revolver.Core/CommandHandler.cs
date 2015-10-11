@@ -146,13 +146,14 @@ namespace Revolver.Core
     /// </summary>
     /// <param name="commandLine">The command line to execute</param>
     /// <param name="directive">Execution directives to control how execution should perform</param>
+    /// <param name="scriptArgs">Numbered script arguments to use when executing a line from script</param>
     /// <returns>String output from the execution</returns>
-    public CommandResult Execute(string commandLine, ExecutionDirective directive)
+    public CommandResult Execute(string commandLine, ExecutionDirective directive, string[] scriptArgs = null)
     {
       var elements = Parser.ParseInputLine(commandLine);
 
       // Dispatch the command to the core command handler
-      var result = Execute(elements, directive);
+      var result = Execute(elements, directive, scriptArgs);
       return new CommandResult(result.Status, result.Message);
     }
 
@@ -252,7 +253,8 @@ namespace Revolver.Core
     /// </summary>
     /// <param name="elements">The elements forming the command and arguments</param>
     /// <param name="directive">Execution directives to control how execution should perform</param>
-    private CommandResult Execute(string[] elements, ExecutionDirective directive)
+    /// <param name="scriptArgs">Numbered script arguments to use when executing a line from script</param>
+    private CommandResult Execute(string[] elements, ExecutionDirective directive, string[] scriptArgs = null)
     {
       EnsureValidContextItem();
 
@@ -265,7 +267,7 @@ namespace Revolver.Core
         {
           var subelements = Parser.ParseInputLine(elements[ind + 1]);
 
-          var innerResult = Execute(subelements, directive);
+          var innerResult = Execute(subelements, directive, scriptArgs);
           if (innerResult.Status != CommandStatus.Success)
             return new CommandResult(innerResult.Status, "Subcommand failure: " + innerResult.Message);
 
@@ -277,13 +279,13 @@ namespace Revolver.Core
         ind = Array.IndexOf(elements, Constants.SubcommandSymbol);
       }
 
-      // Check if we have any forwarding sub commands
+      // Check if we have any chained commands
       ind = Array.IndexOf(elements, Constants.CommandChainSymbol);
       while (ind >= 0)
       {
         var subelements = elements.Take(ind);
 
-        var innerResult = Execute(subelements.ToArray(), directive);
+        var innerResult = Execute(subelements.ToArray(), directive, scriptArgs);
         if (innerResult.Status != CommandStatus.Success)
           return new CommandResult(innerResult.Status, "Subcommand failure: " + innerResult.Message);
 
@@ -307,7 +309,7 @@ namespace Revolver.Core
 
         var args = elements.Skip(1).ToArray();
 
-        var result = Execute(elements[0].Trim(), args, directive);
+        var result = Execute(elements[0].Trim(), args, directive, scriptArgs);
         if (result != null)
           return result;
         
@@ -324,13 +326,15 @@ namespace Revolver.Core
     /// <param name="command">The command or script name</param>
     /// <param name="args">Arguments to pass to the command</param>
     /// <param name="directive">Execution directives to control how execution should perform</param>
+    /// <param name="scriptArgs">Numbered script arguments to use when executing a line from script</param>
     /// <returns>True if the command was run, otherwise returns false</returns>
-    private CommandResult Execute(string command, string[] args, ExecutionDirective directive)
+    private CommandResult Execute(string command, string[] args, ExecutionDirective directive, string[] scriptArgs = null)
     {
       // update current date and time in environment variable
       Context.EnvironmentVariables["now"] = Sitecore.DateUtil.IsoNow;
 
       command = Parser.PerformSubstitution(_context, command);
+      command = Parser.PerformScriptSubstitution(command, scriptArgs);
 
       if (command == string.Empty)
         return new CommandResult(CommandStatus.Success, string.Empty);
@@ -359,11 +363,12 @@ namespace Revolver.Core
       }
 
       if (cmd != null)
-      {
-        return ExecuteCommand(cmd, args, directive);
-      }
-      else
-        return ExecuteScript(command, args, directive);
+        return ExecuteCommand(cmd, args, directive, scriptArgs);
+      
+      var substitutedArgs = from arg in args
+                            select Parser.PerformScriptSubstitution(arg, scriptArgs);
+
+      return ExecuteScript(command, substitutedArgs.ToArray(), directive);
     }
 
     /// <summary>
@@ -372,8 +377,9 @@ namespace Revolver.Core
     /// <param name="cmd">The command to execute</param>
     /// <param name="args">Arguments to apply to the command</param>
     /// <param name="directive">Directives to execute with</param>
+    /// <param name="scriptArgs">Numbered script arguments to use when executing a line from script</param>
     /// <returns>The outcome of the execution</returns>
-    private CommandResult ExecuteCommand(ICommand cmd, string[] args, ExecutionDirective directive)
+    private CommandResult ExecuteCommand(ICommand cmd, string[] args, ExecutionDirective directive, string[] scriptArgs)
     {
       cmd.Initialise(_context, _formatter);
       CommandResult result = null;
@@ -382,7 +388,8 @@ namespace Revolver.Core
       if (manualParseInterface != null)
       {
         var subArgs = from arg in args
-                      select Parser.PerformSubstitution(_context, arg);
+                      let wip = Parser.PerformScriptSubstitution(arg, scriptArgs) 
+                      select Parser.PerformSubstitution(_context, wip);
 
         result = manualParseInterface.Run(subArgs.ToArray());
       }
@@ -398,6 +405,8 @@ namespace Revolver.Core
         {
           propValue = null;
 
+          var noSub = CommandInspector.GetNoSubstitutionAttribute(prop);
+
           var namedParameterAttribute = CommandInspector.GetNamedParameter(prop);
           if (namedParameterAttribute != null && namedParameterAttribute.WordCount > 1)
           {
@@ -407,8 +416,18 @@ namespace Revolver.Core
             {
               var value = string.Empty;
               ParameterUtil.GetParameter(args, "-" + namedParameterAttribute.Name, i, ref value);
-              if (!string.IsNullOrEmpty(value))
-                words.Add(value);
+
+                if (!string.IsNullOrEmpty(value))
+                {
+                  // Substitute individual values as ConvertAndAssignParameter won't handle word arguments
+                  if (noSub == null)
+                  {
+                      value = Parser.PerformSubstitution(_context, (string) value);
+                  }
+
+                  value = Parser.PerformScriptSubstitution((string) value, scriptArgs);
+                  words.Add(value);
+                }
             }
 
             if (words.Count > 0)
@@ -418,7 +437,7 @@ namespace Revolver.Core
             }
           }
 
-          ConvertAndAssignParameter(prop, cmd, propValue);
+          ConvertAndAssignParameter(prop, cmd, propValue, scriptArgs);
         }
 
         // Find flags
@@ -465,10 +484,10 @@ namespace Revolver.Core
             }
           }
 
-          ConvertAndAssignParameter(prop, cmd, propValue);
+          ConvertAndAssignParameter(prop, cmd, propValue, scriptArgs);
         }
 
-        AssignListParameter(cmd, properties, numbered);
+        AssignListParameter(cmd, properties, numbered, scriptArgs);
 
         result = cmd.Run();
       }
@@ -485,7 +504,8 @@ namespace Revolver.Core
     /// <param name="property">The property to assign</param>
     /// <param name="hostObject">The object holding the property</param>
     /// <param name="value">The value to assign to the property</param>
-    private void ConvertAndAssignParameter(PropertyInfo property, object hostObject, object value)
+    /// <param name="scriptArgs">Numbered script arguments to use when executing a line from script</param>
+    private void ConvertAndAssignParameter(PropertyInfo property, object hostObject, object value, string[] scriptArgs = null)
     {
       if (value == null)
         return;
@@ -494,7 +514,11 @@ namespace Revolver.Core
       {
         var noSub = CommandInspector.GetNoSubstitutionAttribute(property);
         if (noSub == null)
+        {
           value = Parser.PerformSubstitution(_context, (string) value);
+        }
+
+        value = Parser.PerformScriptSubstitution((string)value, scriptArgs);
       }
 
       if (property.PropertyType.IsAssignableFrom(value.GetType()))
@@ -553,7 +577,8 @@ namespace Revolver.Core
     /// <param name="cmd">The command</param>
     /// <param name="properties">The command properties</param>
     /// <param name="numbered">Unmatched parameteres from ExtractParameters call</param>
-    private void AssignListParameter(ICommand cmd, PropertyInfo[] properties, string[] numbered)
+    /// <param name="scriptArgs">Numbered script arguments to use when executing a line from script</param>
+    private void AssignListParameter(ICommand cmd, PropertyInfo[] properties, string[] numbered, string[] scriptArgs = null)
     {
       var listProperty = properties.FirstOrDefault(p => CommandInspector.GetListParameter(p) != null);
       if (listProperty == null)
@@ -566,7 +591,8 @@ namespace Revolver.Core
       int numberedParametersToSkip = (numberedParameters.Any()) ? numberedParameters.Max() + 1 : 0;
       var list = numbered.Skip(numberedParametersToSkip).ToList();
       list = (from element in list
-        select Parser.PerformSubstitution(_context, element)).ToList();
+              let wip = Parser.PerformScriptSubstitution(element, scriptArgs)
+              select Parser.PerformSubstitution(_context, wip)).ToList();
 #if NET45
       listProperty.SetValue(cmd, list);
 #else
@@ -588,13 +614,7 @@ namespace Revolver.Core
         var script = ScriptLocator.GetScript(name);
         if (script != null)
         {
-          // Substitute script parameters
-          for (int i = 0; i < args.Length; i++)
-          {
-            script = script.Replace("$" + (i + 1) + "$", args[i]);
-          }
-
-          return ExecuteScriptSource(script, directive);
+          return ExecuteScriptSource(script, directive, args);
         }
       }
       catch (MultipleScriptsFoundException ex)
@@ -624,8 +644,9 @@ namespace Revolver.Core
     /// </summary>
     /// <param name="scriptSource">The source of the script to execute</param>
     /// <param name="directive">The execution directives to execute with</param>
+    /// <param name="args">The arguments to exeucte the script with</param>
     /// <returns>The outcome of the execution</returns>
-    private CommandResult ExecuteScriptSource(string scriptSource, ExecutionDirective directive)
+    private CommandResult ExecuteScriptSource(string scriptSource, ExecutionDirective directive, string[] args = null)
     {
       var output = new StringBuilder();
       var status = CommandStatus.Success;
@@ -660,7 +681,7 @@ namespace Revolver.Core
           }
           else
           {
-            var res = Execute(line, workingDirective);
+            var res = Execute(line, workingDirective, args);
 
             if (res != null)
             {

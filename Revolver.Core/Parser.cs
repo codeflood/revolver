@@ -122,6 +122,28 @@ namespace Revolver.Core
       return input;
     }
 
+      /// <summary>
+      /// Substitute numbered script arguments in the input string
+      /// </summary>
+    /// <param name="input">The input to perform substitution on</param>
+      /// <param name="arguments">The arguments to substitute in</param>
+      /// <returns></returns>
+    public static string PerformScriptSubstitution(string input, string[] arguments)
+    {
+      if (arguments == null)
+        return input;
+
+      var wip = input;
+
+      // Substitute script parameters
+      for (int i = 0; i < arguments.Length; i++)
+      {
+        wip = wip.Replace("$" + (i + 1) + "$", arguments[i]);
+      }
+
+      return wip;
+    }
+
     public static bool TryParseBoolean(string value, out bool boolean)
     {
       var lvalue = value.ToLower();

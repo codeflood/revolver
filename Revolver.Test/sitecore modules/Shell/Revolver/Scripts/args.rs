@@ -1,0 +1,1 @@
+﻿find -a name $1$ (ga -a id)

@@ -88,7 +88,7 @@ namespace Revolver.Core
 
       // Validate the expression
       if (elms.Length != 1 && elms.Length != 2 && elms.Length != 3 && elms.Length != 5 && elms.Length != 7)
-        throw new ExpressionException("Malformed expression");
+        throw new ExpressionException("Malformed expression '" + exp + "'");
 
       // a single element in the expression should be parsable true or false
       if (elms.Length == 1)
