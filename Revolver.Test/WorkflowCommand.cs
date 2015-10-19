@@ -74,7 +74,9 @@ namespace Revolver.Test
       var result = cmd.Run();
 
       Assert.AreEqual(CommandStatus.Success, result.Status);
-      Assert.AreEqual("Submit\r\n__OnSave\r\n", result.Message);
+
+      Assert.That(result.Message, Is.StringStarting("Submit"));
+      Assert.That(result.Message, Is.StringContaining("\r\n__OnSave"));
     }
 
     [Test]
@@ -130,5 +132,11 @@ namespace Revolver.Test
 
       Assert.AreEqual(CommandStatus.Failure, result.Status);
     }
+
+      [Test]
+      public void List_DifferentLanguage()
+      {
+          
+      }
   }
 }

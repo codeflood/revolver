@@ -55,7 +55,10 @@ namespace Revolver.Core.Commands
       if (workflow == null)
         return new CommandResult(CommandStatus.Failure, "The item is not in workflow");
 
-      var command = (from c in workflow.GetCommands(item) where string.Compare(c.DisplayName, name, true) == 0 select c).FirstOrDefault();
+      var command = (from c in workflow.GetCommands(item) 
+                     let ci = Context.CurrentDatabase.GetItem(c.CommandID)
+                     where string.Compare(ci.Name, name, true) == 0 select c).FirstOrDefault();
+
       if (command == null)
         return new CommandResult(CommandStatus.Failure, "Workflow command not found");
 
@@ -86,7 +89,9 @@ namespace Revolver.Core.Commands
 
       foreach (var command in commands)
       {
-        buffer.AppendLine(command.DisplayName);
+        var commandItem = Context.CurrentDatabase.GetItem(command.CommandID);
+
+        Formatter.PrintDefinition(commandItem.Name, "[" + command.DisplayName + "]", buffer);
       }
 
       if (commands.Length == 0)
