@@ -6,74 +6,131 @@ namespace Revolver.Core.Commands
     [Command("random")]
     public class Random : BaseCommand
     {
-        private static System.Random randomProvider = new System.Random();
-        private static object theLock = new object();
+        private readonly static System.Random RandomProvider = new System.Random();
+        private readonly static object RandomLock = new object();
 
-        // todo: work out how to support positional parameters that can change depending on the number of parameters. Prefer min then max rather than max then optional min.
         [NumberedParameter(0, "max")]
         [Description("The maximum allowed value.")]
-        public int Maximum { get; set; }
+        [Optional]
+        public string Maximum { get; set; }
 
         [NumberedParameter(1, "min")]
         [Description("The minimum allowed value.")]
         [Optional]
-        public int Minimum { get; set; }
+        public string Minimum { get; set; }
 
         [NamedParameter("f", "fractions")]
         [Description("The number of fractal digits.")]
+        [Optional]
         public int FractalDigits { get; set; }
+
+        [FlagParameter("d")]
+        [Description("Generate dates")]
+        [Optional]
+        public bool GenerateDates { get; set; }
+
+        [FlagParameter("t")]
+        [Description("Generate times")]
+        [Optional]
+        public bool GenerateTimes { get; set; }
 
         public Random()
         {
-            Maximum = int.MinValue;
-            Minimum = 0;
+            Maximum = string.Empty;
+            Minimum = string.Empty;
             FractalDigits = 0;
+            GenerateDates = false;
+            GenerateTimes = false;
         }
 
         public override CommandResult Run()
         {
-            if (Maximum == int.MinValue)
-                return new CommandResult(CommandStatus.Failure, Constants.Messages.MissingRequiredParameter.FormatWith("max"));
+            if (FractalDigits != 0 && (GenerateDates || GenerateTimes))
+                return new CommandResult(CommandStatus.Failure, "Cannot use -d or -t with -f");
 
+            if (GenerateDates || GenerateTimes)
+                return RunDateTime();
+
+            return RunNumber();
+        }
+
+        protected virtual CommandResult RunNumber()
+        {
+            var parsedMinimum = 0;
+            var parsedMaximum = 10;
+
+            if (!string.IsNullOrEmpty(Minimum) && !int.TryParse(Minimum, out parsedMinimum))
+                return new CommandResult(CommandStatus.Failure, "Cannot parse '{0}' as integer for parameter 'min'".FormatWith(Minimum));
+
+            if (!string.IsNullOrEmpty(Maximum) && !int.TryParse(Maximum, out parsedMaximum))
+                return new CommandResult(CommandStatus.Failure, "Cannot parse '{0}' as integer for parameter 'max'".FormatWith(Minimum));
 
             if (FractalDigits == 0)
             {
                 // Random will be an integer as interval is integer
-                int value = GetRandomInteger(Minimum, Maximum);
+                int value = GetRandomInteger(parsedMinimum, parsedMaximum);
                 return new CommandResult(CommandStatus.Success, value.ToString());
             }
-            else
+            
+            // Random will be a double as interval is double
+            var rnum = GetRandomDouble();
+            var num = Math.Round(parsedMinimum + ((parsedMaximum - parsedMinimum) * rnum), FractalDigits);
+
+            string formatString = "F" + FractalDigits;
+            //F# = Force fractional digits, no commas. See http://msdn.microsoft.com/en-us/library/kfsatb94(v=vs.110).aspx
+            return new CommandResult(CommandStatus.Success, num.ToString(formatString));
+        }
+
+        protected virtual CommandResult RunDateTime()
+        {
+            var parsedMinimum = DateTime.UtcNow;
+            var parsedMaximum = parsedMinimum.AddMonths(6);
+
+            if (!string.IsNullOrEmpty(Minimum) && !DateTime.TryParse(Minimum, out parsedMinimum))
+                return new CommandResult(CommandStatus.Failure, "Cannot parse '{0}' as datetime for parameter 'min'".FormatWith(Minimum));
+
+            if (!string.IsNullOrEmpty(Maximum) && !DateTime.TryParse(Maximum, out parsedMaximum))
+                return new CommandResult(CommandStatus.Failure, "Cannot parse '{0}' as datetime for parameter 'max'".FormatWith(Minimum));
+
+            var value = parsedMinimum;
+
+            if (GenerateDates)
             {
-                // Random will be a double as interval is integer
+                var addDays = GetRandomInteger(0, (int)Math.Ceiling((parsedMaximum - parsedMinimum).TotalDays));
+                value = value.AddDays(GetRandomInteger(0, addDays));
+            }
 
-                var rnum = GetRandomDouble();
-                var num = Math.Round(Minimum + ((Maximum - Minimum) * rnum), FractalDigits);
+            if (GenerateTimes)
+            {
+                var minuteSpan = (int)Math.Ceiling(parsedMaximum.TimeOfDay.TotalMinutes);
+                if (minuteSpan == 0)
+                    minuteSpan = (int) Math.Ceiling(new TimeSpan(24, 0, 0).TotalMinutes);
 
-                string formatString = "F" + FractalDigits;
-                //F# = Force fractional digits, no commas. See http://msdn.microsoft.com/en-us/library/kfsatb94(v=vs.110).aspx
-                return new CommandResult(CommandStatus.Success, num.ToString(formatString));
+                value = value.AddMinutes(GetRandomInteger(0, minuteSpan));
+            }
+
+            return new CommandResult(CommandStatus.Success, value.ToString());
+        }
+
+        protected int GetRandomInteger(int min, int max)
+        {
+            lock (RandomLock)
+            {
+                return RandomProvider.Next(min, max);
             }
         }
 
-        private int GetRandomInteger(int min, int max)
+        protected double GetRandomDouble()
         {
-            lock (theLock)
+            lock (RandomLock)
             {
-                return randomProvider.Next(min, max);
-            }
-        }
-
-        private double GetRandomDouble()
-        {
-            lock (theLock)
-            {
-                return randomProvider.NextDouble();
+                return RandomProvider.NextDouble();
             }
         }
 
         public override string Description()
         {
-            return "Generate random numbers";
+            return "Generate random numbers, dates and times";
         }
 
         public override void Help(HelpDetails details)
@@ -81,6 +138,10 @@ namespace Revolver.Core.Commands
             details.AddExample("10");
             details.AddExample("5 50");
             details.AddExample("10 -f 2");
+            details.AddExample("-d 2020-12-31");
+            details.AddExample("-d -t 2020-12-31");
+            details.AddExample("-t");
+            details.AddExample("-d -t 2010-01-01 2020-12-31");
         }
     }
 }
