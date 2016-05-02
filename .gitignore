@@ -17,5 +17,6 @@ deploy.targets
 # except build/, which is used as an MSBuild target.
 !**/packages/build/
 
-# Other binaries
+# Other stuff
 *.exe
+.vs/

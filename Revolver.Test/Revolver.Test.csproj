@@ -11,6 +11,9 @@
     <IISExpressUseClassicPipelineMode />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <Import Project="..\build configurations.targets" />
   <Import Project="..\deploy.targets" />
@@ -52,17 +55,8 @@
   </PropertyGroup>
   <Import Project="..\sc version props.targets" />
   <ItemGroup>
-    <Reference Include="nunit.core">
-      <HintPath>..\packages\Nunit.Runners.2.6.4\tools\lib\nunit.core.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.core.interfaces">
-      <HintPath>..\packages\Nunit.Runners.2.6.4\tools\lib\nunit.core.interfaces.dll</HintPath>
-    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.util">
-      <HintPath>..\packages\Nunit.Runners.2.6.4\tools\lib\nunit.util.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.Kernel">
       <SpecificVersion>False</SpecificVersion>
@@ -119,6 +113,11 @@
     <Compile Include="Random.cs" />
     <Compile Include="RegexMatch.cs" />
     <Compile Include="SimpleConditional.cs" />
+    <Compile Include="Test.aspx.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test.aspx.designer.cs" />
     <Compile Include="UserManager.cs" />
     <Compile Include="ValidateFields.cs" />
     <Compile Include="ListVersions.cs" />
@@ -167,13 +166,6 @@
     <Compile Include="SitecoreQuery.cs" />
     <Compile Include="SplitString.cs" />
     <Compile Include="StringReplace.cs" />
-    <Compile Include="Test.aspx.cs">
-      <DependentUpon>Test.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Test.aspx.designer.cs">
-      <DependentUpon>Test.aspx</DependentUpon>
-    </Compile>
     <Compile Include="TestUtil.cs" />
     <Compile Include="Timer.cs" />
     <Compile Include="ValidateItem.cs" />
@@ -181,11 +173,11 @@
     <Compile Include="XPathMatch.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Test.aspx" />
     <Content Include="TestResources\branch.xml" />
     <Content Include="TestResources\find content.xml" />
     <Content Include="TestResources\German Language.xml" />
     <Content Include="TestResources\items in workflow.xml" />
-    <Content Include="Test.aspx" />
     <Content Include="TestResources\links.xml" />
     <Content Include="TestResources\narrow tree with duplicate names.xml" />
     <Content Include="TestResources\narrow tree.xml">
@@ -254,4 +246,11 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="..\packages\codeflood.nunit.aspnet.testrunner.1.0.0\build\codeflood.nunit.aspnet.testrunner.targets" Condition="Exists('..\packages\codeflood.nunit.aspnet.testrunner.1.0.0\build\codeflood.nunit.aspnet.testrunner.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\codeflood.nunit.aspnet.testrunner.1.0.0\build\codeflood.nunit.aspnet.testrunner.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\codeflood.nunit.aspnet.testrunner.1.0.0\build\codeflood.nunit.aspnet.testrunner.targets'))" />
+  </Target>
 </Project>
