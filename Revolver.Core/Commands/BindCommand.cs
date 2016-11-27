@@ -44,11 +44,11 @@ namespace Revolver.Core.Commands
       if (string.IsNullOrEmpty(Command) && string.IsNullOrEmpty(CommandName) && !Remove)
         return new CommandResult(CommandStatus.Success, PrintCurrentBindings());
 
-      if(string.IsNullOrEmpty(CommandName))
-          return new CommandResult(CommandStatus.Failure, Constants.Messages.MissingRequiredParameter.FormatWith("commandName"));
+      /*if(string.IsNullOrEmpty(CommandName))
+          return new CommandResult(CommandStatus.Failure, Constants.Messages.MissingRequiredParameter.FormatWith("commandName"));*/
 
-      if (string.IsNullOrEmpty(Command) && !Remove)
-        return new CommandResult(CommandStatus.Failure, Constants.Messages.MissingRequiredParameter.FormatWith("commandClass"));
+      /*if (string.IsNullOrEmpty(Command) && !Remove)
+        return new CommandResult(CommandStatus.Failure, Constants.Messages.MissingRequiredParameter.FormatWith("commandClass"));*/
 
       if(!string.IsNullOrEmpty(Command) && Remove)
         return new CommandResult(CommandStatus.Failure, "Cannot use -r with 'command' parameter");
@@ -130,6 +130,13 @@ namespace Revolver.Core.Commands
     /// <returns>A command result</returns>
     private CommandResult BindNewCommand(string typeName, string moniker)
     {
+      // typeName would be empty if using the default command binding on the class and the command name wasn't provided in the parameters
+      if (string.IsNullOrEmpty(typeName))
+      {
+        typeName = moniker;
+        moniker = string.Empty;
+      }
+
       // Try to load the type
       Type t = Type.GetType(typeName, false, true);
       if (t != null)
@@ -137,6 +144,17 @@ namespace Revolver.Core.Commands
         // Verify it implements the correct interface
         if (t.GetInterface(typeof(ICommand).Name) != null)
         {
+          if (string.IsNullOrEmpty(moniker))
+          {
+            // If no moniker is provided, grab the moniker from the command attribute
+            var commandAttr = CommandInspector.GetCommandAttribute(t);
+            if (commandAttr != null)
+              moniker = commandAttr.Binding;
+          }
+
+          if(string.IsNullOrEmpty(moniker))
+            return new CommandResult(CommandStatus.Failure, Constants.Messages.MissingRequiredParameter.FormatWith("commandName"));
+
           // Call into command handler to bind custom command
           if (Context.CommandHandler.AddCustomCommand(moniker, t))
             return new CommandResult(CommandStatus.Success, t.Name + " bound to " + moniker);
