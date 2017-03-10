@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyCompany("codeflood")]
-[assembly: AssemblyCopyright("Copyright © codeflood 2007 - 2015")]
+[assembly: AssemblyCopyright("Copyright © codeflood 2007 - 2017")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 

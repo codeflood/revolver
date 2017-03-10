@@ -44,12 +44,6 @@ namespace Revolver.Core.Commands
       if (string.IsNullOrEmpty(Command) && string.IsNullOrEmpty(CommandName) && !Remove)
         return new CommandResult(CommandStatus.Success, PrintCurrentBindings());
 
-      /*if(string.IsNullOrEmpty(CommandName))
-          return new CommandResult(CommandStatus.Failure, Constants.Messages.MissingRequiredParameter.FormatWith("commandName"));*/
-
-      /*if (string.IsNullOrEmpty(Command) && !Remove)
-        return new CommandResult(CommandStatus.Failure, Constants.Messages.MissingRequiredParameter.FormatWith("commandClass"));*/
-
       if(!string.IsNullOrEmpty(Command) && Remove)
         return new CommandResult(CommandStatus.Failure, "Cannot use -r with 'command' parameter");
 
@@ -150,6 +144,8 @@ namespace Revolver.Core.Commands
             var commandAttr = CommandInspector.GetCommandAttribute(t);
             if (commandAttr != null)
               moniker = commandAttr.Binding;
+            else
+              return new CommandResult(CommandStatus.Failure, string.Format("Type {0} does not have a command attribute. You must specify the commandName", t.Name));
           }
 
           if(string.IsNullOrEmpty(moniker))
@@ -162,7 +158,7 @@ namespace Revolver.Core.Commands
             return new CommandResult(CommandStatus.Failure, "Failed to add command");
         }
         else
-          return new CommandResult(CommandStatus.Failure, string.Format("Type {0} doesn't support interface {1}", t.Name, typeof(ICommand).Name));
+          return new CommandResult(CommandStatus.Failure, string.Format("Type {0} does not support interface {1}", t.Name, typeof(ICommand).Name));
       }
       else
         return new CommandResult(CommandStatus.Failure, "Failed to load type " + typeName);
