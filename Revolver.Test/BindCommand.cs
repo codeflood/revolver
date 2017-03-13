@@ -1,7 +1,5 @@
 ﻿using NUnit.Framework;
 using Revolver.Core;
-using Revolver.Core.Commands;
-using Revolver.UI;
 using System;
 using System.Collections.Generic;
 using Revolver.Core.Formatting;
@@ -13,8 +11,9 @@ namespace Revolver.Test
   [Category("BindCommand")]
   public class BindCommand
   {
-    [Test]
-    public void BindCustomCommand()
+    [TestCase("c", "Revolver.Test.BindCommand+CustomCommand, Revolver.Test", "c", TestName = "Separate command name")]
+    [TestCase("Revolver.Test.BindCommand+CustomCommand, Revolver.Test", null, "cc", TestName = "Command name from attribute")]
+    public void BindCustomCommand(string commandName, string command, string expectedBoundCommandName)
     {
       var formatter = new TextOutputFormatter();
 
@@ -24,13 +23,15 @@ namespace Revolver.Test
       var cmd = new Mod.BindCommand();
       cmd.Initialise(ctx, formatter);
 
-      cmd.Command = "Revolver.Test.BindCommand+CustomCommand, Revolver.Test";
-      cmd.CommandName = "c";
+      cmd.CommandName = commandName;
+
+      if(command != null)
+        cmd.Command = command;
 
       var result = cmd.Run();
 
       Assert.That(result.Status, Is.EqualTo(CommandStatus.Success));
-      Assert.That(ctx.CommandHandler.CustomCommands, Contains.Item(new KeyValuePair<string, Type>("c", typeof(CustomCommand))));
+      Assert.That(ctx.CommandHandler.CustomCommands, Contains.Item(new KeyValuePair<string, Type>(expectedBoundCommandName, typeof(CustomCommand))));
     }
 
     [Test]
@@ -129,60 +130,6 @@ namespace Revolver.Test
     }
 
     [Test]
-    public void AddAlias()
-    {
-      var formatter = new TextOutputFormatter();
-
-      var ctx = new Core.Context();
-      ctx.CommandHandler = new Core.CommandHandler(ctx, formatter);
-      ctx.CommandHandler.AddCustomCommand("c", typeof(CustomCommand));
-
-      var cmd = new Mod.BindCommand();
-      cmd.Initialise(ctx, formatter);
-
-      cmd.Command = "c";
-      cmd.CommandName = "cc";
-      cmd.ProcessAsAlias = true;
-
-      var result = cmd.Run();
-
-      Assert.That(result.Status, Is.EqualTo(CommandStatus.Success), result.Message);
-      Assert.That(ctx.CommandHandler.CustomCommands, Contains.Item(new KeyValuePair<string, Type>("c", typeof(CustomCommand))));
-
-      var cmdArgs = ctx.CommandHandler.FindCommandAlias("cc");
-
-      Assert.That(cmdArgs, Is.Not.Null);
-      Assert.That(cmdArgs.CommandName, Is.EqualTo("c"));
-    }
-
-    [Test]
-    public void RemoveAlias()
-    {
-      var formatter = new TextOutputFormatter();
-
-      var ctx = new Core.Context();
-      ctx.CommandHandler = new Core.CommandHandler(ctx, formatter);
-      ctx.CommandHandler.AddCustomCommand("c", typeof(CustomCommand));
-      ctx.CommandHandler.AddCommandAlias("cc", "c");
-
-      var cmd = new Mod.BindCommand();
-      cmd.Initialise(ctx, formatter);
-
-      cmd.Remove = true;
-      cmd.CommandName = "cc";
-      cmd.ProcessAsAlias = true;
-
-      var result = cmd.Run();
-
-      Assert.That(result.Status, Is.EqualTo(CommandStatus.Success), result.Message);
-      Assert.That(ctx.CommandHandler.CustomCommands, Contains.Item(new KeyValuePair<string, Type>("c", typeof(CustomCommand))));
-
-      var cmdArgs = ctx.CommandHandler.FindCommandAlias("cc");
-
-      Assert.That(cmdArgs, Is.Null);
-    }
-
-    [Test]
     public void ListBindings()
     {
       var formatter = new TextOutputFormatter();
@@ -198,28 +145,6 @@ namespace Revolver.Test
       Assert.That(result.Status, Is.EqualTo(CommandStatus.Success), result.Message);
       Assert.That(result.Message, Contains.Substring("cd"));
       Assert.That(result.Message, Contains.Substring("ls"));
-    }
-
-    private class CustomCommand : ICommand
-    {
-      public string Description()
-      {
-        return "A custom command";
-      }
-
-      public void Help(Core.HelpDetails details)
-      {
-        details.Description = Description();
-      }
-
-      public void Initialise(Core.Context context, ICommandFormatter formatter)
-      {
-      }
-
-      public Core.CommandResult Run()
-      {
-        return new CommandResult(CommandStatus.Success, "boo");
-      }
     }
   }
 }

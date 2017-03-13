@@ -11,6 +11,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug 8.0</Configuration>
@@ -101,6 +102,7 @@
     <Compile Include="CommandInspector.cs" />
     <Compile Include="CommandResult.cs" />
     <Compile Include="CommandStatus.cs" />
+    <Compile Include="Commands\AliasCommand.cs" />
     <Compile Include="Commands\Attributes\NoSubstitutionAttribute.cs" />
     <Compile Include="Commands\BaseCommand.cs" />
     <Compile Include="Commands\Cache.cs" />

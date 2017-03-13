@@ -84,6 +84,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AliasCommand.cs" />
     <Compile Include="BaseCommandTest.cs" />
     <Compile Include="BindCommand.cs" />
     <Compile Include="Cache.cs" />
@@ -100,6 +101,7 @@
     <Compile Include="ContentSearch.cs" Condition="$(DefineConstants.Contains('FEATURE_ITEM_BUCKETS'))" />
     <Compile Include="Context.cs" />
     <Compile Include="ContextSwitcher.cs" />
+    <Compile Include="CustomCommand.cs" />
     <Compile Include="ExpressionParser.cs" />
     <Compile Include="ParameterUtil.cs" />
     <Compile Include="Prompt.cs" />

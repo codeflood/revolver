@@ -1,6 +1,5 @@
 using Sitecore.StringExtensions;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -14,11 +13,6 @@ namespace Revolver.Core.Commands
     [Optional]
     public bool Remove { get; set; }
 
-    [FlagParameter("a")]
-    [Description("Process as a command alias.")]
-    [Optional]
-    public bool ProcessAsAlias { get; set; }
-
     [NumberedParameter(0, "commandName")]
     [Description("The name to bind the command to.")]
     public string CommandName { get; set; }
@@ -28,14 +22,8 @@ namespace Revolver.Core.Commands
     [Optional]
     public string Command { get; set; }
 
-    [ListParameter("parameters")]
-    [Description("Additional parameters to use for an alias. Cannot be used when binding a new command.")]
-    [Optional]
-    public IList<string> Parameters { get; set; }
-
     public BindCommand()
     {
-      ProcessAsAlias = false;
       Remove = false;
     }
 
@@ -47,14 +35,6 @@ namespace Revolver.Core.Commands
       if(!string.IsNullOrEmpty(Command) && Remove)
         return new CommandResult(CommandStatus.Failure, "Cannot use -r with 'command' parameter");
 
-      if (ProcessAsAlias)
-      {
-        if (Remove)
-          return Context.CommandHandler.RemoveCommandAlias(CommandName);
-        else
-          return BindAlias(CommandName, Command, Parameters != null ? Parameters.ToArray() : null);
-      }
-
       if (Remove)
       {
         if (Context.CommandHandler.RemoveCustomCommand(CommandName))
@@ -62,9 +42,6 @@ namespace Revolver.Core.Commands
         else
           return new CommandResult(CommandStatus.Failure, string.Format("Failed to find command '{0}'", CommandName));
       }
-
-      if (Parameters != null && Parameters.Count > 0)
-        return new CommandResult(CommandStatus.Failure, "Parameters are only valid for aliases");
 
       return BindNewCommand(Command, CommandName);
     }
@@ -110,8 +87,6 @@ namespace Revolver.Core.Commands
     public override void Help(HelpDetails details)
     {
       details.Comments = "-r cannot be used with 'command'";
-      details.AddExample("-a dir ls");
-      details.AddExample("-a geta ga");
       details.AddExample("mycommand (MyNamespace.MyClass, MyAssembly)");
       details.AddExample("-r geta");
     }
@@ -162,11 +137,6 @@ namespace Revolver.Core.Commands
       }
       else
         return new CommandResult(CommandStatus.Failure, "Failed to load type " + typeName);
-    }
-
-    private CommandResult BindAlias(string commandName, string command, string[] parameters)
-    {
-      return Context.CommandHandler.AddCommandAlias(commandName, command, parameters);
     }
   }
 }
