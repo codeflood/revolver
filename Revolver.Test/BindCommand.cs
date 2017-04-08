@@ -91,24 +91,6 @@ namespace Revolver.Test
     }
 
     [Test]
-    public void BindCustomCommand_MissingCommandName()
-    {
-      var formatter = new TextOutputFormatter();
-
-      var ctx = new Core.Context();
-      ctx.CommandHandler = new Core.CommandHandler(ctx, formatter);
-
-      var cmd = new Mod.BindCommand();
-      cmd.Initialise(ctx, formatter);
-
-      cmd.Command = "Revolver.Test.BindCommand+CustomCommand, Revolver.Test";
-
-      var result = cmd.Run();
-
-      Assert.That(result.Status, Is.EqualTo(CommandStatus.Failure));
-    }
-
-    [Test]
     public void RemoveCustomCommand()
     {
       var formatter = new TextOutputFormatter();
@@ -146,5 +128,28 @@ namespace Revolver.Test
       Assert.That(result.Message, Contains.Substring("cd"));
       Assert.That(result.Message, Contains.Substring("ls"));
     }
+
+	[Mod.Command("cc")]
+	internal class CustomCommand : Mod.ICommand
+	{
+	  public string Description()
+	  {
+		return "A custom command";
+	  }
+
+	  public void Help(Core.HelpDetails details)
+	  {
+		details.Description = Description();
+	  }
+
+	  public void Initialise(Core.Context context, ICommandFormatter formatter)
+	  {
+	  }
+
+	  public Core.CommandResult Run()
+	  {
+		return new CommandResult(CommandStatus.Success, "boo");
+	  }
+	}
   }
 }

@@ -14,7 +14,11 @@ using System.Text;
 
 namespace Revolver.Core.Commands
 {
+#if FEATURE_INDEX_SEARCH
   [Command("csearch")]
+#else
+  [Command("search")]
+#endif
   public class ContentSearch : BaseCommand
   {
     [FlagParameter("ns")]

@@ -102,28 +102,50 @@ namespace Revolver.Core.Commands
     {
       var buffer = new StringBuilder();
 
-      var cache = Sitecore.Caching.CacheManager.GetAllCaches().FirstOrDefault(x => x.Name.Equals(CacheName));
-      if (cache == null)
+	  var cache = GetCacheByName();
+	  if (cache == null)
       {
         return new CommandResult(CommandStatus.Failure, "Cannot find cache by name '{0}'".FormatWith(CacheName));
       }
 
-      var widths = new[] { 45, 15, 80 };
+      var widths = new[]
+	  {
+		45,
+#if !FEATURE_ABSTRACTS
+		15,
+#endif
+		80
+	  };
+
       Formatter.PrintTable(new[]
       {
         "Key",
+#if !FEATURE_ABSTRACTS
         "Size",
+#endif
         "Value"
       }, widths, buffer);
 
       Formatter.PrintTable(new[]
       {
         "---",
+#if !FEATURE_ABSTRACTS
         "----",
+#endif
         "-----"
       }, widths, buffer);
 
-      var keyCount = EnumerateCacheEntries(cache, entry =>
+#if FEATURE_ABSTRACTS
+	  var keyCount = EnumerateCacheEntries(cache, key =>
+	  {
+		Formatter.PrintTable(new[]
+		{
+		  key,
+		  cache.GetValue(key).ToString()
+		}, widths, buffer);
+	  });
+#else
+	  var keyCount = EnumerateCacheEntries(cache, entry =>
       {
         Formatter.PrintTable(new[]
         {
@@ -132,8 +154,9 @@ namespace Revolver.Core.Commands
           entry.Data.ToString()
         }, widths, buffer);
       });
+#endif
 
-      Formatter.PrintLine(string.Empty, buffer);
+	  Formatter.PrintLine(string.Empty, buffer);
       Formatter.PrintLine("Listing {0} keys".FormatWith(keyCount), buffer);
 
       return new CommandResult(CommandStatus.Success, buffer.ToString());
@@ -148,8 +171,8 @@ namespace Revolver.Core.Commands
       }
       else
       {
-        var cache = Sitecore.Caching.CacheManager.GetAllCaches().FirstOrDefault(x => x.Name.Equals(CacheName));
-        if (cache == null)
+		var cache = GetCacheByName();
+		if (cache == null)
         {
           return new CommandResult(CommandStatus.Failure, "Cannot find cache by name '{0}'".FormatWith(CacheName));
         }
@@ -162,21 +185,62 @@ namespace Revolver.Core.Commands
 
     protected virtual CommandResult ClearEntries()
     {
-      var cache = Sitecore.Caching.CacheManager.GetAllCaches().FirstOrDefault(x => x.Name.Equals(CacheName));
-      if (cache == null)
+	  var cache = GetCacheByName();
+
+	  if (cache == null)
       {
         return new CommandResult(CommandStatus.Failure, "Cannot find cache by name '{0}'".FormatWith(CacheName));
       }
 
-      var keyCount = EnumerateCacheEntries(cache, entry =>
+#if FEATURE_ABSTRACTS
+	  var keyCount = EnumerateCacheEntries(cache, key =>
+	  {
+		cache.Remove(key);
+	  });
+#else
+	  var keyCount = EnumerateCacheEntries(cache, entry =>
       {
         cache.Remove(entry.Key);
       });
+#endif
 
-      return new CommandResult(CommandStatus.Success, "Cleared {0} entr{1} from cache '{2}'".FormatWith(keyCount, keyCount == 1 ? "y" : "ies", cache.Name));
+	  return new CommandResult(CommandStatus.Success, "Cleared {0} entr{1} from cache '{2}'".FormatWith(keyCount, keyCount == 1 ? "y" : "ies", cache.Name));
     }
 
-    protected virtual int EnumerateCacheEntries(Sitecore.Caching.Cache cache, Action<Sitecore.Caching.Cache.CacheEntry> action)
+#if FEATURE_ABSTRACTS
+	protected virtual ICache GetCacheByName()
+	{
+	  return CacheManager.FindCacheByName(CacheName);
+	}
+
+	protected virtual int EnumerateCacheEntries(ICache cache, Action<string> action)
+	{
+	  var keys = cache.GetCacheKeys();
+	  var keyCount = 0;
+
+	  foreach (var key in keys)
+	  {
+		var match = true;
+		if (!string.IsNullOrEmpty(KeyName))
+		  match = KeyNamePartial ? key.ToString().Contains(KeyName) : key.ToString().Equals(KeyName);
+
+		if (match)
+		{
+		  action(key);
+
+		  keyCount++;
+		}
+	  }
+
+	  return keyCount;
+	}
+#else
+	protected virtual Cache GetCacheByName()
+	{
+	  return CacheManager.GetAllCaches().FirstOrDefault(x => x.Name.Equals(CacheName));
+	}
+
+	protected virtual int EnumerateCacheEntries(Sitecore.Caching.Cache cache, Action<Sitecore.Caching.Cache.CacheEntry> action)
     {
       var keys = cache.GetCacheKeys();
       var keyCount = 0;
@@ -198,8 +262,9 @@ namespace Revolver.Core.Commands
 
       return keyCount;
     }
+#endif
 
-    public override string Description()
+	public override string Description()
     {
       return "List information about the caches.";
     }

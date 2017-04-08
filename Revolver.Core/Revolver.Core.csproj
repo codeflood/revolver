@@ -140,7 +140,7 @@
     <Compile Include="Commands\GetFields.cs" />
     <Compile Include="Commands\GetItem.cs" />
     <Compile Include="Commands\Grep.cs" />
-    <Compile Include="Commands\IndexSearch.cs" />
+    <Compile Include="Commands\IndexSearch.cs" Condition="$(DefineConstants.Contains('FEATURE_INDEX_SEARCH'))" />
     <Compile Include="Commands\JobManager.cs" />
     <Compile Include="Commands\Links.cs" />
     <Compile Include="Commands\List.cs" />
