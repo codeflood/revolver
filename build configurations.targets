@@ -6,10 +6,12 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug 7.0'"/>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug 7.5'"/>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug 8.0'"/>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug 8.2'"/>
   <PropertyGroup Condition="'$(Configuration)' == 'Release 6.2'"/>
   <PropertyGroup Condition="'$(Configuration)' == 'Release 6.4'"/>
   <PropertyGroup Condition="'$(Configuration)' == 'Release 6.6'"/>
   <PropertyGroup Condition="'$(Configuration)' == 'Release 7.0'"/>
   <PropertyGroup Condition="'$(Configuration)' == 'Release 7.5'"/>
   <PropertyGroup Condition="'$(Configuration)' == 'Release 8.0'"/>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release 8.2'"/>
 </Project>
