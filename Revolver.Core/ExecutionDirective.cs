@@ -60,7 +60,11 @@
           output.StopOnError = true;
           break;
 
-        case "ignoreunknowncommands":
+		case "continueonerror":
+		  output.StopOnError = false;
+		  break;
+
+		case "ignoreunknowncommands":
           output.IgnoreUnknownCommands = true;
           break;
       }

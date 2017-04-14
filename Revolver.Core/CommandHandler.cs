@@ -681,16 +681,23 @@ namespace Revolver.Core
           else
           {
             var res = Execute(line, workingDirective, args);
+	        var outputAdded = false;
 
             if (res != null)
             {
               if (!(bool)(workingDirective.EchoOff ?? false))
               {
                 _formatter.PrintLine(res.Message, output);
+	            outputAdded = true;
               }
 
               if (res.Status == CommandStatus.Abort)
-                return new CommandResult(CommandStatus.Success, res.Message);
+			  {
+				if(!outputAdded)
+				  _formatter.PrintLine(res.Message, output);
+
+				return new CommandResult(CommandStatus.Success, output.ToString());
+			  }
 
               if (res.Status != CommandStatus.Success)
                 status = CommandStatus.Failure;

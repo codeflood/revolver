@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using Revolver.Core;
+using Sitecore;
 using Sitecore.ContentSearch;
 using Sitecore.Data;
 using Sitecore.Data.Items;
@@ -240,5 +241,55 @@ namespace Revolver.Test
 
       Assert.AreEqual(CommandStatus.Failure, result.Status);
     }
+
+	[Test]
+	public void WaitForIndexUpdate()
+	{
+	  Item localTestRoot = null;
+
+	  try
+	  {
+		_context.CurrentDatabase = Sitecore.Configuration.Factory.GetDatabase("master");
+		var template = _context.CurrentDatabase.Templates[Constants.Paths.DocTemplate];
+		var name = ID.NewID.ToShortID().ToString();
+		var id = ID.Null;
+
+		var contentNode = _context.CurrentDatabase.GetItem(Sitecore.Constants.ContentPath);
+		var testRootName = "test root-" + DateUtil.IsoNow;
+
+		using (new SecurityDisabler())
+		{
+		  localTestRoot = contentNode.Add(testRootName, _context.CurrentDatabase.Templates[Constants.Paths.FolderTemplate]);
+		  localTestRoot.Add(ID.NewID.ToShortID().ToString(), template);
+		  localTestRoot.Add(ID.NewID.ToShortID().ToString(), template);
+		  localTestRoot.Add(ID.NewID.ToShortID().ToString(), template);
+		  localTestRoot.Add(ID.NewID.ToShortID().ToString(), template);
+		  id = localTestRoot.Add(name, template).ID;
+		}
+
+		var cmd = new Cmd.ContentSearch();
+		base.InitCommand(cmd);
+
+		cmd.Query = "_name:" + name;
+		cmd.Command = "ga -a id";
+		cmd.IndexName = ContentSearchManager.GetContextIndexName(new SitecoreIndexableItem(localTestRoot));
+		cmd.IndexUpdateWaitTimeSeconds = 30;
+
+		var result = cmd.Run();
+
+		Assert.AreEqual(CommandStatus.Success, result.Status);
+		Assert.IsTrue(result.Message.Contains(id.ToString()));
+		Assert.IsTrue(result.Message.Contains("Found 1 item"));
+	  }
+	  finally
+	  {
+		using (new SecurityDisabler())
+		{
+		  localTestRoot.Delete();
+		}
+
+		_context.CurrentDatabase = Sitecore.Configuration.Factory.GetDatabase("web");
+	  }
+	}
   }
 }
