@@ -23,19 +23,15 @@ namespace Revolver.Test
         {
             // arrange
             var ctx = CreateContext();
-            var sut = new Mod.AliasCommand
-            {
-                Command = "c",
-                Name = "cc"
-            };
+            var sut = new Mod.AliasCommand();
 
             sut.Initialise(ctx, _formatter);
 
             // act
-            var result = sut.Run();
+            var result = sut.Run(new[] { "cc", "c" });
 
-            // assert
-            Assert.That(result.Status, Is.EqualTo(CommandStatus.Success), result.Message);
+			// assert
+			Assert.That(result.Status, Is.EqualTo(CommandStatus.Success), result.Message);
             Assert.That(ctx.CommandHandler.CustomCommands, Contains.Item(new KeyValuePair<string, Type>("c", typeof(CustomCommand))));
 
             var cmdArgs = ctx.CommandHandler.FindCommandAlias("cc");
@@ -55,7 +51,7 @@ namespace Revolver.Test
             sut.Initialise(ctx, _formatter);
 
             // act
-            var result = sut.Run();
+            var result = sut.Run(new string[0]);
 
             // assert
             Assert.That(result.Status, Is.EqualTo(CommandStatus.Success));
@@ -69,15 +65,12 @@ namespace Revolver.Test
             var ctx = CreateContext();
             ctx.CommandHandler.AddCommandAlias("cc", "c");
 
-            var sut = new Mod.AliasCommand
-            {
-                Name = "cc"
-            };
+            var sut = new Mod.AliasCommand();
 
             sut.Initialise(ctx, _formatter);
 
             // act
-            var result = sut.Run();
+            var result = sut.Run(new[] { "cc" });
 
             // assert
             Assert.That(result.Status, Is.EqualTo(CommandStatus.Success), result.Message);

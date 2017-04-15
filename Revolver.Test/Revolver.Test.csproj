@@ -177,6 +177,7 @@
   <ItemGroup>
     <Content Include="sitecore modules\Shell\Revolver\Scripts\test-init.rs" />
     <Content Include="sitecore modules\Shell\Revolver\Scripts\test-teardown.rs" />
+    <Content Include="sitecore modules\Shell\Revolver\Scripts\test-alias.rs" />
     <None Include="sitecore modules\Shell\Revolver\Scripts\test-search.rs" />
     <Content Include="Test.aspx" />
     <Content Include="TestResources\branch.xml" />
