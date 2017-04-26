@@ -175,6 +175,7 @@
     <Compile Include="XPathMatch.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="sitecore modules\Shell\Revolver\Scripts\test-fields.rs" />
     <Content Include="sitecore modules\Shell\Revolver\Scripts\test-init.rs" />
     <Content Include="sitecore modules\Shell\Revolver\Scripts\test-teardown.rs" />
     <Content Include="sitecore modules\Shell\Revolver\Scripts\test-alias.rs" />

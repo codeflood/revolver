@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Text;
 using Sitecore.Caching;
+using Sitecore.Caching.Generics;
 using Sitecore.StringExtensions;
 
 namespace Revolver.Core.Commands
@@ -37,18 +38,25 @@ namespace Revolver.Core.Commands
 
     public override CommandResult Run()
     {
-      if (Clear)
+	  try
       {
-        if (string.IsNullOrEmpty(KeyName))
-          return ClearCaches();
+        if (Clear)
+        {
+          if (string.IsNullOrEmpty(KeyName))
+            return ClearCaches();
 
-        return ClearEntries();
-      }
+          return ClearEntries();
+        }
       
-      if (string.IsNullOrEmpty(CacheName))
-        return ListCaches();
+        if (string.IsNullOrEmpty(CacheName))
+          return ListCaches();
 
-      return ListCacheKeys();
+        return ListCacheKeys();
+	  }
+	  catch(InvalidOperationException)
+	  {
+		return new CommandResult(CommandStatus.Failure, "Cache type not supported.");
+      }
     }
 
     protected virtual CommandResult ListCaches()
@@ -72,7 +80,7 @@ namespace Revolver.Core.Commands
         "--------"
       }, widths, buffer);
 
-      var caches = Sitecore.Caching.CacheManager.GetAllCaches();
+      var caches = CacheManager.GetAllCaches().OrderBy(x => x.Name);
 
       var cacheCount = 0;
 
@@ -208,14 +216,21 @@ namespace Revolver.Core.Commands
     }
 
 #if FEATURE_ABSTRACTS
-	protected virtual ICache GetCacheByName()
+	protected virtual ICache<string> GetCacheByName()
 	{
-	  return CacheManager.FindCacheByName(CacheName);
+	  var cacheInfo = CacheManager.GetAllCaches().FirstOrDefault(x => x.Name.Equals(CacheName));
+	  if(cacheInfo == null)
+	    return null;
+
+	  if (!(cacheInfo is ICache<string>))
+		throw new InvalidOperationException();
+
+	  return (ICache<string>) cacheInfo;
 	}
 
-	protected virtual int EnumerateCacheEntries(ICache cache, Action<string> action)
+	protected virtual int EnumerateCacheEntries(ICache<string> cache, Action<string> action)
 	{
-	  var keys = cache.GetCacheKeys();
+	  var keys = cache.GetCacheKeys().OrderBy(x => x);
 	  var keyCount = 0;
 
 	  foreach (var key in keys)
@@ -242,7 +257,7 @@ namespace Revolver.Core.Commands
 
 	protected virtual int EnumerateCacheEntries(Sitecore.Caching.Cache cache, Action<Sitecore.Caching.Cache.CacheEntry> action)
     {
-      var keys = cache.GetCacheKeys();
+      var keys = cache.GetCacheKeys().OrderBy(x => x.Name);
       var keyCount = 0;
 
       foreach (var key in keys)
