@@ -139,5 +139,35 @@ namespace Revolver.Test
       Assert.That(result.Status, Is.EqualTo(CommandStatus.Success));
       Assert.That(result.Message, Is.StringContaining(expected));
     }
+
+    [Test]
+    public void Json_Valid()
+    {
+      var cmd = new Cmd.PrettyPrint();
+      InitCommand(cmd);
+
+      cmd.FormatJson = true;
+      cmd.Input = "{\"a\":3,\"b\":\"c\"}";
+
+      var result = cmd.Run();
+
+      var expected = "{\r\n  \"a\": 3,\r\n  \"b\": \"c\"\r\n}";
+
+      Assert.That(result.Status, Is.EqualTo(CommandStatus.Success));
+      Assert.That(result.Message, Is.EqualTo(expected));
+    }
+
+    [Test]
+    public void Json_Invalid()
+    {
+      var cmd = new Cmd.PrettyPrint();
+      InitCommand(cmd);
+
+      cmd.FormatJson = true;
+      cmd.Input = "{\"a\":3\"b\":\"c\"}";
+
+      var result = cmd.Run();
+      Assert.That(result.Status, Is.EqualTo(CommandStatus.Failure));
+    }
   }
 }

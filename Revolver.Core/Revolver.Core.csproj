@@ -52,6 +52,7 @@
       <HintPath>$(SitecorePath)\bin\Sitecore.Kernel.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    
     <Reference Include="Sitecore.ContentSearch" Condition="$(DefineConstants.Contains('FEATURE_ITEM_BUCKETS'))">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>$(SitecorePath)\bin\Sitecore.ContentSearch.dll</HintPath>
@@ -75,6 +76,11 @@
     <Reference Include="HtmlAgilityPack">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>$(SitecorePath)\bin\HtmlAgilityPack.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(SitecorePath)\bin\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
