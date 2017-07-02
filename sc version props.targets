@@ -40,6 +40,11 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
 	<OutputPath>bin\8.0</OutputPath>
   </PropertyGroup>
+  <PropertyGroup Condition="$(Configuration.Contains('8.1'))">
+    <DefineConstants>$(DefineConstants);NET45;FEATURE_ITEM_CLONES;FEATURE_ITEM_BUCKETS;FEATURE_INDEX_SEARCH</DefineConstants>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+	<OutputPath>bin\8.0</OutputPath>
+  </PropertyGroup>
   <PropertyGroup Condition="$(Configuration.Contains('8.2'))">
     <DefineConstants>$(DefineConstants);NET45;FEATURE_ITEM_CLONES;FEATURE_ITEM_BUCKETS;FEATURE_ABSTRACTS</DefineConstants>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
