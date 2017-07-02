@@ -6,6 +6,7 @@ obj
 *proj.user
 *.DotSettings.user
 *.suo
+.vs/
 
 # Local build config
 deploy.targets
@@ -17,6 +18,5 @@ deploy.targets
 # except build/, which is used as an MSBuild target.
 !**/packages/build/
 
-# Other stuff
+# Other binaries
 *.exe
-.vs/

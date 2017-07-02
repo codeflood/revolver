@@ -38,7 +38,7 @@ namespace Revolver.Core.Commands
 
     public override CommandResult Run()
     {
-	  try
+      try
       {
         if (Clear)
         {
@@ -52,10 +52,10 @@ namespace Revolver.Core.Commands
           return ListCaches();
 
         return ListCacheKeys();
-	  }
-	  catch(InvalidOperationException)
-	  {
-		return new CommandResult(CommandStatus.Failure, "Cache type not supported.");
+      }
+      catch(InvalidOperationException)
+      {
+        return new CommandResult(CommandStatus.Failure, "Cache type not supported.");
       }
     }
 
@@ -110,20 +110,20 @@ namespace Revolver.Core.Commands
     {
       var buffer = new StringBuilder();
 
-	  var cache = GetCacheByName();
-	  if (cache == null)
+      var cache = GetCacheByName();
+      if (cache == null)
       {
         return new CommandResult(CommandStatus.Failure, "Cannot find cache by name '{0}'".FormatWith(CacheName));
       }
 
       var widths = new[]
-	  {
-		45,
+      {
+        45,
 #if !FEATURE_ABSTRACTS
-		15,
+        15,
 #endif
-		80
-	  };
+        80
+      };
 
       Formatter.PrintTable(new[]
       {
@@ -144,16 +144,16 @@ namespace Revolver.Core.Commands
       }, widths, buffer);
 
 #if FEATURE_ABSTRACTS
-	  var keyCount = EnumerateCacheEntries(cache, key =>
-	  {
-		Formatter.PrintTable(new[]
-		{
-		  key,
-		  cache.GetValue(key).ToString()
-		}, widths, buffer);
-	  });
+      var keyCount = EnumerateCacheEntries(cache, key =>
+      {
+        Formatter.PrintTable(new[]
+        {
+          key,
+          cache.GetValue(key).ToString()
+        }, widths, buffer);
+      });
 #else
-	  var keyCount = EnumerateCacheEntries(cache, entry =>
+      var keyCount = EnumerateCacheEntries(cache, entry =>
       {
         Formatter.PrintTable(new[]
         {
@@ -164,7 +164,7 @@ namespace Revolver.Core.Commands
       });
 #endif
 
-	  Formatter.PrintLine(string.Empty, buffer);
+      Formatter.PrintLine(string.Empty, buffer);
       Formatter.PrintLine("Listing {0} keys".FormatWith(keyCount), buffer);
 
       return new CommandResult(CommandStatus.Success, buffer.ToString());
@@ -179,8 +179,8 @@ namespace Revolver.Core.Commands
       }
       else
       {
-		var cache = GetCacheByName();
-		if (cache == null)
+        var cache = GetCacheByName();
+        if (cache == null)
         {
           return new CommandResult(CommandStatus.Failure, "Cannot find cache by name '{0}'".FormatWith(CacheName));
         }
@@ -193,71 +193,72 @@ namespace Revolver.Core.Commands
 
     protected virtual CommandResult ClearEntries()
     {
-	  var cache = GetCacheByName();
+      var cache = GetCacheByName();
 
-	  if (cache == null)
+      if (cache == null)
       {
         return new CommandResult(CommandStatus.Failure, "Cannot find cache by name '{0}'".FormatWith(CacheName));
       }
 
 #if FEATURE_ABSTRACTS
-	  var keyCount = EnumerateCacheEntries(cache, key =>
-	  {
-		cache.Remove(key);
-	  });
+      var keyCount = EnumerateCacheEntries(cache, key =>
+      {
+        cache.Remove(key);
+      });
 #else
-	  var keyCount = EnumerateCacheEntries(cache, entry =>
+      var keyCount = EnumerateCacheEntries(cache, entry =>
       {
         cache.Remove(entry.Key);
       });
 #endif
 
-	  return new CommandResult(CommandStatus.Success, "Cleared {0} entr{1} from cache '{2}'".FormatWith(keyCount, keyCount == 1 ? "y" : "ies", cache.Name));
+      return new CommandResult(CommandStatus.Success, "Cleared {0} entr{1} from cache '{2}'".FormatWith(keyCount, keyCount == 1 ? "y" : "ies", cache.Name));
     }
 
 #if FEATURE_ABSTRACTS
-	protected virtual ICache<string> GetCacheByName()
-	{
-	  var cacheInfo = CacheManager.GetAllCaches().FirstOrDefault(x => x.Name.Equals(CacheName));
-	  if(cacheInfo == null)
-	    return null;
-
-	  if (!(cacheInfo is ICache<string>))
-		throw new InvalidOperationException();
-
-	  return (ICache<string>) cacheInfo;
-	}
-
-	protected virtual int EnumerateCacheEntries(ICache<string> cache, Action<string> action)
-	{
-	  var keys = cache.GetCacheKeys().OrderBy(x => x);
-	  var keyCount = 0;
-
-	  foreach (var key in keys)
-	  {
-		var match = true;
-		if (!string.IsNullOrEmpty(KeyName))
-		  match = KeyNamePartial ? key.ToString().Contains(KeyName) : key.ToString().Equals(KeyName);
-
-		if (match)
-		{
-		  action(key);
-
-		  keyCount++;
-		}
-	  }
-
-	  return keyCount;
-	}
-#else
-	protected virtual Cache GetCacheByName()
-	{
-	  return CacheManager.GetAllCaches().FirstOrDefault(x => x.Name.Equals(CacheName));
-	}
-
-	protected virtual int EnumerateCacheEntries(Sitecore.Caching.Cache cache, Action<Sitecore.Caching.Cache.CacheEntry> action)
+    protected virtual ICache<string> GetCacheByName()
     {
-      var keys = cache.GetCacheKeys().OrderBy(x => x.Name);
+      var cacheInfo = CacheManager.GetAllCaches().FirstOrDefault(x => x.Name.Equals(CacheName));
+      if(cacheInfo == null)
+        return null;
+
+      if (!(cacheInfo is ICache<string>))
+        throw new InvalidOperationException();
+
+      return (ICache<string>) cacheInfo;
+    }
+
+    protected virtual int EnumerateCacheEntries(ICache<string> cache, Action<string> action)
+    {
+      var keys = cache.GetCacheKeys().OrderBy(x => x);
+      var keyCount = 0;
+
+      foreach (var key in keys)
+      {
+        var match = true;
+        if (!string.IsNullOrEmpty(KeyName))
+          match = KeyNamePartial ? key.ToString().Contains(KeyName) : key.ToString().Equals(KeyName);
+
+        if (match)
+        {
+          action(key);
+
+          keyCount++;
+        }
+      }
+
+      return keyCount;
+    }
+#else
+    protected virtual Sitecore.Caching.Cache GetCacheByName()
+    {
+      return CacheManager.GetAllCaches().FirstOrDefault(x => x.Name.Equals(CacheName));
+    }
+
+    protected virtual int EnumerateCacheEntries(Sitecore.Caching.Cache cache, Action<Sitecore.Caching.Cache.CacheEntry> action)
+    {
+      var keys = cache.GetCacheKeys();
+      keys.Sort();
       var keyCount = 0;
 
       foreach (var key in keys)
@@ -279,7 +280,7 @@ namespace Revolver.Core.Commands
     }
 #endif
 
-	public override string Description()
+    public override string Description()
     {
       return "List information about the caches.";
     }

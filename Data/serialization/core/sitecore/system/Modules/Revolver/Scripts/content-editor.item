@@ -72,7 +72,7 @@ revision: 5b91a0a6-efd5-4119-82c6-ec970f32e1b3
 field: {5777540D-336C-402B-8666-98CC83C49CF5}
 name: Script
 key: script
-content-length: 222
+content-length: 216
 
 @stoponerror
 bind run Revolver.SheerExtensions.ApplicationLauncher,Revolver.SheerExtensions

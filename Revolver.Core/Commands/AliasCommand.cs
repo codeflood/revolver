@@ -5,11 +5,11 @@ namespace Revolver.Core.Commands
 {
     [Command("alias")]
     public class AliasCommand : BaseCommand, IManualParseCommand
-	{
-		public CommandResult Run(string[] args)
-		{
-		  if(args.Length == 0)
-			return new CommandResult(CommandStatus.Success, PrintCurrentAliases());
+  {
+    public CommandResult Run(string[] args)
+    {
+      if(args.Length == 0)
+      return new CommandResult(CommandStatus.Success, PrintCurrentAliases());
 
           if (args.Length == 1)
                 return Context.CommandHandler.RemoveCommandAlias(args[0]);
@@ -24,17 +24,17 @@ namespace Revolver.Core.Commands
 
         public override void Help(HelpDetails details)
         {
-			details.AddParameter("name", "The name for the alias.");
-			details.AddParameter("command", "The command to alias.");
-			details.AddParameter("parameters", "Additional parameters to pass to the command.");
+      details.AddParameter("name", "The name for the alias.");
+      details.AddParameter("command", "The command to alias.");
+      details.AddParameter("parameters", "Additional parameters to pass to the command.");
 
-			details.Comments = Formatter.JoinLines(new[]
-			{
-			  "To list the current aliases, don't provide any parameters.",
-			  "To remove the alias, exclude the 'command' parameter."
-			});
-			details.AddExample(string.Empty);
-			details.AddExample("dir ls");
+      details.Comments = Formatter.JoinLines(new[]
+      {
+        "To list the current aliases, don't provide any parameters.",
+        "To remove the alias, exclude the 'command' parameter."
+      });
+      details.AddExample(string.Empty);
+      details.AddExample("dir ls");
             details.AddExample("dir ls -a -d");
             details.AddExample("dir");
         }
@@ -55,7 +55,7 @@ namespace Revolver.Core.Commands
                 if (aliases.Any())
                 {
                     hasAliases = true;
-                    var value = string.Join(", ", aliases);
+                    var value = string.Join(", ", aliases.ToArray());
                     Formatter.PrintDefinition(command.Key, value, sb);
                 }
             }
