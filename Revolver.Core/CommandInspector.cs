@@ -54,12 +54,8 @@ namespace Revolver.Core
     /// <returns>The attribute if found, otherwise null</returns>
     public static CommandAttribute GetCommandAttribute(Type type)
     {
-#if NET45
       var commandAttr = type.GetCustomAttribute<CommandAttribute>();
-#else
-      var attrs = type.GetCustomAttributes(typeof(CommandAttribute), true);
-      var commandAttr = attrs.FirstOrDefault();
-#endif
+
       if (commandAttr != null)
         return commandAttr as CommandAttribute;
 
@@ -144,13 +140,7 @@ namespace Revolver.Core
     /// <returns>The custom attribute if found, otherwise null</returns>
     public static T GetCustomAttribute<T>(PropertyInfo property) where T : class
     {
-#if NET45
       var attribute = property.GetCustomAttribute(typeof(T));
-#else
-      var attributes = property.GetCustomAttributes(typeof(T), true);
-      var attribute = attributes.FirstOrDefault();
-#endif
-
       
       if (attribute != null)
         return attribute as T;

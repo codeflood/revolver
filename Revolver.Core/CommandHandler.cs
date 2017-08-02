@@ -38,7 +38,6 @@ namespace Revolver.Core
       }
     }
 
-#if NET45
     /// <summary>
     /// Gets a dictionary of the current core commands
     /// </summary>
@@ -54,25 +53,6 @@ namespace Revolver.Core
     {
       get { return new ReadOnlyDictionary<string, Type>(_custcommands); }
     }
-
-#else
-
-    /// <summary>
-    /// Gets a dictionary of the current core commands
-    /// </summary>
-    public Dictionary<string, Type> CoreCommands
-    {
-      get { return _commands;  }
-    }
-
-    /// <summary>
-    /// Gets a dictionary of the current custom commands
-    /// </summary>
-    public Dictionary<string, Type> CustomCommands
-    {
-      get { return _custcommands; }
-    }
-#endif
 
     /// <summary>
     /// Gets the script locator
@@ -474,11 +454,7 @@ namespace Revolver.Core
           {
             if (named.ContainsKey(flagParameterAttribute.Name))
             {
-#if NET45
               var origVal = (bool)prop.GetValue(cmd);
-#else
-              var origVal = (bool)prop.GetValue(cmd, null);
-#endif
               propValue = !origVal;
             }
           }
@@ -522,11 +498,7 @@ namespace Revolver.Core
 
       if (property.PropertyType.IsAssignableFrom(value.GetType()))
       {
-#if NET45
         property.SetValue(hostObject, value);
-#else
-        property.SetValue(hostObject, value, null);
-#endif
       }
       else
       {
@@ -534,19 +506,7 @@ namespace Revolver.Core
         TypeConverter converter = null;
 
         // First look for type converters on the property itself
-#if NET45
         var propertyTypeConverter = property.GetCustomAttribute(typeof (TypeConverterAttribute));
-#else
-        Attribute propertyTypeConverter = null;
-
-        var attributes = property.GetCustomAttributes(typeof(TypeConverterAttribute), true);
-          
-        if (attributes != null && attributes.Any())
-        {
-          propertyTypeConverter = attributes[0] as Attribute;
-        }
-          
-#endif
         if (propertyTypeConverter != null)
         {
           var converterType = Type.GetType((propertyTypeConverter as TypeConverterAttribute).ConverterTypeName, true,
@@ -561,11 +521,7 @@ namespace Revolver.Core
 
         if (converter != null)
         {
-#if NET45
           property.SetValue(hostObject, converter.ConvertFrom(value));
-#else
-          property.SetValue(hostObject, converter.ConvertFrom(value), null);
-#endif
         }
       }
     }
@@ -592,11 +548,8 @@ namespace Revolver.Core
       list = (from element in list
               let wip = Parser.PerformScriptSubstitution(element, scriptArgs)
               select Parser.PerformSubstitution(_context, wip)).ToList();
-#if NET45
+
       listProperty.SetValue(cmd, list);
-#else
-      listProperty.SetValue(cmd, list, null);
-#endif
     }
 
     /// <summary>
