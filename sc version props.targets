@@ -11,28 +11,28 @@
   <!-- version specific -->
   <PropertyGroup Condition="$(Configuration.Contains('7.0'))">
   <!-- only allow specific SC70 token as there is a specific SC7 behaviour we need to deal with -->
-    <DefineConstants>$(DefineConstants);NET45;FEATURE_ITEM_CLONES;FEATURE_ITEM_BUCKETS;SC70;FEATURE_INDEX_SEARCH</DefineConstants>
+    <DefineConstants>$(DefineConstants);SC70;FEATURE_INDEX_SEARCH</DefineConstants>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-	<OutputPath>bin\7.0</OutputPath>
+    <OutputPath>bin\7.0</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="$(Configuration.Contains('7.5'))">
-    <DefineConstants>$(DefineConstants);NET45;FEATURE_ITEM_CLONES;FEATURE_ITEM_BUCKETS;FEATURE_INDEX_SEARCH</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_INDEX_SEARCH</DefineConstants>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-	<OutputPath>bin\7.5</OutputPath>
+    <OutputPath>bin\7.5</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="$(Configuration.Contains('8.0'))">
-    <DefineConstants>$(DefineConstants);NET45;FEATURE_ITEM_CLONES;FEATURE_ITEM_BUCKETS;FEATURE_INDEX_SEARCH</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_INDEX_SEARCH</DefineConstants>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-	<OutputPath>bin\8.0</OutputPath>
+    <OutputPath>bin\8.0</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="$(Configuration.Contains('8.1'))">
-    <DefineConstants>$(DefineConstants);NET45;FEATURE_ITEM_CLONES;FEATURE_ITEM_BUCKETS;FEATURE_INDEX_SEARCH</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_INDEX_SEARCH</DefineConstants>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-	<OutputPath>bin\8.1</OutputPath>
+    <OutputPath>bin\8.1</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="$(Configuration.Contains('8.2'))">
-    <DefineConstants>$(DefineConstants);NET45;FEATURE_ITEM_CLONES;FEATURE_ITEM_BUCKETS;FEATURE_ABSTRACTS</DefineConstants>
+    <DefineConstants>$(DefineConstants);FEATURE_ABSTRACTS</DefineConstants>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-	<OutputPath>bin\8.2</OutputPath>
+    <OutputPath>bin\8.2</OutputPath>
   </PropertyGroup>
 </Project>

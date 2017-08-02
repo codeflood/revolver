@@ -53,17 +53,17 @@
       <Private>True</Private>
     </Reference>
     
-    <Reference Include="Sitecore.ContentSearch" Condition="$(DefineConstants.Contains('FEATURE_ITEM_BUCKETS'))">
+    <Reference Include="Sitecore.ContentSearch">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>$(SitecorePath)\bin\Sitecore.ContentSearch.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Sitecore.ContentSearch.Linq" Condition="$(DefineConstants.Contains('FEATURE_ITEM_BUCKETS'))">
+    <Reference Include="Sitecore.ContentSearch.Linq">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>$(SitecorePath)\bin\Sitecore.ContentSearch.Linq.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Sitecore.Buckets" Condition="$(DefineConstants.Contains('FEATURE_ITEM_BUCKETS'))">
+    <Reference Include="Sitecore.Buckets">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>$(SitecorePath)\bin\Sitecore.Buckets.dll</HintPath>
       <Private>True</Private>
@@ -119,9 +119,9 @@
     <Compile Include="Commands\ChangeVersion.cs" />
     <Compile Include="Commands\CheckIn.cs" />
     <Compile Include="Commands\CheckOut.cs" />
-    <Compile Include="Commands\CloneItem.cs" Condition="$(DefineConstants.Contains('FEATURE_ITEM_CLONES'))" />
+    <Compile Include="Commands\CloneItem.cs"/>
     <Compile Include="Commands\Attributes\CommandAttribute.cs" />
-    <Compile Include="Commands\ContentSearch.cs" Condition="$(DefineConstants.Contains('FEATURE_ITEM_BUCKETS'))" />
+    <Compile Include="Commands\ContentSearch.cs"/>
     <Compile Include="Commands\Attributes\DescriptionAttribute.cs" />
     <Compile Include="Commands\Attributes\FlagParameterAttribute.cs" />
     <Compile Include="Commands\HelpCommand.cs" />
@@ -202,11 +202,11 @@
     <Compile Include="ProductInfo.cs" />
     <Compile Include="Prompt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\AssemblyInfo-6.2.cs" Condition="$(Configuration.Contains('6.2'))" />
-    <Compile Include="Properties\AssemblyInfo-6.4.cs" Condition="$(Configuration.Contains('6.4'))" />
-    <Compile Include="Properties\AssemblyInfo-6.6.cs" Condition="$(Configuration.Contains('6.6'))" />
     <Compile Include="Properties\AssemblyInfo-7.0.cs" Condition="$(Configuration.Contains('7.0'))" />
     <Compile Include="Properties\AssemblyInfo-7.5.cs" Condition="$(Configuration.Contains('7.5'))" />
+	<Compile Include="Properties\AssemblyInfo-8.0.cs" Condition="$(Configuration.Contains('8.0'))" />
+	<Compile Include="Properties\AssemblyInfo-8.1.cs" Condition="$(Configuration.Contains('8.1'))" />
+	<Compile Include="Properties\AssemblyInfo-8.2.cs" Condition="$(Configuration.Contains('8.2'))" />
     <Compile Include="ExecutionDirective.cs" />
     <Compile Include="ScriptLocator\DatabaseScriptLocator.cs" />
     <Compile Include="ScriptLocator\FileScriptLocator.cs" />
