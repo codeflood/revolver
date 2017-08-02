@@ -16,11 +16,7 @@ namespace Revolver.Core.Commands
         return new CommandResult(CommandStatus.Failure, Constants.Messages.MissingRequiredParameter.FormatWith("path or ID"));
 
       var prev = "/" + Context.CurrentDatabase.Name + Context.CurrentItem.Paths.FullPath;
-#if NET35
-      var next = string.Join(" ", new string[] { PathOrID }).Trim();
-#else
       var next = string.Join(" ", PathOrID).Trim();
-#endif
 
       var res = Context.SetContext(next);
 

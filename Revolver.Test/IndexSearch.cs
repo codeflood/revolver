@@ -41,14 +41,7 @@ namespace Revolver.Test
       _item2[FIELD2_NAME] = _item2Field;
       _item2.Editing.EndEdit();
 
-#if SC62
-      // The above updates will cause the index to be updated. Need to wait until this finishes or our queries won't find the updates.
-      // Was having issues using Rebuild() method. Probably due to the above updates updating the index.
-      Thread.Sleep(5000);
-#else
-
       SearchManager.SystemIndex.Rebuild();
-#endif
     }
 
     [Test]

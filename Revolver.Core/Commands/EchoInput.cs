@@ -59,11 +59,7 @@ namespace Revolver.Core.Commands
       {
         if (string.IsNullOrEmpty(filename))
         {
-#if NET35
-          return new CommandResult(CommandStatus.Success, string.Join(" ", Input.ToArray()));
-#else
           return new CommandResult(CommandStatus.Success, string.Join(" ", Input));
-#endif
         }
         else
         {
@@ -73,20 +69,12 @@ namespace Revolver.Core.Commands
 
           if (Append)
           {
-#if NET35
-            File.AppendAllText(filename, string.Join(" ", Input.ToArray()) + Environment.NewLine);
-#else
             File.AppendAllText(filename, string.Join(" ", Input) + Environment.NewLine);
-#endif
             return new CommandResult(CommandStatus.Success, "Output appended to " + filename);
           }
           else
           {
-#if NET35
-            File.WriteAllText(filename, string.Join(" ", Input.ToArray()) + Environment.NewLine);
-#else
             File.WriteAllText(filename, string.Join(" ", Input) + Environment.NewLine);
-#endif
             return new CommandResult(CommandStatus.Success, "Output written to " + filename);
           }
         }

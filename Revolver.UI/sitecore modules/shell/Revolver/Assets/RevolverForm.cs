@@ -89,11 +89,7 @@ namespace Revolver.UI
         }
       }
 
-#if SC62
-      var jsonOutput = Newtonsoft.Json.JavaScriptConvert.SerializeObject(new
-#else
       var jsonOutput = Newtonsoft.Json.JsonConvert.SerializeObject(new
-#endif
         {
           prompt = PrintCommandPrompt(),
           outputBuffer = _commandHandler != null ? _commandHandler.Context.EnvironmentVariables["outputbuffer"] : null,

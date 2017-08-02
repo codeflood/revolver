@@ -130,12 +130,7 @@ namespace Revolver.Test
 
       _sourceItem.Reload();
 
-#if SC62
-      // todo: verify this works with layout deltas
-      var layout = LayoutDefinition.Parse(_sourceItem.Fields[FieldIDs.LayoutField].GetValue(true));
-#else
       var layout = LayoutDefinition.Parse(LayoutField.GetFieldValue(_sourceItem.Fields[FieldIDs.LayoutField]));
-#endif
       var defaultDevice = layout.GetDevice(_defaultDeviceId);
       var printDevice = layout.GetDevice(_printDeviceId);
 
@@ -158,11 +153,7 @@ namespace Revolver.Test
 
       _sourceItem.Reload();
 
-#if SC62
-      var layout = LayoutDefinition.Parse(_sourceItem.Fields[FieldIDs.LayoutField].GetValue(true));
-#else
       var layout = LayoutDefinition.Parse(LayoutField.GetFieldValue(_sourceItem.Fields[FieldIDs.LayoutField]));
-#endif
       var defaultDevice = layout.GetDevice(_defaultDeviceId);
       var printDevice = layout.GetDevice(_printDeviceId);
 
@@ -187,11 +178,7 @@ namespace Revolver.Test
 
       _sourceItem.Reload();
 
-#if SC62
-      var layout = LayoutDefinition.Parse(_sourceItem.Fields[FieldIDs.LayoutField].GetValue(true));
-#else
       var layout = LayoutDefinition.Parse(LayoutField.GetFieldValue(_sourceItem.Fields[FieldIDs.LayoutField]));
-#endif
       var defaultDevice = layout.GetDevice(_defaultDeviceId);
       var printDevice = layout.GetDevice(_printDeviceId);
 
@@ -254,13 +241,8 @@ namespace Revolver.Test
 
       _targetItem.Reload();
 
-#if SC62
-      var sourceDevice = LayoutDefinition.Parse(((LayoutField)_sourceItem.Fields[FieldIDs.LayoutField]).Value).GetDevice(_defaultDeviceId);
-      var targetDevice = LayoutDefinition.Parse(((LayoutField)_targetItem.Fields[FieldIDs.LayoutField]).Value).GetDevice(_defaultDeviceId);
-#else
       var sourceDevice = LayoutDefinition.Parse(LayoutField.GetFieldValue(_sourceItem.Fields[FieldIDs.LayoutField])).GetDevice(_defaultDeviceId);
       var targetDevice = LayoutDefinition.Parse(LayoutField.GetFieldValue(_targetItem.Fields[FieldIDs.LayoutField])).GetDevice(_defaultDeviceId);
-#endif
 
       AssertLayout(sourceDevice, targetDevice);
     }

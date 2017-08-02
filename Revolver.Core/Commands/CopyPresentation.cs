@@ -86,21 +86,12 @@ namespace Revolver.Core.Commands
         if (sourceDevice != null && targetDevice != null)
         {
           // get the layout from the current item for the source device
-#if SC62
-          // todo: verify this works with layout deltas
-          var sldf = source.Fields[Sitecore.FieldIDs.LayoutField].GetValue(true);
-#else
           var sldf = LayoutField.GetFieldValue(source.Fields[Sitecore.FieldIDs.LayoutField]);
-#endif
           var sld = string.IsNullOrEmpty(sldf) ? new LayoutDefinition() : Sitecore.Layouts.LayoutDefinition.Parse(sldf);
           var sdd = sld.GetDevice(sourceDevice.ID.ToString());
 
           // todo: verify this works with layout deltas
-#if SC62
-          var tldf = target.Fields[Sitecore.FieldIDs.LayoutField].GetValue(true);
-#else
           var tldf = LayoutField.GetFieldValue(target.Fields[Sitecore.FieldIDs.LayoutField]);
-#endif
           var tld = string.IsNullOrEmpty(tldf) ? new LayoutDefinition() : Sitecore.Layouts.LayoutDefinition.Parse(tldf);
           var tdd = tld.GetDevice(targetDevice.ID.ToString());
 

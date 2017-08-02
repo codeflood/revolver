@@ -45,24 +45,13 @@ namespace Revolver.Core.Commands
     {
       if (NewVersion)
         return AddNewVersion();
-#if NET35
-      if (string.IsNullOrEmpty((Xml ?? string.Empty).Trim()))
-#else
+
       if (string.IsNullOrWhiteSpace(Xml))
-#endif
       {
-#if NET35
-        if (string.IsNullOrEmpty((Template ?? string.Empty).Trim()) && string.IsNullOrEmpty((Branch ?? string.Empty).Trim()))
-#else
         if (string.IsNullOrWhiteSpace(Template) && string.IsNullOrWhiteSpace(Branch))
-#endif
           return new CommandResult(CommandStatus.Failure, "Missing either 'template' or 'branch 'parameter.");
        
-#if NET35
-        if (string.IsNullOrEmpty((Name ?? string.Empty).Trim()))
-#else
         if (string.IsNullOrWhiteSpace(Name))
-#endif
           return new CommandResult(CommandStatus.Failure, Constants.Messages.MissingRequiredParameter.FormatWith("name"));
       }
 
@@ -75,18 +64,11 @@ namespace Revolver.Core.Commands
 
         // Resolve the temaplate or master
         Item constructor = null;
-#if NET35
-        if (!string.IsNullOrEmpty((Template ?? string.Empty).Trim()))
-#else
+
         if (!string.IsNullOrWhiteSpace(Template))
-#endif
           constructor = Context.CurrentDatabase.Templates[Template];
 
-#if NET35
-        if (!string.IsNullOrEmpty((Branch ?? string.Empty).Trim()))
-#else
         if (!string.IsNullOrWhiteSpace(Branch))
-#endif
           constructor = Context.CurrentDatabase.Branches[Branch];
 
         if (!string.IsNullOrEmpty(Xml))
@@ -110,27 +92,13 @@ namespace Revolver.Core.Commands
           }
 
           // create the item
-#if NET35
-          if (!string.IsNullOrEmpty((Template ?? string.Empty).Trim()))
-#else
           if (!string.IsNullOrWhiteSpace(Template))
-#endif
             created = Context.CurrentItem.Add(Name, (TemplateItem)constructor);
 
-#if NET35
-          if (!string.IsNullOrEmpty((Branch ?? string.Empty).Trim()))
-#else
           if (!string.IsNullOrWhiteSpace(Branch))
-#endif
             created = Context.CurrentItem.Add(Name, (BranchItem)constructor);
         }
       }
-
-      /*var message = string.Empty;
-      if (Name != string.Empty)
-        message = "Created item '" + Name + "'";
-      else
-        message = "Created Item";*/
 
       return new CommandResult(CommandStatus.Success, created.ID.ToString());
     }

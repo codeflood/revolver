@@ -73,11 +73,7 @@ namespace Revolver.Core.Commands
 
       using (var searchContext = index.CreateSearchContext())
       {
-#if NET35
-        var hits = searchContext.Search(Query);
-#else
         var hits = searchContext.Search(Query, MAX_SEARCH_HITS);
-#endif
         searchCount = hits.Length;
 
         foreach (var result in hits.FetchResults(0, MAX_SEARCH_HITS))

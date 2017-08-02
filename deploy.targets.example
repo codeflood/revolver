@@ -6,8 +6,5 @@
 		<SitecorePath Condition="$(Configuration.Contains('8.0'))">C:\inetpub\Revolver\Sitecore 8.0\Website</SitecorePath>
 		<SitecorePath Condition="$(Configuration.Contains('7.5'))">C:\inetpub\Revolver\Sitecore 7.5\Website</SitecorePath>
 		<SitecorePath Condition="$(Configuration.Contains('7.0'))">C:\inetpub\Revolver\Sitecore 7.0\Website</SitecorePath>
-		<SitecorePath Condition="$(Configuration.Contains('6.6'))">C:\inetpub\Revolver\Sitecore 6.6\Website</SitecorePath>
-		<SitecorePath Condition="$(Configuration.Contains('6.4'))">C:\inetpub\Revolver\Sitecore 6.4\Website</SitecorePath>
-		<SitecorePath Condition="$(Configuration.Contains('6.2'))">C:\inetpub\Revolver\Sitecore 6.2\Website</SitecorePath>
 	</PropertyGroup>
 </Project>

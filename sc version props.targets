@@ -9,21 +9,6 @@
     <DefineConstants>$(DefineConstants);TRACE</DefineConstants>
   </PropertyGroup>
   <!-- version specific -->
-  <PropertyGroup Condition="$(Configuration.Contains('6.2'))">
-    <DefineConstants>$(DefineConstants);NET35;SC62;FEATURE_INDEX_SEARCH</DefineConstants>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-	<OutputPath>bin\6.2</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition="$(Configuration.Contains('6.4'))">
-    <DefineConstants>$(DefineConstants);NET35;FEATURE_ITEM_CLONES;FEATURE_INDEX_SEARCH</DefineConstants>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-	<OutputPath>bin\6.4</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition="$(Configuration.Contains('6.6'))">
-    <DefineConstants>$(DefineConstants);NET35;FEATURE_ITEM_CLONES;FEATURE_INDEX_SEARCH</DefineConstants>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-	<OutputPath>bin\6.6</OutputPath>
-  </PropertyGroup>
   <PropertyGroup Condition="$(Configuration.Contains('7.0'))">
   <!-- only allow specific SC70 token as there is a specific SC7 behaviour we need to deal with -->
     <DefineConstants>$(DefineConstants);NET45;FEATURE_ITEM_CLONES;FEATURE_ITEM_BUCKETS;SC70;FEATURE_INDEX_SEARCH</DefineConstants>

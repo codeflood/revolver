@@ -13,11 +13,7 @@ namespace Revolver.Core.Commands
 
     public override CommandResult Run()
     {
-#if NET35
-      return new CommandResult(CommandStatus.Abort, string.Join(" ", MessageWords.ToArray()));
-#else
       return new CommandResult(CommandStatus.Abort, string.Join(" ", MessageWords));
-#endif
     }
 
     public override string Description()
