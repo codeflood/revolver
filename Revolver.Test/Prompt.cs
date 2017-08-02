@@ -28,7 +28,7 @@ namespace Revolver.Test
     [Test]
     public void Item()
     {
-      _context.CurrentItem = _testTreeRoot.Axes.SelectSingleItem("Juliet").Versions[new Sitecore.Data.Version(3)];
+      _context.CurrentItem = _testTreeRoot.Axes.SelectSingleItem("Juliet").Versions[Sitecore.Data.Version.Parse(3)];
       var output = Revolver.Core.Prompt.EvaluatePrompt(_context, "%path% %itemname% %ver%");
       Assert.That(output, Is.EqualTo(_context.CurrentItem.Paths.FullPath + " Juliet 3"));
     }
@@ -36,7 +36,7 @@ namespace Revolver.Test
     [Test]
     public void DB()
     {
-      _context.CurrentItem = _testTreeRoot.Axes.SelectSingleItem("Juliet").Versions[new Sitecore.Data.Version(3)];
+      _context.CurrentItem = _testTreeRoot.Axes.SelectSingleItem("Juliet").Versions[Sitecore.Data.Version.Parse(3)];
       var output = Revolver.Core.Prompt.EvaluatePrompt(_context, "%db%");
       Assert.That(output, Is.EqualTo(_context.CurrentDatabase.Name));
     }
@@ -44,7 +44,7 @@ namespace Revolver.Test
     [Test]
     public void Language()
     {
-      _context.CurrentItem = _testTreeRoot.Axes.SelectSingleItem("Juliet").Versions[new Sitecore.Data.Version(3)];
+      _context.CurrentItem = _testTreeRoot.Axes.SelectSingleItem("Juliet").Versions[Sitecore.Data.Version.Parse(3)];
       var output = Revolver.Core.Prompt.EvaluatePrompt(_context, "%lang% %langcode%");
       Assert.That(output, Is.EqualTo("English en"));
     }
@@ -52,7 +52,7 @@ namespace Revolver.Test
     [Test]
     public void EnvironmentVariable()
     {
-      _context.CurrentItem = _testTreeRoot.Axes.SelectSingleItem("Juliet").Versions[new Sitecore.Data.Version(3)];
+      _context.CurrentItem = _testTreeRoot.Axes.SelectSingleItem("Juliet").Versions[Sitecore.Data.Version.Parse(3)];
       _context.EnvironmentVariables.Add("a", "b");
       var output = Revolver.Core.Prompt.EvaluatePrompt(_context, "$a$");
       Assert.That(output, Is.EqualTo("b"));
@@ -61,7 +61,7 @@ namespace Revolver.Test
     [Test]
     public void EnvironmentVariable_NotPresent()
     {
-      _context.CurrentItem = _testTreeRoot.Axes.SelectSingleItem("Juliet").Versions[new Sitecore.Data.Version(3)];
+      _context.CurrentItem = _testTreeRoot.Axes.SelectSingleItem("Juliet").Versions[Sitecore.Data.Version.Parse(3)];
       _context.EnvironmentVariables.Add("a", "b");
       var output = Revolver.Core.Prompt.EvaluatePrompt(_context, "$c$");
       Assert.That(output, Is.EqualTo("$c$"));

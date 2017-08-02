@@ -76,6 +76,7 @@
 	<Compile Include="Properties\AssemblyInfo-8.0.cs" Condition="$(Configuration.Contains('8.0'))" />
 	<Compile Include="Properties\AssemblyInfo-8.1.cs" Condition="$(Configuration.Contains('8.1'))" />
 	<Compile Include="Properties\AssemblyInfo-8.2.cs" Condition="$(Configuration.Contains('8.2'))" />
+	<Compile Include="Properties\AssemblyInfo-9.0.cs" Condition="$(Configuration.Contains('9.0'))" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Revolver.Core\Revolver.Core.csproj">

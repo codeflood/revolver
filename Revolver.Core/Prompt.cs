@@ -35,7 +35,7 @@ namespace Revolver.Core
 
       if (context.CurrentLanguage != null)
       {
-        toRet = toRet.Replace("%lang%", context.CurrentLanguage.Title);
+        toRet = toRet.Replace("%lang%", context.CurrentLanguage.CultureInfo.DisplayName);
         toRet = toRet.Replace("%langcode%", context.CurrentLanguage.Name);
       }
       else

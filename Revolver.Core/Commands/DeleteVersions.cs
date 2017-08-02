@@ -70,7 +70,7 @@ namespace Revolver.Core.Commands
         {
           foreach (var version in versions)
           {
-            var versionItem = Context.CurrentItem.Database.GetItem(Context.CurrentItem.ID, language, new Version(version));
+            var versionItem = Context.CurrentItem.Database.GetItem(Context.CurrentItem.ID, language, Version.Parse(version));
             if (versionItem != null)
             {
               versionItem.Versions.RemoveVersion();

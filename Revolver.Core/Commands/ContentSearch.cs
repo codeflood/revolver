@@ -23,10 +23,10 @@ namespace Revolver.Core.Commands
 #endif
   public class ContentSearch : BaseCommand
   {
-	/// <summary>
-	/// The number of milliseconds the command will sleep per iteration while waiting for the index to complete updates.
-	/// </summary>
-	public const int IndexUpdateWaitSleepIntervalMilliseconds = 50;
+  /// <summary>
+  /// The number of milliseconds the command will sleep per iteration while waiting for the index to complete updates.
+  /// </summary>
+  public const int IndexUpdateWaitSleepIntervalMilliseconds = 50;
 
     [FlagParameter("ns")]
     [Description("No Statistics. Don't show how many items were found.")]
@@ -48,10 +48,10 @@ namespace Revolver.Core.Commands
     [Optional]
     public string IndexName { get; set; }
 
-	[NamedParameter("w", "waitTime")]
-	[Description("The number of seconds to wait for the index to finish updating before running the search.")]
-	[Optional]
-	public int IndexUpdateWaitTimeSeconds { get; set; }
+  [NamedParameter("w", "waitTime")]
+  [Description("The number of seconds to wait for the index to finish updating before running the search.")]
+  [Optional]
+  public int IndexUpdateWaitTimeSeconds { get; set; }
 
     [NumberedParameter(0, "query")]
     [Description("The content search query to execute.")]
@@ -70,8 +70,8 @@ namespace Revolver.Core.Commands
       IndexName = string.Empty;
       Query = string.Empty;
       Command = string.Empty;
-	  IndexUpdateWaitTimeSeconds = 0;
-	}
+    IndexUpdateWaitTimeSeconds = 0;
+  }
 
     public override CommandResult Run()
     {
@@ -106,19 +106,19 @@ namespace Revolver.Core.Commands
       var buffer = new StringBuilder();
       var foundCount = 0;
 
-	  if (IndexUpdateWaitTimeSeconds > 0)
-	  {
-		var maxIterations = Math.Ceiling((double)(IndexUpdateWaitTimeSeconds * 1000) / IndexUpdateWaitSleepIntervalMilliseconds);
-		var isRebuilding = IndexCustodian.IsRebuilding(index);
-		
-		for(var i = 0; i < maxIterations && isRebuilding; i++)
-		{
-		  Thread.Sleep(IndexUpdateWaitSleepIntervalMilliseconds);
-		  isRebuilding = IndexCustodian.IsRebuilding(index);
-		}
-	  }
+    if (IndexUpdateWaitTimeSeconds > 0)
+    {
+    var maxIterations = Math.Ceiling((double)(IndexUpdateWaitTimeSeconds * 1000) / IndexUpdateWaitSleepIntervalMilliseconds);
+    var isRebuilding = IndexCustodian.IsRebuilding(index);
+    
+    for(var i = 0; i < maxIterations && isRebuilding; i++)
+    {
+      Thread.Sleep(IndexUpdateWaitSleepIntervalMilliseconds);
+      isRebuilding = IndexCustodian.IsRebuilding(index);
+    }
+    }
 
-	  using (var searchContext = index.CreateSearchContext())
+    using (var searchContext = index.CreateSearchContext())
       {
         List<SearchStringModel> searchModel;
 
@@ -135,7 +135,11 @@ namespace Revolver.Core.Commands
           return new CommandResult(CommandStatus.Failure, "Failed to parse search query: " + ex.GetType().Name + ": " + ex.Message);
         }
 
-		var queryable = LinqHelper.CreateQuery(searchContext, searchModel);
+#if SC70
+        var queryable = LinqHelper.CreateQuery(searchContext, searchModel);
+#else
+        var queryable = LinqHelper.CreateQuery<SitecoreUISearchResultItem>(searchContext, searchModel);
+#endif
 
         var results = queryable.GetResults<SitecoreUISearchResultItem>();
         var uris = from item in results.Hits
@@ -187,7 +191,7 @@ namespace Revolver.Core.Commands
       details.AddExample("(__smallcreateddate:[20120903 TO 20130917]) pwd");
       details.AddExample("-l text:someterm pwd");
       details.AddExample("-so sitecore_core_index _name:sitecore");
-	  details.AddExample("-w 10 _name:home pwd");
+    details.AddExample("-w 10 _name:home pwd");
     }
   }
 }

@@ -73,7 +73,7 @@ namespace Revolver.Test
       var cmd = new Cmd.DeleteVersions();
       InitCommand(cmd);
 
-      _context.CurrentItem = _testItem.Database.GetItem(_testItem.ID, Language.Parse("en"), new Version(3));
+      _context.CurrentItem = _testItem.Database.GetItem(_testItem.ID, Language.Parse("en"), Version.Parse(3));
 
       var result = cmd.Run();
 

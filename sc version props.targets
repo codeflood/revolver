@@ -36,7 +36,7 @@
     <OutputPath>bin\8.2</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="$(Configuration.Contains('9.0'))">
-    <DefineConstants>$(DefineConstants);NET46;FEATURE_ITEM_CLONES;FEATURE_ITEM_BUCKETS;FEATURE_ABSTRACTS</DefineConstants>
+    <DefineConstants>$(DefineConstants);NET46;FEATURE_ABSTRACTS</DefineConstants>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
 	<OutputPath>bin\9.0</OutputPath>
   </PropertyGroup>
