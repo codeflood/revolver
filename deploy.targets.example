@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 	<PropertyGroup>
+		<SitecorePath Condition="$(Configuration.Contains('9.0'))">C:\inetpub\Revolver\Sitecore 9.0\Website</SitecorePath>
 		<SitecorePath Condition="$(Configuration.Contains('8.2'))">C:\inetpub\Revolver\Sitecore 8.2\Website</SitecorePath>
 		<SitecorePath Condition="$(Configuration.Contains('8.1'))">C:\inetpub\Revolver\Sitecore 8.1\Website</SitecorePath>
 		<SitecorePath Condition="$(Configuration.Contains('8.0'))">C:\inetpub\Revolver\Sitecore 8.0\Website</SitecorePath>

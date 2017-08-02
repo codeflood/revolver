@@ -25,11 +25,13 @@ Global
 		Debug 8.0|Any CPU = Debug 8.0|Any CPU
 		Debug 8.1|Any CPU = Debug 8.1|Any CPU
 		Debug 8.2|Any CPU = Debug 8.2|Any CPU
+		Debug 9.0|Any CPU = Debug 9.0|Any CPU
 		Release 7.0|Any CPU = Release 7.0|Any CPU
 		Release 7.5|Any CPU = Release 7.5|Any CPU
 		Release 8.0|Any CPU = Release 8.0|Any CPU
 		Release 8.1|Any CPU = Release 8.1|Any CPU
 		Release 8.2|Any CPU = Release 8.2|Any CPU
+		Release 9.0|Any CPU = Release 9.0|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{D3258D66-9269-40AC-BE6C-F880CFDA6312}.Debug 7.0|Any CPU.ActiveCfg = Debug 7.0|Any CPU
@@ -42,6 +44,8 @@ Global
 		{D3258D66-9269-40AC-BE6C-F880CFDA6312}.Debug 8.1|Any CPU.Build.0 = Debug 8.1|Any CPU
 		{D3258D66-9269-40AC-BE6C-F880CFDA6312}.Debug 8.2|Any CPU.ActiveCfg = Debug 8.2|Any CPU
 		{D3258D66-9269-40AC-BE6C-F880CFDA6312}.Debug 8.2|Any CPU.Build.0 = Debug 8.2|Any CPU
+		{D3258D66-9269-40AC-BE6C-F880CFDA6312}.Debug 9.0|Any CPU.ActiveCfg = Debug 9.0|Any CPU
+		{D3258D66-9269-40AC-BE6C-F880CFDA6312}.Debug 9.0|Any CPU.Build.0 = Debug 9.0|Any CPU
 		{D3258D66-9269-40AC-BE6C-F880CFDA6312}.Release 7.0|Any CPU.ActiveCfg = Release 7.0|Any CPU
 		{D3258D66-9269-40AC-BE6C-F880CFDA6312}.Release 7.0|Any CPU.Build.0 = Release 7.0|Any CPU
 		{D3258D66-9269-40AC-BE6C-F880CFDA6312}.Release 7.5|Any CPU.ActiveCfg = Release 7.5|Any CPU
@@ -52,6 +56,8 @@ Global
 		{D3258D66-9269-40AC-BE6C-F880CFDA6312}.Release 8.1|Any CPU.Build.0 = Release 8.1|Any CPU
 		{D3258D66-9269-40AC-BE6C-F880CFDA6312}.Release 8.2|Any CPU.ActiveCfg = Release 8.2|Any CPU
 		{D3258D66-9269-40AC-BE6C-F880CFDA6312}.Release 8.2|Any CPU.Build.0 = Release 8.2|Any CPU
+		{D3258D66-9269-40AC-BE6C-F880CFDA6312}.Release 9.0|Any CPU.ActiveCfg = Release 9.0|Any CPU
+		{D3258D66-9269-40AC-BE6C-F880CFDA6312}.Release 9.0|Any CPU.Build.0 = Release 9.0|Any CPU
 		{A7C5DE34-061F-47AF-B99C-9B74C781714F}.Debug 7.0|Any CPU.ActiveCfg = Debug 7.0|Any CPU
 		{A7C5DE34-061F-47AF-B99C-9B74C781714F}.Debug 7.0|Any CPU.Build.0 = Debug 7.0|Any CPU
 		{A7C5DE34-061F-47AF-B99C-9B74C781714F}.Debug 7.5|Any CPU.ActiveCfg = Debug 7.5|Any CPU
@@ -62,6 +68,8 @@ Global
 		{A7C5DE34-061F-47AF-B99C-9B74C781714F}.Debug 8.1|Any CPU.Build.0 = Debug 8.1|Any CPU
 		{A7C5DE34-061F-47AF-B99C-9B74C781714F}.Debug 8.2|Any CPU.ActiveCfg = Debug 8.2|Any CPU
 		{A7C5DE34-061F-47AF-B99C-9B74C781714F}.Debug 8.2|Any CPU.Build.0 = Debug 8.2|Any CPU
+		{A7C5DE34-061F-47AF-B99C-9B74C781714F}.Debug 9.0|Any CPU.ActiveCfg = Debug 9.0|Any CPU
+		{A7C5DE34-061F-47AF-B99C-9B74C781714F}.Debug 9.0|Any CPU.Build.0 = Debug 9.0|Any CPU
 		{A7C5DE34-061F-47AF-B99C-9B74C781714F}.Release 7.0|Any CPU.ActiveCfg = Release 7.0|Any CPU
 		{A7C5DE34-061F-47AF-B99C-9B74C781714F}.Release 7.0|Any CPU.Build.0 = Release 7.0|Any CPU
 		{A7C5DE34-061F-47AF-B99C-9B74C781714F}.Release 7.5|Any CPU.ActiveCfg = Release 7.5|Any CPU
@@ -72,6 +80,8 @@ Global
 		{A7C5DE34-061F-47AF-B99C-9B74C781714F}.Release 8.1|Any CPU.Build.0 = Release 8.1|Any CPU
 		{A7C5DE34-061F-47AF-B99C-9B74C781714F}.Release 8.2|Any CPU.ActiveCfg = Release 8.2|Any CPU
 		{A7C5DE34-061F-47AF-B99C-9B74C781714F}.Release 8.2|Any CPU.Build.0 = Release 8.2|Any CPU
+		{A7C5DE34-061F-47AF-B99C-9B74C781714F}.Release 9.0|Any CPU.ActiveCfg = Release 9.0|Any CPU
+		{A7C5DE34-061F-47AF-B99C-9B74C781714F}.Release 9.0|Any CPU.Build.0 = Release 9.0|Any CPU
 		{D91486D2-CC5B-45D6-98D0-BFF15CBE42D3}.Debug 7.0|Any CPU.ActiveCfg = Debug 7.0|Any CPU
 		{D91486D2-CC5B-45D6-98D0-BFF15CBE42D3}.Debug 7.0|Any CPU.Build.0 = Debug 7.0|Any CPU
 		{D91486D2-CC5B-45D6-98D0-BFF15CBE42D3}.Debug 7.5|Any CPU.ActiveCfg = Debug 7.5|Any CPU
@@ -82,6 +92,8 @@ Global
 		{D91486D2-CC5B-45D6-98D0-BFF15CBE42D3}.Debug 8.1|Any CPU.Build.0 = Debug 8.1|Any CPU
 		{D91486D2-CC5B-45D6-98D0-BFF15CBE42D3}.Debug 8.2|Any CPU.ActiveCfg = Debug 8.2|Any CPU
 		{D91486D2-CC5B-45D6-98D0-BFF15CBE42D3}.Debug 8.2|Any CPU.Build.0 = Debug 8.2|Any CPU
+		{D91486D2-CC5B-45D6-98D0-BFF15CBE42D3}.Debug 9.0|Any CPU.ActiveCfg = Debug 9.0|Any CPU
+		{D91486D2-CC5B-45D6-98D0-BFF15CBE42D3}.Debug 9.0|Any CPU.Build.0 = Debug 9.0|Any CPU
 		{D91486D2-CC5B-45D6-98D0-BFF15CBE42D3}.Release 7.0|Any CPU.ActiveCfg = Release 7.0|Any CPU
 		{D91486D2-CC5B-45D6-98D0-BFF15CBE42D3}.Release 7.0|Any CPU.Build.0 = Release 7.0|Any CPU
 		{D91486D2-CC5B-45D6-98D0-BFF15CBE42D3}.Release 7.5|Any CPU.ActiveCfg = Release 7.5|Any CPU
@@ -92,6 +104,8 @@ Global
 		{D91486D2-CC5B-45D6-98D0-BFF15CBE42D3}.Release 8.1|Any CPU.Build.0 = Release 8.1|Any CPU
 		{D91486D2-CC5B-45D6-98D0-BFF15CBE42D3}.Release 8.2|Any CPU.ActiveCfg = Release 8.2|Any CPU
 		{D91486D2-CC5B-45D6-98D0-BFF15CBE42D3}.Release 8.2|Any CPU.Build.0 = Release 8.2|Any CPU
+		{D91486D2-CC5B-45D6-98D0-BFF15CBE42D3}.Release 9.0|Any CPU.ActiveCfg = Release 9.0|Any CPU
+		{D91486D2-CC5B-45D6-98D0-BFF15CBE42D3}.Release 9.0|Any CPU.Build.0 = Release 9.0|Any CPU
 		{181D6A11-A17B-480B-8548-366FAE4BD5C6}.Debug 7.0|Any CPU.ActiveCfg = Debug 7.0|Any CPU
 		{181D6A11-A17B-480B-8548-366FAE4BD5C6}.Debug 7.0|Any CPU.Build.0 = Debug 7.0|Any CPU
 		{181D6A11-A17B-480B-8548-366FAE4BD5C6}.Debug 7.5|Any CPU.ActiveCfg = Debug 7.5|Any CPU
@@ -102,6 +116,8 @@ Global
 		{181D6A11-A17B-480B-8548-366FAE4BD5C6}.Debug 8.1|Any CPU.Build.0 = Debug 8.1|Any CPU
 		{181D6A11-A17B-480B-8548-366FAE4BD5C6}.Debug 8.2|Any CPU.ActiveCfg = Debug 8.2|Any CPU
 		{181D6A11-A17B-480B-8548-366FAE4BD5C6}.Debug 8.2|Any CPU.Build.0 = Debug 8.2|Any CPU
+		{181D6A11-A17B-480B-8548-366FAE4BD5C6}.Debug 9.0|Any CPU.ActiveCfg = Debug 9.0|Any CPU
+		{181D6A11-A17B-480B-8548-366FAE4BD5C6}.Debug 9.0|Any CPU.Build.0 = Debug 9.0|Any CPU
 		{181D6A11-A17B-480B-8548-366FAE4BD5C6}.Release 7.0|Any CPU.ActiveCfg = Release 7.0|Any CPU
 		{181D6A11-A17B-480B-8548-366FAE4BD5C6}.Release 7.0|Any CPU.Build.0 = Release 7.0|Any CPU
 		{181D6A11-A17B-480B-8548-366FAE4BD5C6}.Release 7.5|Any CPU.ActiveCfg = Release 7.5|Any CPU
@@ -112,6 +128,8 @@ Global
 		{181D6A11-A17B-480B-8548-366FAE4BD5C6}.Release 8.1|Any CPU.Build.0 = Release 8.1|Any CPU
 		{181D6A11-A17B-480B-8548-366FAE4BD5C6}.Release 8.2|Any CPU.ActiveCfg = Release 8.2|Any CPU
 		{181D6A11-A17B-480B-8548-366FAE4BD5C6}.Release 8.2|Any CPU.Build.0 = Release 8.2|Any CPU
+		{181D6A11-A17B-480B-8548-366FAE4BD5C6}.Release 9.0|Any CPU.ActiveCfg = Release 9.0|Any CPU
+		{181D6A11-A17B-480B-8548-366FAE4BD5C6}.Release 9.0|Any CPU.Build.0 = Release 9.0|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
