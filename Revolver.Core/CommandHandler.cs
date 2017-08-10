@@ -35,6 +35,17 @@ namespace Revolver.Core
       {
         _context = value;
         _context.CommandHandler = this; // todo: This is bad design. Need to fix this.
+
+        // Only populate custom commands from context if they're currently empty in the command handler, which would indicate a session restart.
+        if (_custcommands.Count == 0)
+        {
+          foreach (var entry in _context.CustomCommands)
+          {
+            var type = Type.GetType(entry.Value);
+            if (type != null)
+              _custcommands.Add(entry.Key, type);
+          }
+        }
       }
     }
 
@@ -148,6 +159,9 @@ namespace Revolver.Core
 
       _custcommands.Add(name, commandClass);
 
+      // Add the command to the context so it can survive session restarts
+      _context.CustomCommands.Add(name, commandClass.AssemblyQualifiedName);
+
       return true;
     }
 
@@ -157,13 +171,18 @@ namespace Revolver.Core
     /// <param name="name">The name the command is bound to</param>
     public bool RemoveCustomCommand(string name)
     {
+      var result = false;
+
       if (_custcommands.ContainsKey(name))
       {
         _custcommands.Remove(name);
-        return true;
+        result = true;
       }
 
-      return false;
+      if (_context.CustomCommands.ContainsKey(name))
+        _context.CustomCommands.Remove(name);
+
+      return result;
     }
 
     /// <summary>

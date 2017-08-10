@@ -17,6 +17,7 @@ namespace Revolver.Core
     private ItemUri _currentItemUri = null;
     private string _lastGoodPath = string.Empty;
     private StringDictionary _envVars = null;
+    private Dictionary<string, string> _customCommands = null;
     
     [NonSerialized]
     private CommandHandler _commandHandler = null;
@@ -111,6 +112,12 @@ namespace Revolver.Core
       get { return _envVars; }
     }
 
+    public Dictionary<string, string> CustomCommands
+    {
+      get { return _customCommands; }
+      set { _customCommands = value; }
+    }
+
     public Context()
     {
       if (Sitecore.Context.Site == null)
@@ -123,6 +130,8 @@ namespace Revolver.Core
       _envVars = new StringDictionary();
       _envVars.Add("prompt", "sc >");
       _envVars.Add("outputbuffer", "1000000");
+
+      _customCommands = new Dictionary<string, string>();
     }
 
     /// <summary>
