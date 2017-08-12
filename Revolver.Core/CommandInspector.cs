@@ -19,7 +19,18 @@ namespace Revolver.Core
     /// <param name="commands">A dictionary to populate the found commands into</param>
     public static void FindAllCommands(Dictionary<string, Type> commands)
     {
-      foreach (var type in Assembly.GetExecutingAssembly().GetTypes())
+      var assembly = Assembly.GetExecutingAssembly();
+      FindAllCommands(commands, assembly);
+    }
+
+    /// <summary>
+    /// Find all command classes and populate them into the provided dictionary
+    /// </summary>
+    /// <param name="commands">A dictionary to populate the found commands into</param>
+    /// <param name="assembly">The assembly to find the commands in</param>
+    public static void FindAllCommands(Dictionary<string, Type> commands, Assembly assembly)
+    {
+      foreach (var type in assembly.GetTypes())
       {
         var commandInterface = type.GetInterface("Revolver.Core.Commands.ICommand", true);
         if (commandInterface != null)
@@ -27,6 +38,13 @@ namespace Revolver.Core
           var commandAttr = GetCommandAttribute(type);
           if (commandAttr != null)
           {
+            if (commands.ContainsKey(commandAttr.Binding))
+            {
+              var existing = commands[commandAttr.Binding];
+              var message = string.Format("Command binding '{0}' used on types {1} and {2}. Bindings must be unique.", commandAttr.Binding, existing.FullName, type.FullName);
+              throw new InvalidOperationException(message);
+            }
+
             commands.Add(commandAttr.Binding, type);
           }
         }
