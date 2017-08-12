@@ -1,8 +1,11 @@
-﻿namespace Revolver.Core
+﻿using System;
+
+namespace Revolver.Core
 {
   /// <summary>
   /// Represents the arguments for a command
   /// </summary>
+  [Serializable]
   public class CommandArgs
   {
     /// <summary>

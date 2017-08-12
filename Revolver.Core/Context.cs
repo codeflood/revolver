@@ -18,7 +18,8 @@ namespace Revolver.Core
     private string _lastGoodPath = string.Empty;
     private StringDictionary _envVars = null;
     private Dictionary<string, string> _customCommands = null;
-    
+    private Dictionary<string, CommandArgs> _commandAliases;
+
     [NonSerialized]
     private CommandHandler _commandHandler = null;
 
@@ -118,6 +119,11 @@ namespace Revolver.Core
       set { _customCommands = value; }
     }
 
+    public Dictionary<string, CommandArgs> CommandAliases
+    {
+      get { return _commandAliases; }
+    }
+
     public Context()
     {
       if (Sitecore.Context.Site == null)
@@ -132,6 +138,7 @@ namespace Revolver.Core
       _envVars.Add("outputbuffer", "1000000");
 
       _customCommands = new Dictionary<string, string>();
+      _commandAliases = new Dictionary<string, CommandArgs>();
     }
 
     /// <summary>
@@ -146,7 +153,9 @@ namespace Revolver.Core
         _currentItemUri = _currentItemUri,
         _envVars = _envVars,
         _lastGoodPath = _lastGoodPath,
-        _pathStack = _pathStack
+        _pathStack = _pathStack,
+        _customCommands = _customCommands,
+        _commandAliases = _commandAliases
       };
     }
 

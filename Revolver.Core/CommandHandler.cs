@@ -19,7 +19,6 @@ namespace Revolver.Core
   {
     private readonly Dictionary<string, Type> _commands;
     private readonly Dictionary<string, Type> _custcommands;
-    private readonly Dictionary<string, CommandArgs> _commandAliases;
     private readonly ICommandFormatter _formatter;
     
     private Context _context;
@@ -84,7 +83,6 @@ namespace Revolver.Core
     {
       _commands = new Dictionary<string, Type>();
       _custcommands = new Dictionary<string, Type>();
-      _commandAliases = new Dictionary<string, CommandArgs>();
       Context = context;
       _formatter = formatter;
       ScriptLocator = new ScriptLocator.ScriptLocator();
@@ -194,13 +192,13 @@ namespace Revolver.Core
     /// <returns>The status of the addition.</returns>
     public CommandResult AddCommandAlias(string name, string command, params string[] parameters)
     {
-      if (_commandAliases.ContainsKey(name))
+      if (_context.CommandAliases.ContainsKey(name))
         return new CommandResult(CommandStatus.Failure, string.Format("Alias '{0}' already exists", name));
 
       if (_commands.ContainsKey(name))
         return new CommandResult(CommandStatus.Failure, string.Format("Cannot add alias '{0}' with the same name as an existing command", name));
 
-      _commandAliases.Add(name, new CommandArgs(command, parameters));
+      _context.CommandAliases.Add(name, new CommandArgs(command, parameters));
 
       return new CommandResult(CommandStatus.Success, string.Format("Alias '{0}' added", name));
     }
@@ -212,10 +210,10 @@ namespace Revolver.Core
     /// <returns>The status of the removal.</returns>
     public CommandResult RemoveCommandAlias(string name)
     {
-      if (!_commandAliases.ContainsKey(name))
+      if (!_context.CommandAliases.ContainsKey(name))
         return new CommandResult(CommandStatus.Failure, string.Format("Alias '{0}' not found", name));
 
-      if (_commandAliases.Remove(name))
+      if (_context.CommandAliases.Remove(name))
         return new CommandResult(CommandStatus.Success, string.Format("Alias '{0}' removed", name));
 
       return new CommandResult(CommandStatus.Failure, string.Format("Failed to remove alias '{0}'", name));
@@ -228,7 +226,7 @@ namespace Revolver.Core
     /// <returns>An enumeration of aliases for the command.</returns>
     public IEnumerable<string> GetCommandAliasesFor(string command)
     {
-      return from alias in _commandAliases
+      return from alias in _context.CommandAliases
              where alias.Value.CommandName == command
              select alias.Key;
     }
@@ -240,8 +238,8 @@ namespace Revolver.Core
     /// <returns>The alias if found, otherwise null.</returns>
     public CommandArgs FindCommandAlias(string alias)
     {
-      if (_commandAliases.ContainsKey(alias))
-        return _commandAliases[alias];
+      if (_context.CommandAliases.ContainsKey(alias))
+        return _context.CommandAliases[alias];
 
       return null;
     }
@@ -347,9 +345,9 @@ namespace Revolver.Core
       {
         cmd = (ICommand)Activator.CreateInstance(_custcommands[command]);
       }
-      else if(_commandAliases.ContainsKey(command) && _commands.ContainsKey(_commandAliases[command].CommandName))
+      else if(_context.CommandAliases.ContainsKey(command) && _commands.ContainsKey(_context.CommandAliases[command].CommandName))
       {
-        var alias = _commandAliases[command];
+        var alias = _context.CommandAliases[command];
         cmd = (ICommand)Activator.CreateInstance(_commands[alias.CommandName]);
         
         if(alias.Parameters != null && alias.Parameters.Length > 0)
@@ -653,23 +651,23 @@ namespace Revolver.Core
           else
           {
             var res = Execute(line, workingDirective, args);
-	        var outputAdded = false;
+          var outputAdded = false;
 
             if (res != null)
             {
               if (!(bool)(workingDirective.EchoOff ?? false))
               {
                 _formatter.PrintLine(res.Message, output);
-	            outputAdded = true;
+              outputAdded = true;
               }
 
               if (res.Status == CommandStatus.Abort)
-			  {
-				if(!outputAdded)
-				  _formatter.PrintLine(res.Message, output);
+        {
+        if(!outputAdded)
+          _formatter.PrintLine(res.Message, output);
 
-				return new CommandResult(CommandStatus.Success, output.ToString());
-			  }
+        return new CommandResult(CommandStatus.Success, output.ToString());
+        }
 
               if (res.Status != CommandStatus.Success)
                 status = CommandStatus.Failure;
