@@ -223,7 +223,6 @@ namespace Revolver.Core
       }
 
       Database db = null;
-      //bool requireRevert = false;
       if (CurrentDatabase.Name != dbName)
       {
         try
@@ -243,8 +242,6 @@ namespace Revolver.Core
         }
         else
           CurrentDatabase = db;
-
-        //requireRevert = true;
       }
 
       if (workingPath.StartsWith("/" + dbName))
@@ -321,7 +318,6 @@ namespace Revolver.Core
         // if version contains a negative number, take it as latest version minus that number
         var parsedVersion = Sitecore.Data.Version.Latest.Number;
 
-        //if (!Sitecore.Data.Version.TryParse(version, out targetVersion))
         if (int.TryParse(version, out parsedVersion))
         {
           if (parsedVersion < 0)

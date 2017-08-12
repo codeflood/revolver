@@ -3,9 +3,9 @@ using System.Text;
 
 namespace Revolver.Core.Commands
 {
-	[Command("ival")]
+  [Command("ival")]
   public class ValidateItem : BaseCommand
-	{
+  {
     [FlagParameter("g")]
     [Description("Run validators defined for the 'gutter'.")]
     [Optional]
@@ -36,8 +36,8 @@ namespace Revolver.Core.Commands
     [Optional]
     public string Path { get; set; }
 
-		public override CommandResult Run()
-		{
+    public override CommandResult Run()
+    {
       // Check both item level rules and global rules. Looks like page editor may run global rules separatley.
 
       var all = !(ModeGutter || ModeButton || ModeBar || ModeWorkflow);
@@ -77,7 +77,7 @@ namespace Revolver.Core.Commands
 
       var status = result ? CommandStatus.Success : CommandStatus.Failure;
       return new CommandResult(status, output.ToString());
-		}
+    }
 
     private bool RunValidation(ValidatorsMode mode, StringBuilder output, ref int count)
     {
@@ -101,15 +101,14 @@ namespace Revolver.Core.Commands
       return success;
     }
 
-		public override string Description()
-		{
-			return "Perform validation for the item";
-		}
+    public override string Description()
+    {
+      return "Perform validation for the item";
+    }
 
     public override void Help(HelpDetails details)
-		{
+    {
       details.Comments = "With no 'mode' flags (g, btn, b, w) this command will run all validators defined.";
-			//details.Usage = "<cmd> [path]";
-		}
-	}
+    }
+  }
 }

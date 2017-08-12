@@ -9,18 +9,18 @@ using Cmd = Revolver.Core.Commands;
 
 namespace Revolver.Test
 {
-	[TestFixture]
-	[Category("FindItems")]
-	public class FindItems : BaseCommandTest
-	{
-	  private Item _testContent = null;
+  [TestFixture]
+  [Category("FindItems")]
+  public class FindItems : BaseCommandTest
+  {
+    private Item _testContent = null;
     private BranchItem _branch = null;
 
-		[TestFixtureSetUp]
-		public void Init()
-		{
-		  Sitecore.Context.IsUnitTesting = true;
-		  Sitecore.Context.SkipSecurityInUnitTests = true;
+    [TestFixtureSetUp]
+    public void Init()
+    {
+      Sitecore.Context.IsUnitTesting = true;
+      Sitecore.Context.SkipSecurityInUnitTests = true;
 
       InitContent();
       var sampleBranch = _context.CurrentDatabase.Branches[Constants.Paths.Branch];
@@ -35,21 +35,21 @@ namespace Revolver.Test
       }
 
       _testContent = TestUtil.CreateContentFromFile("TestResources\\find content.xml", _testRoot);
-		}
+    }
 
-	  [Test]
-	  public void MissingCommand()
-	  {
-	    var cmd = new Cmd.FindItems();
+    [Test]
+    public void MissingCommand()
+    {
+      var cmd = new Cmd.FindItems();
       base.InitCommand(cmd);
 
       _context.CurrentItem = _testContent;
-	    cmd.Template = Constants.Paths.DocTemplate;
+      cmd.Template = Constants.Paths.DocTemplate;
 
-	    var result = cmd.Run();
+      var result = cmd.Run();
       Assert.That(result.Status, Is.EqualTo(CommandStatus.Failure));
       Assert.That(_context.CurrentItem.ID, Is.EqualTo(_testContent.ID));
-	  }
+    }
 
     [Test]
     public void CommandWithStatsOnly()
@@ -350,7 +350,6 @@ namespace Revolver.Test
 
       _context.CurrentItem = _testContent;
       
-      // todo: Ensure the dates are valid for Sitecore 6.x
       cmd.Expression = "@__created > (2014-05-03) as date";
       cmd.Command = "ga -a name";
 
@@ -390,7 +389,7 @@ namespace Revolver.Test
       base.InitCommand(cmd);
 
       _context.CurrentItem = _testContent;
-      // todo: Ensure the dates are valid for Sitecore 6.x
+      
       cmd.Expression = "@__created < (2014-05-03) as date";
       cmd.Command = "ga -a name";
 
@@ -586,16 +585,16 @@ namespace Revolver.Test
       Assert.That(_context.CurrentItem.ID, Is.EqualTo(_testContent.Parent.ID));
     }
 
-	  [Test]
-	  public void MultipleFilters()
-	  {
+    [Test]
+    public void MultipleFilters()
+    {
       var cmd = new Cmd.FindItems();
       base.InitCommand(cmd);
 
       _context.CurrentItem = _testContent;
       cmd.Template = Constants.IDs.DocTemplateId.ToString();
       cmd.FindByField = new KeyValuePair<string, string>("text", "ipsum");
-	    cmd.Recursive = true;
+      cmd.Recursive = true;
       cmd.Command = "ga -a name";
 
       var result = cmd.Run();
@@ -604,6 +603,6 @@ namespace Revolver.Test
       Assert.That(result.Message, Contains.Substring("Sao"));
       Assert.That(result.Message, Contains.Substring("Found 2 items"));
       Assert.That(_context.CurrentItem.ID, Is.EqualTo(_testContent.ID));
-	  }
-	}
+    }
+  }
 }

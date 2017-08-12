@@ -75,7 +75,6 @@ namespace Revolver.Core
           if ((ind = args.IndexOf("-" + flags[i])) >= 0)
           {
             named.Add(flags[i], string.Empty);
-            //	args.RemoveAt(ind);
             args[ind] = null;
           }
         }

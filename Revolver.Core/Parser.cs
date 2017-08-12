@@ -74,8 +74,6 @@ namespace Revolver.Core
         if (count == 0)
         {
           string chunk = input.Substring(start + 1, ind - start - 1).Trim();
-          //chunk = chunk.Replace(Constants.SubcommandEnterSymbol, Constants.EscapeCharacter + Constants.SubcommandEnter);
-          //chunk = chunk.Replace(Constants.SubcommandExitSymbol, Constants.EscapeCharacter + Constants.SubcommandExit);
           groups.Add(chunk);
           start = ind + 1;
         }

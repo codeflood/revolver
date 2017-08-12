@@ -11,9 +11,7 @@ namespace Revolver.Test
   [Category("BindCommand")]
   public class BindCommand
   {
-    //[TestCase("c", "Revolver.Test.BindCommand+CustomCommand, Revolver.Test", "c", TestName = "Separate command name")]
     [TestCase("c", "Revolver.Test.CustomCommand, Revolver.Test", "c", TestName = "Separate command name")]
-    //[TestCase("Revolver.Test.BindCommand+CustomCommand, Revolver.Test", null, "cc", TestName = "Command name from attribute")]
     [TestCase("Revolver.Test.CustomCommand, Revolver.Test", null, "cc", TestName = "Command name from attribute")]
     public void BindCustomCommand(string commandName, string command, string expectedBoundCommandName)
     {
@@ -130,28 +128,5 @@ namespace Revolver.Test
       Assert.That(result.Message, Contains.Substring("cd"));
       Assert.That(result.Message, Contains.Substring("ls"));
     }
-
-  /*[Mod.Command("cc")]
-  internal class CustomCommand : Mod.ICommand
-  {
-    public string Description()
-    {
-    return "A custom command";
-    }
-
-    public void Help(Core.HelpDetails details)
-    {
-    details.Description = Description();
-    }
-
-    public void Initialise(Core.Context context, ICommandFormatter formatter)
-    {
-    }
-
-    public Core.CommandResult Run()
-    {
-    return new CommandResult(CommandStatus.Success, "boo");
-    }
-  }*/
   }
 }
