@@ -52,7 +52,6 @@
       <HintPath>$(SitecorePath)\bin\Sitecore.Kernel.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    
     <Reference Include="Sitecore.ContentSearch">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>$(SitecorePath)\bin\Sitecore.ContentSearch.dll</HintPath>
@@ -119,9 +118,9 @@
     <Compile Include="Commands\ChangeVersion.cs" />
     <Compile Include="Commands\CheckIn.cs" />
     <Compile Include="Commands\CheckOut.cs" />
-    <Compile Include="Commands\CloneItem.cs"/>
+    <Compile Include="Commands\CloneItem.cs" />
     <Compile Include="Commands\Attributes\CommandAttribute.cs" />
-    <Compile Include="Commands\ContentSearch.cs"/>
+    <Compile Include="Commands\ContentSearch.cs" />
     <Compile Include="Commands\Attributes\DescriptionAttribute.cs" />
     <Compile Include="Commands\Attributes\FlagParameterAttribute.cs" />
     <Compile Include="Commands\HelpCommand.cs" />
@@ -158,6 +157,7 @@
     <Compile Include="Commands\Attributes\NamedParameterAttribute.cs" />
     <Compile Include="Commands\Attributes\NumberedParameterAttribute.cs" />
     <Compile Include="Commands\Attributes\OptionalAttribute.cs" />
+    <Compile Include="Commands\NewID.cs" />
     <Compile Include="Commands\Parameters\KeyValueConverter.cs" />
     <Compile Include="Commands\PrettyPrint.cs" />
     <Compile Include="Commands\PrintCurrentDatabase.cs" />
@@ -204,9 +204,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\AssemblyInfo-7.0.cs" Condition="$(Configuration.Contains('7.0'))" />
     <Compile Include="Properties\AssemblyInfo-7.5.cs" Condition="$(Configuration.Contains('7.5'))" />
-	<Compile Include="Properties\AssemblyInfo-8.0.cs" Condition="$(Configuration.Contains('8.0'))" />
-	<Compile Include="Properties\AssemblyInfo-8.1.cs" Condition="$(Configuration.Contains('8.1'))" />
-	<Compile Include="Properties\AssemblyInfo-8.2.cs" Condition="$(Configuration.Contains('8.2'))" />
+    <Compile Include="Properties\AssemblyInfo-8.0.cs" Condition="$(Configuration.Contains('8.0'))" />
+    <Compile Include="Properties\AssemblyInfo-8.1.cs" Condition="$(Configuration.Contains('8.1'))" />
+    <Compile Include="Properties\AssemblyInfo-8.2.cs" Condition="$(Configuration.Contains('8.2'))" />
     <Compile Include="ExecutionDirective.cs" />
     <Compile Include="ScriptLocator\DatabaseScriptLocator.cs" />
     <Compile Include="ScriptLocator\FileScriptLocator.cs" />
