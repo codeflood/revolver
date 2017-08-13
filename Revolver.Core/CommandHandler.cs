@@ -20,7 +20,7 @@ namespace Revolver.Core
     private readonly Dictionary<string, Type> _commands;
     private readonly Dictionary<string, Type> _custcommands;
     private readonly ICommandFormatter _formatter;
-    
+
     private Context _context;
     private bool _executionFaulted = false;
 
@@ -53,7 +53,7 @@ namespace Revolver.Core
     /// </summary>
     public ReadOnlyDictionary<string, Type> CoreCommands
     {
-      get { return new ReadOnlyDictionary<string,Type>(_commands); }
+      get { return new ReadOnlyDictionary<string, Type>(_commands); }
     }
 
     /// <summary>
@@ -86,7 +86,7 @@ namespace Revolver.Core
       Context = context;
       _formatter = formatter;
       ScriptLocator = new ScriptLocator.ScriptLocator();
-      
+
       CommandInspector.FindAllCommands(_commands);
     }
 
@@ -308,7 +308,7 @@ namespace Revolver.Core
         var result = Execute(elements[0].Trim(), args, directive, scriptArgs);
         if (result != null)
           return result;
-        
+
         if (directive.IgnoreUnknownCommands == null || !directive.IgnoreUnknownCommands.Value)
           return new CommandResult(CommandStatus.Failure, "Unknown command or script name " + elements[0].Trim());
       }
@@ -345,12 +345,12 @@ namespace Revolver.Core
       {
         cmd = (ICommand)Activator.CreateInstance(_custcommands[command]);
       }
-      else if(_context.CommandAliases.ContainsKey(command) && _commands.ContainsKey(_context.CommandAliases[command].CommandName))
+      else if (_context.CommandAliases.ContainsKey(command) && _commands.ContainsKey(_context.CommandAliases[command].CommandName))
       {
         var alias = _context.CommandAliases[command];
         cmd = (ICommand)Activator.CreateInstance(_commands[alias.CommandName]);
-        
-        if(alias.Parameters != null && alias.Parameters.Length > 0)
+
+        if (alias.Parameters != null && alias.Parameters.Length > 0)
         {
           var paramsList = new List<string>(alias.Parameters);
           paramsList.AddRange(args);
@@ -360,7 +360,7 @@ namespace Revolver.Core
 
       if (cmd != null)
         return ExecuteCommand(cmd, args, directive, scriptArgs);
-      
+
       var substitutedArgs = from arg in args
                             select Parser.PerformScriptSubstitution(arg, scriptArgs);
 
@@ -384,7 +384,7 @@ namespace Revolver.Core
       if (manualParseInterface != null)
       {
         var subArgs = from arg in args
-                      let wip = Parser.PerformScriptSubstitution(arg, scriptArgs) 
+                      let wip = Parser.PerformScriptSubstitution(arg, scriptArgs)
                       select Parser.PerformSubstitution(_context, wip);
 
         result = manualParseInterface.Run(subArgs.ToArray());
@@ -413,17 +413,17 @@ namespace Revolver.Core
               var value = string.Empty;
               ParameterUtil.GetParameter(args, "-" + namedParameterAttribute.Name, i, ref value);
 
-                if (!string.IsNullOrEmpty(value))
+              if (!string.IsNullOrEmpty(value))
+              {
+                // Substitute individual values as ConvertAndAssignParameter won't handle word arguments
+                if (noSub == null)
                 {
-                  // Substitute individual values as ConvertAndAssignParameter won't handle word arguments
-                  if (noSub == null)
-                  {
-                      value = Parser.PerformSubstitution(_context, (string) value);
-                  }
-
-                  value = Parser.PerformScriptSubstitution((string) value, scriptArgs);
-                  words.Add(value);
+                  value = Parser.PerformSubstitution(_context, (string)value);
                 }
+
+                value = Parser.PerformScriptSubstitution((string)value, scriptArgs);
+                words.Add(value);
+              }
             }
 
             if (words.Count > 0)
@@ -507,7 +507,7 @@ namespace Revolver.Core
         var noSub = CommandInspector.GetNoSubstitutionAttribute(property);
         if (noSub == null)
         {
-          value = Parser.PerformSubstitution(_context, (string) value);
+          value = Parser.PerformSubstitution(_context, (string)value);
         }
 
         value = Parser.PerformScriptSubstitution((string)value, scriptArgs);
@@ -523,7 +523,7 @@ namespace Revolver.Core
         TypeConverter converter = null;
 
         // First look for type converters on the property itself
-        var propertyTypeConverter = property.GetCustomAttribute(typeof (TypeConverterAttribute));
+        var propertyTypeConverter = property.GetCustomAttribute(typeof(TypeConverterAttribute));
         if (propertyTypeConverter != null)
         {
           var converterType = Type.GetType((propertyTypeConverter as TypeConverterAttribute).ConverterTypeName, true,
@@ -629,7 +629,7 @@ namespace Revolver.Core
       _executionFaulted = false;
 
       // Execute each line
-      foreach(var line in lines)
+      foreach (var line in lines)
       {
         // Don't execute a comment line (starts with #) and don't execute if faulted
         if (!line.StartsWith(Constants.ScriptCommentLineIndicator) && !_executionFaulted)
@@ -651,26 +651,31 @@ namespace Revolver.Core
           else
           {
             var res = Execute(line, workingDirective, args);
-          var outputAdded = false;
+            var outputAdded = false;
 
             if (res != null)
             {
               if (!(bool)(workingDirective.EchoOff ?? false))
               {
                 _formatter.PrintLine(res.Message, output);
-              outputAdded = true;
+                outputAdded = true;
               }
 
               if (res.Status == CommandStatus.Abort)
-        {
-        if(!outputAdded)
-          _formatter.PrintLine(res.Message, output);
+              {
+                if (!outputAdded)
+                  _formatter.PrintLine(res.Message, output);
 
-        return new CommandResult(CommandStatus.Success, output.ToString());
-        }
+                return new CommandResult(CommandStatus.Success, output.ToString());
+              }
 
               if (res.Status != CommandStatus.Success)
+              {
                 status = CommandStatus.Failure;
+
+                if (workingDirective.StopOnError.HasValue && workingDirective.StopOnError.Value)
+                  break;
+              }
             }
             else
             {
