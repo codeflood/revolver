@@ -102,7 +102,9 @@
     <Compile Include="Context.cs" />
     <Compile Include="ContextSwitcher.cs" />
     <Compile Include="CustomCommand.cs" />
+    <Compile Include="CustomCommand2.cs" />
     <Compile Include="ExpressionParser.cs" />
+    <Compile Include="ItemPageEvents.cs" />
     <Compile Include="NewID.cs" />
     <Compile Include="ParameterUtil.cs" />
     <Compile Include="Prompt.cs" />
@@ -176,6 +178,9 @@
     <Compile Include="XPathMatch.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="sitecore modules\Shell\Revolver\Scripts\execution-directive-stop-processing-1.rs" />
+    <Content Include="sitecore modules\Shell\Revolver\Scripts\execution-directive-stop-processing-2.rs" />
+    <Content Include="sitecore modules\Shell\Revolver\Scripts\execution-directive-stop-processing-3.rs" />
     <None Include="sitecore modules\Shell\Revolver\Scripts\test-fields.rs" />
     <Content Include="sitecore modules\Shell\Revolver\Scripts\test-init.rs" />
     <Content Include="sitecore modules\Shell\Revolver\Scripts\test-teardown.rs" />

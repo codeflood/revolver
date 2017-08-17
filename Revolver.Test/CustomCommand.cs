@@ -5,7 +5,7 @@ using Revolver.Core.Formatting;
 namespace Revolver.Test
 {
     [Command("cc")]
-    internal class CustomCommand : ICommand
+    public class CustomCommand : ICommand
     {
         public string Description()
         {

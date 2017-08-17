@@ -91,6 +91,26 @@ namespace Revolver.Test
     }
 
     [Test]
+    public void BindAllCustomCommands()
+    {
+      var formatter = new TextOutputFormatter();
+
+      var ctx = new Core.Context();
+      ctx.CommandHandler = new Core.CommandHandler(ctx, formatter);
+
+      var cmd = new Mod.BindCommand();
+      cmd.Initialise(ctx, formatter);
+
+      cmd.CommandName = "Revolver.Test";
+
+      var result = cmd.Run();
+
+      Assert.That(result.Status, Is.EqualTo(CommandStatus.Success));
+      Assert.That(ctx.CommandHandler.CustomCommands, Contains.Item(new KeyValuePair<string, Type>("cc", typeof(CustomCommand))));
+      Assert.That(ctx.CommandHandler.CustomCommands, Contains.Item(new KeyValuePair<string, Type>("cc2", typeof(CustomCommand2))));
+    }
+
+    [Test]
     public void RemoveCustomCommand()
     {
       var formatter = new TextOutputFormatter();

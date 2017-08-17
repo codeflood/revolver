@@ -262,5 +262,26 @@ namespace Revolver.Test
       Assert.That(result.Status, Is.EqualTo(CommandStatus.Success));
       Assert.That(result.Message, Is.StringContaining(ItemIDs.MediaLibraryRoot.ToString()));
     }
+
+    [Test]
+    public void ExecutionDirective_StopOnError_SubScriptFailureCeasesExecution()
+    {
+      var ctx = new Mod.Context();
+      ctx.CurrentItem = ctx.CurrentDatabase.GetRootItem();
+      var handler = new Mod.CommandHandler(ctx, new TextOutputFormatter());
+
+      var result = handler.Execute("execution-directive-stop-processing-1");
+
+      Assert.That(result.Status, Is.EqualTo(CommandStatus.Failure));
+
+      Assert.That(result.Message, Is.StringContaining("script 1 start"));
+      Assert.That(result.Message, Is.Not.StringContaining("script 1 end"));
+
+      Assert.That(result.Message, Is.StringContaining("script 2 start"));
+      Assert.That(result.Message, Is.Not.StringContaining("script 2 end"));
+
+      Assert.That(result.Message, Is.StringContaining("script 3 start"));
+      Assert.That(result.Message, Is.Not.StringContaining("script 3 end"));
+    }
   }
 }
