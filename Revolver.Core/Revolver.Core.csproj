@@ -127,6 +127,7 @@
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\IManualParseCommand.cs" />
     <Compile Include="Commands\Attributes\ListParameterAttribute.cs" />
+    <Compile Include="Commands\ItemPageEvents.cs" />
     <Compile Include="Commands\ListPublishQueue.cs" />
     <Compile Include="Commands\ListScripts.cs" />
     <Compile Include="Commands\MathModulus.cs" />
