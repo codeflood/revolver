@@ -1,5 +1,13 @@
 # Breaking Changes #
 
+## Touch Command ##
+Introduced: Revolver 3.2
+Description: The `touch` command has had it's binding changed to `create`. An alias has been included in the `init` script to minimise disruption.
+
+## Alias Command ##
+Introduced: Revolver 3.1
+Description: The alias functionality has been moved out of the `bind` command and into a dedicated command named `alias`.
+
 ## Content Search Command ##
 Introduced: Revolver 3
 Description: If specifying the index name you need the -i named parameter instead of just adding the index name before the query

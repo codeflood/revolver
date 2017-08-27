@@ -8,7 +8,24 @@ name: init
 master: {00000000-0000-0000-0000-000000000000}
 template: {89330AFB-66E4-40E8-92D6-79D9C793A985}
 templatekey: Script
+created: 20170604T124908Z
 
+----field----
+field: {5777540D-336C-402B-8666-98CC83C49CF5}
+name: Script
+key: script
+content-length: 40
+
+@echooff
+set-prompt
+alias touch create
+----field----
+field: {41F14C52-ED01-41CB-8C35-297FB7A70C59}
+name: Usage
+key: usage
+content-length: 4
+
+init
 ----field----
 field: {BA3F86A2-4A1C-4D78-B63D-91C2779C1B5E}
 name: __Sortorder
@@ -167,22 +184,8 @@ content-length: 0
 ----version----
 language: en
 version: 1
-revision: 1335f9c3-c290-43e8-aa63-de7dc9594ae4
+revision: 1485b0fa-c58d-459a-9abf-8638fcdc997e
 
-----field----
-field: {5777540D-336C-402B-8666-98CC83C49CF5}
-name: Script
-key: script
-content-length: 10
-
-set-prompt
-----field----
-field: {41F14C52-ED01-41CB-8C35-297FB7A70C59}
-name: Usage
-key: usage
-content-length: 4
-
-init
 ----field----
 field: {F2606B79-E8AE-4D6E-B4F0-446C5009040D}
 name: Description
@@ -210,21 +213,21 @@ name: __Revision
 key: __revision
 content-length: 36
 
-1335f9c3-c290-43e8-aa63-de7dc9594ae4
+1485b0fa-c58d-459a-9abf-8638fcdc997e
 ----field----
 field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
 name: __Updated
 key: __updated
-content-length: 34
+content-length: 16
 
-20150301T190722:635608336423832233
+20170827T122002Z
 ----field----
 field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
 name: __Updated by
 key: __updated by
 content-length: 14
 
-sitecore\admin
+sitecore\Admin
 ----field----
 field: {001DD393-96C5-490B-924A-B0F25CD9EFD8}
 name: __Lock
