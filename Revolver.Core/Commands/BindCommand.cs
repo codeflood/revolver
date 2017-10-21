@@ -1,7 +1,11 @@
 using Sitecore.StringExtensions;
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
+using Lucene.Net.Search.Function;
 
 namespace Revolver.Core.Commands
 {
@@ -106,37 +110,99 @@ namespace Revolver.Core.Commands
         moniker = string.Empty;
       }
 
+      // If we're missing the assembly delimiter, treat the typeName as an assemblyName
+      if (!typeName.Contains(","))
+        return BindCommandsFromAssembly(typeName);
+
+      return BindCommandFromType(typeName, moniker);
+    }
+
+    /// <summary>
+    /// Bind a single command from a type name.
+    /// </summary>
+    /// <param name="typeName">The name of the type implementing the command.</param>
+    /// <param name="moniker">The name of the command to bind to. If empty, use the default command name from the command attribute on the type.</param>
+    /// <returns>A result indicating whether the type was bound successfully.</returns>
+    private CommandResult BindCommandFromType(string typeName, string moniker)
+    {
       // Try to load the type
-      Type t = Type.GetType(typeName, false, true);
-      if (t != null)
-      {
-        // Verify it implements the correct interface
-        if (t.GetInterface(typeof(ICommand).Name) != null)
-        {
-          if (string.IsNullOrEmpty(moniker))
-          {
-            // If no moniker is provided, grab the moniker from the command attribute
-            var commandAttr = CommandInspector.GetCommandAttribute(t);
-            if (commandAttr != null)
-              moniker = commandAttr.Binding;
-            else
-              return new CommandResult(CommandStatus.Failure, string.Format("Type {0} does not have a command attribute. You must specify the commandName", t.Name));
-          }
-
-          if(string.IsNullOrEmpty(moniker))
-            return new CommandResult(CommandStatus.Failure, Constants.Messages.MissingRequiredParameter.FormatWith("commandName"));
-
-          // Call into command handler to bind custom command
-          if (Context.CommandHandler.AddCustomCommand(moniker, t))
-            return new CommandResult(CommandStatus.Success, t.Name + " bound to " + moniker);
-          else
-            return new CommandResult(CommandStatus.Failure, "Failed to add command");
-        }
-        else
-          return new CommandResult(CommandStatus.Failure, string.Format("Type {0} does not support interface {1}", t.Name, typeof(ICommand).Name));
-      }
-      else
+      var type = Type.GetType(typeName, false, true);
+      if (type == null)
         return new CommandResult(CommandStatus.Failure, "Failed to load type " + typeName);
+
+      return BindCommandFromType(type, moniker);
+    }
+
+    /// <summary>
+    /// Bind a single command from a type name.
+    /// </summary>
+    /// <param name="typeName">The name of the type implementing the command.</param>
+    /// <param name="moniker">The name of the command to bind to. If empty, use the default command name from the command attribute on the type.</param>
+    /// <returns>A result indicating whether the type was bound successfully.</returns>
+    private CommandResult BindCommandFromType(Type type, string moniker)
+    { 
+      // Verify it implements the correct interface
+      if (type.GetInterface(typeof(ICommand).Name) != null)
+      {
+        if (string.IsNullOrEmpty(moniker))
+        {
+          // If no moniker is provided, grab the moniker from the command attribute
+          var commandAttr = CommandInspector.GetCommandAttribute(type);
+          if (commandAttr != null)
+            moniker = commandAttr.Binding;
+          else
+            return new CommandResult(CommandStatus.Failure, string.Format("Type {0} does not have a command attribute. You must specify the commandName", type.Name));
+        }
+
+        if (string.IsNullOrEmpty(moniker))
+          return new CommandResult(CommandStatus.Failure, Constants.Messages.MissingRequiredParameter.FormatWith("commandName"));
+
+        // Call into command handler to bind custom command
+        if (Context.CommandHandler.AddCustomCommand(moniker, type))
+          return new CommandResult(CommandStatus.Success, type.Name + " bound to " + moniker);
+          
+        return new CommandResult(CommandStatus.Failure, "Failed to add command");
+      }
+        
+      return new CommandResult(CommandStatus.Failure, string.Format("Type {0} does not support interface {1}", type.Name, typeof(ICommand).Name));
+    }
+
+    /// <summary>
+    /// Bind all commands from an assembly.
+    /// </summary>
+    /// <param name="assemblyName">The name of the assembly to load the commands from.</param>
+    /// <returns>A result indicating whether at least 1 command was found and whether all found commands where bound successfully.</returns>
+    private CommandResult BindCommandsFromAssembly(string assemblyName)
+    {
+      Assembly assembly = null;
+
+      try
+      {
+        assembly = Assembly.Load(assemblyName);
+      }
+      catch (FileNotFoundException)
+      {
+        return new CommandResult(CommandStatus.Failure, "Failed to load assembly " + assemblyName);
+      }
+
+      if(assembly == null)
+        return new CommandResult(CommandStatus.Failure, "Failed to load assembly " + assemblyName);
+
+      var commands = new Dictionary<string, Type>();
+      CommandInspector.FindAllCommands(commands, assembly);
+
+      var results = new List<CommandResult>();
+
+      foreach (var command in commands)
+      {
+        var result = BindCommandFromType(command.Value, command.Key);
+        results.Add(result);
+      }
+
+      var message = Formatter.JoinLines(results.Select(x => x.Message));
+      var status = results.All(x => x.Status == CommandStatus.Success) ? CommandStatus.Success : CommandStatus.Failure;
+
+      return new CommandResult(status, message);
     }
   }
 }

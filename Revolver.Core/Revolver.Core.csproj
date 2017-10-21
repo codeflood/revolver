@@ -52,7 +52,6 @@
       <HintPath>$(SitecorePath)\bin\Sitecore.Kernel.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    
     <Reference Include="Sitecore.ContentSearch">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>$(SitecorePath)\bin\Sitecore.ContentSearch.dll</HintPath>
@@ -119,15 +118,17 @@
     <Compile Include="Commands\ChangeVersion.cs" />
     <Compile Include="Commands\CheckIn.cs" />
     <Compile Include="Commands\CheckOut.cs" />
-    <Compile Include="Commands\CloneItem.cs"/>
+    <Compile Include="Commands\CloneItem.cs" />
     <Compile Include="Commands\Attributes\CommandAttribute.cs" />
-    <Compile Include="Commands\ContentSearch.cs"/>
+    <Compile Include="Commands\ContentSearch.cs" />
     <Compile Include="Commands\Attributes\DescriptionAttribute.cs" />
     <Compile Include="Commands\Attributes\FlagParameterAttribute.cs" />
+    <Compile Include="Commands\Filler.cs" />
     <Compile Include="Commands\HelpCommand.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\IManualParseCommand.cs" />
     <Compile Include="Commands\Attributes\ListParameterAttribute.cs" />
+    <Compile Include="Commands\ItemPageEvents.cs" />
     <Compile Include="Commands\ListPublishQueue.cs" />
     <Compile Include="Commands\ListScripts.cs" />
     <Compile Include="Commands\MathModulus.cs" />
@@ -158,6 +159,7 @@
     <Compile Include="Commands\Attributes\NamedParameterAttribute.cs" />
     <Compile Include="Commands\Attributes\NumberedParameterAttribute.cs" />
     <Compile Include="Commands\Attributes\OptionalAttribute.cs" />
+    <Compile Include="Commands\NewID.cs" />
     <Compile Include="Commands\Parameters\KeyValueConverter.cs" />
     <Compile Include="Commands\PrettyPrint.cs" />
     <Compile Include="Commands\PrintCurrentDatabase.cs" />

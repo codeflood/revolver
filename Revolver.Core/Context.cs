@@ -17,7 +17,9 @@ namespace Revolver.Core
     private ItemUri _currentItemUri = null;
     private string _lastGoodPath = string.Empty;
     private StringDictionary _envVars = null;
-    
+    private Dictionary<string, string> _customCommands = null;
+    private Dictionary<string, CommandArgs> _commandAliases;
+
     [NonSerialized]
     private CommandHandler _commandHandler = null;
 
@@ -111,6 +113,17 @@ namespace Revolver.Core
       get { return _envVars; }
     }
 
+    public Dictionary<string, string> CustomCommands
+    {
+      get { return _customCommands; }
+      set { _customCommands = value; }
+    }
+
+    public Dictionary<string, CommandArgs> CommandAliases
+    {
+      get { return _commandAliases; }
+    }
+
     public Context()
     {
       if (Sitecore.Context.Site == null)
@@ -123,6 +136,9 @@ namespace Revolver.Core
       _envVars = new StringDictionary();
       _envVars.Add("prompt", "sc >");
       _envVars.Add("outputbuffer", "1000000");
+
+      _customCommands = new Dictionary<string, string>();
+      _commandAliases = new Dictionary<string, CommandArgs>();
     }
 
     /// <summary>
@@ -137,7 +153,9 @@ namespace Revolver.Core
         _currentItemUri = _currentItemUri,
         _envVars = _envVars,
         _lastGoodPath = _lastGoodPath,
-        _pathStack = _pathStack
+        _pathStack = _pathStack,
+        _customCommands = _customCommands,
+        _commandAliases = _commandAliases
       };
     }
 
@@ -205,7 +223,6 @@ namespace Revolver.Core
       }
 
       Database db = null;
-      //bool requireRevert = false;
       if (CurrentDatabase.Name != dbName)
       {
         try
@@ -225,8 +242,6 @@ namespace Revolver.Core
         }
         else
           CurrentDatabase = db;
-
-        //requireRevert = true;
       }
 
       if (workingPath.StartsWith("/" + dbName))
@@ -303,7 +318,6 @@ namespace Revolver.Core
         // if version contains a negative number, take it as latest version minus that number
         var parsedVersion = Sitecore.Data.Version.Latest.Number;
 
-        //if (!Sitecore.Data.Version.TryParse(version, out targetVersion))
         if (int.TryParse(version, out parsedVersion))
         {
           if (parsedVersion < 0)

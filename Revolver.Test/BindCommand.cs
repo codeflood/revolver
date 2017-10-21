@@ -11,8 +11,8 @@ namespace Revolver.Test
   [Category("BindCommand")]
   public class BindCommand
   {
-    [TestCase("c", "Revolver.Test.BindCommand+CustomCommand, Revolver.Test", "c", TestName = "Separate command name")]
-    [TestCase("Revolver.Test.BindCommand+CustomCommand, Revolver.Test", null, "cc", TestName = "Command name from attribute")]
+    [TestCase("c", "Revolver.Test.CustomCommand, Revolver.Test", "c", TestName = "Separate command name")]
+    [TestCase("Revolver.Test.CustomCommand, Revolver.Test", null, "cc", TestName = "Command name from attribute")]
     public void BindCustomCommand(string commandName, string command, string expectedBoundCommandName)
     {
       var formatter = new TextOutputFormatter();
@@ -91,6 +91,26 @@ namespace Revolver.Test
     }
 
     [Test]
+    public void BindAllCustomCommands()
+    {
+      var formatter = new TextOutputFormatter();
+
+      var ctx = new Core.Context();
+      ctx.CommandHandler = new Core.CommandHandler(ctx, formatter);
+
+      var cmd = new Mod.BindCommand();
+      cmd.Initialise(ctx, formatter);
+
+      cmd.CommandName = "Revolver.Test";
+
+      var result = cmd.Run();
+
+      Assert.That(result.Status, Is.EqualTo(CommandStatus.Success));
+      Assert.That(ctx.CommandHandler.CustomCommands, Contains.Item(new KeyValuePair<string, Type>("cc", typeof(CustomCommand))));
+      Assert.That(ctx.CommandHandler.CustomCommands, Contains.Item(new KeyValuePair<string, Type>("cc2", typeof(CustomCommand2))));
+    }
+
+    [Test]
     public void RemoveCustomCommand()
     {
       var formatter = new TextOutputFormatter();
@@ -128,28 +148,5 @@ namespace Revolver.Test
       Assert.That(result.Message, Contains.Substring("cd"));
       Assert.That(result.Message, Contains.Substring("ls"));
     }
-
-	[Mod.Command("cc")]
-	internal class CustomCommand : Mod.ICommand
-	{
-	  public string Description()
-	  {
-		return "A custom command";
-	  }
-
-	  public void Help(Core.HelpDetails details)
-	  {
-		details.Description = Description();
-	  }
-
-	  public void Initialise(Core.Context context, ICommandFormatter formatter)
-	  {
-	  }
-
-	  public Core.CommandResult Run()
-	  {
-		return new CommandResult(CommandStatus.Success, "boo");
-	  }
-	}
   }
 }

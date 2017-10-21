@@ -4,7 +4,7 @@ using System;
 
 namespace Revolver.Core.Commands
 {
-  [Command("touch")]
+  [Command("create")]
   public class CreateItem : BaseCommand
   {
     [NamedParameter("t", "template")]

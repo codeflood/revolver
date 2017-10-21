@@ -1,0 +1,2 @@
+# Exclude CRLF conversion for all *.item files (leave them as-is)
+*.item -text
