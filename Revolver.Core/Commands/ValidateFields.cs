@@ -10,7 +10,7 @@ namespace Revolver.Core.Commands {
   public class ValidateFields : BaseCommand {
 
     [NumberedParameter(0, "path")]
-    [Description("The path of the source item to copy including the new name. If not specified the current item is used.")]
+    [Description("The path of the item to validate. If not specified the current item is used.")]
     public string Path { get; set; }
 
     public ValidateFields() {
