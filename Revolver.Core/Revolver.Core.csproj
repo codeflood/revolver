@@ -123,6 +123,7 @@
     <Compile Include="Commands\ContentSearch.cs" />
     <Compile Include="Commands\Attributes\DescriptionAttribute.cs" />
     <Compile Include="Commands\Attributes\FlagParameterAttribute.cs" />
+    <Compile Include="Commands\Filler.cs" />
     <Compile Include="Commands\HelpCommand.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\IManualParseCommand.cs" />
