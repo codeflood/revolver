@@ -3,7 +3,7 @@
 test-init fields
 
 # create item and set some fields
-touch -t (sample/sample item) item
+create -t (sample/sample item) item
 cd item
 sf title (the title)
 gf -f title > if (($~$) != (the title)) (exit (title field is wrong))
@@ -15,7 +15,7 @@ sf text (<p>lorem</p>) item
 gf -f text item > if (($~$) != (<p>lorem</p>)) (exit (text field is wrong))
 
 # no version
-touch -t (sample/sample item) noversion
+create -t (sample/sample item) noversion
 cd noversion
 sf -nv title hello
 lsv > if (($~$) !? (1 version)) (exit (Version count is wrong))

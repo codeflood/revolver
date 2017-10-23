@@ -74,7 +74,10 @@ namespace Revolver.Core.Commands
       if (upper == 0)
         upper = 20;
 
-      var count = _random.Next(lower, upper);
+      if(upper < lower)
+        return new CommandResult(CommandStatus.Failure, "Lower limit must be less than upper limit");
+
+      var count = _random.Next(lower, upper + 1); // Upper limit is exclusive
       var output = string.Empty;
 
       if (Sentences)

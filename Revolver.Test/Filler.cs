@@ -146,5 +146,21 @@ namespace Revolver.Test
       var spaceCount = output.Message.Count(x => x == ' ');
       Assert.That(spaceCount, Is.EqualTo(2));
     }
+
+    [Test]
+    public void WhenUpperIsLessThanLower_ReturnError()
+    {
+      // arrange
+      var cmd = new Cmd.Filler();
+      InitCommand(cmd);
+      cmd.FirstLimit = 10;
+      cmd.SecondLimit = 5;
+
+      // act
+      var output = cmd.Run();
+
+      // assert
+      Assert.That(output.Status, Is.EqualTo(CommandStatus.Failure));
+    }
   }
 }

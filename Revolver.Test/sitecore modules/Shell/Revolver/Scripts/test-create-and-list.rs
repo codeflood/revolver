@@ -4,9 +4,9 @@ test-init create-and-list
 
 # create several items
 set salt < (random 10000)
-touch -t (sample/sample item) alpha$salt$
-touch -t (sample/sample item) beta$salt$
-touch -t (sample/sample item) gamma$salt$
+create-t (sample/sample item) alpha$salt$
+create -t (sample/sample item) beta$salt$
+create -t (sample/sample item) gamma$salt$
 
 # list all items
 ls > if (($~$) !? alpha$salt$) (exit (missing item 'alpha'))

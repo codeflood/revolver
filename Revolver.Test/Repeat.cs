@@ -62,7 +62,7 @@ namespace Revolver.Test
 			base.InitCommand(cmd);
 
 			cmd.Number = "4";
-			cmd.Command = "touch -t (" + Constants.Paths.DocTemplate + ") (item $num$)";
+			cmd.Command = "create -t (" + Constants.Paths.DocTemplate + ") (item $num$)";
 			cmd.Path = _testRoot.Paths.FullPath;
 
 			var result = cmd.Run();

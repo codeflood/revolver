@@ -4,9 +4,9 @@ test-init search
 
 # create several items
 set salt < (random 10000)
-touch -t (sample/sample item) alpha$salt$
-touch -t (sample/sample item) beta$salt$ > set betaid $~$
-touch -t (sample/sample item) gamma$salt$ > set gammaid $~$
+create -t (sample/sample item) alpha$salt$
+create -t (sample/sample item) beta$salt$ > set betaid $~$
+create -t (sample/sample item) gamma$salt$ > set gammaid $~$
 sf title (optimus$salt$) gamma$salt$
 
 ls

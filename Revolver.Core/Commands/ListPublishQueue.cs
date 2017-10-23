@@ -52,7 +52,7 @@ namespace Revolver.Core.Commands
 
           startDate = Context.CurrentDatabase.Properties.GetLastPublishDate(targetDatabase, Context.CurrentLanguage);
         }
-        catch (Exception ex)
+        catch (Exception)
         {
           return new CommandResult(CommandStatus.Failure, "Failed to locate database '{0}'".FormatWith(DatabaseName));
         }

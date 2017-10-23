@@ -67,7 +67,7 @@ namespace Revolver.Core.Commands
     public override void Help(HelpDetails details)
     {
       details.Comments = "On each repetition the $num$ environment variable contains the current count of runs";
-      details.AddExample("3 (touch -t (sample/sample item) $num$)");
+      details.AddExample("3 (create -t (sample/sample item) $num$)");
       details.AddExample("5 (echo $num$) /sitecore/content/home");
     }
   }

@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 using Revolver.Core;
 using Sitecore.Data;
 using Sitecore.Data.Engines.DataCommands;
+using Sitecore.Data.Events;
 using Sitecore.Data.Items;
 using Sitecore.SecurityModel;
 using Cmd = Revolver.Core.Commands;
@@ -13,6 +15,10 @@ namespace Revolver.Test
   [Category("ItemPageEvents")]
   public class ItemPageEvents : BaseCommandTest
   {
+    private readonly Guid LoginGoalId = Guid.Parse("{66722F52-2D13-4DCC-90FC-EA7117CF2298}");
+    private readonly Guid ErrorPageEventId = Guid.Parse("{C8BF254A-9CCC-4E16-9009-82B7CD33E4BE}");
+    private readonly Guid SearchPageEventId = Guid.Parse("{0C179613-2073-41AB-992E-027D03D523BF}");
+
     [TestFixtureSetUp]
     public void TestFixtureSetUp()
     {
@@ -67,7 +73,7 @@ namespace Revolver.Test
       using (new EditContext(testItem))
       {
         testItem[Cmd.ItemPageEvents.TrackingFieldName] =
-          "<tracking><event id=\"{C8BF254A-9CCC-4E16-9009-82B7CD33E4BE}\" name=\"Error\" /></tracking>";
+          $"<tracking><event id=\"{LoginGoalId}\" name=\"Login\" /></tracking>";
       }
 
       var command = CreateCommand(testItem);
@@ -77,7 +83,7 @@ namespace Revolver.Test
 
       // assert
       Assert.That(result.Status, Is.EqualTo(CommandStatus.Success));
-      Assert.That(result.Message, Is.StringContaining("{C8BF254A-9CCC-4E16-9009-82B7CD33E4BE}"));
+      Assert.That(result.Message, Is.StringContaining(LoginGoalId.ToString()));
     }
 
     [Test]
@@ -89,7 +95,7 @@ namespace Revolver.Test
       using (new EditContext(testItem))
       {
         testItem[Cmd.ItemPageEvents.TrackingFieldName] =
-          "<tracking><event id=\"{C8BF254A-9CCC-4E16-9009-82B7CD33E4BE}\" name=\"Error\" /></tracking>";
+          $"<tracking><event id=\"{LoginGoalId}\" name=\"Login\" /></tracking>";
       }
 
       var command = CreateCommand(testItem);
@@ -112,7 +118,7 @@ namespace Revolver.Test
       using (new EditContext(testItem))
       {
         testItem[Cmd.ItemPageEvents.TrackingFieldName] =
-          "<tracking><event id=\"{C8BF254A-9CCC-4E16-9009-82B7CD33E4BE}\" name=\"Error\" /></tracking>";
+          $"<tracking><event id=\"{LoginGoalId}\" name=\"Login\" /></tracking>";
       }
 
       var command = CreateCommand(testItem);
@@ -135,22 +141,23 @@ namespace Revolver.Test
       using (new EditContext(testItem))
       {
         testItem[Cmd.ItemPageEvents.TrackingFieldName] =
-          "<tracking><event id=\"{C8BF254A-9CCC-4E16-9009-82B7CD33E4BE}\" name=\"Error\" /></tracking>";
+          $"<tracking><event id=\"{ErrorPageEventId}\" name=\"Error\" /></tracking>";
       }
 
       var command = CreateCommand(testItem);
       command.Add = true;
-      command.PageEventIds = new List<string>(new[] { "{C2D9DFBC-E465-45FD-BA21-0A06EBE942D6}" });
+      command.PageEventIds = new List<string>(new[] { LoginGoalId.ToString() });
 
       // act
       var result = command.Run();
 
       // assert
       Assert.That(result.Status, Is.EqualTo(CommandStatus.Success));
-      Assert.That(result.Message, Is.StringMatching("Added page event {C2D9DFBC-E465-45FD-BA21-0A06EBE942D6}"));
+      Assert.That(result.Message.ToLower(), Is.StringMatching($"added page event {LoginGoalId:B}"));
 
       testItem.Reload();
-      Assert.That(testItem[Cmd.ItemPageEvents.TrackingFieldName], Is.StringContaining("{C2D9DFBC-E465-45FD-BA21-0A06EBE942D6}"));
+      var trackingFieldValeue = testItem[Cmd.ItemPageEvents.TrackingFieldName].ToLower();
+      Assert.That(trackingFieldValeue, Is.StringContaining(LoginGoalId.ToString("D")));
     }
 
     [Test]
@@ -162,24 +169,25 @@ namespace Revolver.Test
       using (new EditContext(testItem))
       {
         testItem[Cmd.ItemPageEvents.TrackingFieldName] =
-          "<tracking><event id=\"{C8BF254A-9CCC-4E16-9009-82B7CD33E4BE}\" name=\"Error\" /></tracking>";
+          $"<tracking><event id=\"{ErrorPageEventId}\" name=\"Error\" /></tracking>";
       }
 
       var command = CreateCommand(testItem);
       command.Add = true;
-      command.PageEventIds = new List<string>(new[] { "{C2D9DFBC-E465-45FD-BA21-0A06EBE942D6}", "{BF6B8EE3-9FFB-4C58-9CB4-301C1C710F89}" });
+      command.PageEventIds = new List<string>(new[] { LoginGoalId.ToString(), SearchPageEventId.ToString() });
 
       // act
       var result = command.Run();
 
       // assert
       Assert.That(result.Status, Is.EqualTo(CommandStatus.Success));
-      Assert.That(result.Message, Is.StringContaining("Added page event {C2D9DFBC-E465-45FD-BA21-0A06EBE942D6}"));
-      Assert.That(result.Message, Is.StringContaining("Added page event {BF6B8EE3-9FFB-4C58-9CB4-301C1C710F89}"));
+      Assert.That(result.Message.ToLower(), Is.StringContaining($"added page event {LoginGoalId:B}"));
+      Assert.That(result.Message.ToLower(), Is.StringContaining($"added page event {SearchPageEventId:B}"));
 
       testItem.Reload();
-      Assert.That(testItem[Cmd.ItemPageEvents.TrackingFieldName], Is.StringContaining("{C2D9DFBC-E465-45FD-BA21-0A06EBE942D6}"));
-      Assert.That(testItem[Cmd.ItemPageEvents.TrackingFieldName], Is.StringContaining("{BF6B8EE3-9FFB-4C58-9CB4-301C1C710F89}"));
+      var trackingFieldValue = testItem[Cmd.ItemPageEvents.TrackingFieldName].ToLower();
+      Assert.That(trackingFieldValue, Is.StringContaining(LoginGoalId.ToString("D")));
+      Assert.That(trackingFieldValue, Is.StringContaining(SearchPageEventId.ToString("D")));
     }
 
     [Test]
@@ -191,7 +199,7 @@ namespace Revolver.Test
       using (new EditContext(testItem))
       {
         testItem[Cmd.ItemPageEvents.TrackingFieldName] =
-          "<tracking><event id=\"{C8BF254A-9CCC-4E16-9009-82B7CD33E4BE}\" name=\"Error\" /></tracking>";
+          $"<tracking><event id=\"{ErrorPageEventId}\" name=\"Error\" /></tracking>";
       }
 
       var command = CreateCommand(testItem);
@@ -216,14 +224,14 @@ namespace Revolver.Test
       using (new EditContext(testItem))
       {
         testItem[Cmd.ItemPageEvents.TrackingFieldName] =
-          "<tracking><event id=\"{C8BF254A-9CCC-4E16-9009-82B7CD33E4BE}\" name=\"Error\" /></tracking>";
+          $"<tracking><event id=\"{ErrorPageEventId}\" name=\"Error\" /></tracking>";
       }
 
       var command = CreateCommand(testItem);
 
       command.Add = true;
       command.PageEventIds = new List<string>(new[]
-        {"{C2D9DFBC-E465-45FD-BA21-0A06EBE942D6}", "{FFFB8EE3-9FFB-4C58-9CB4-301C1C710F89}"});
+        {LoginGoalId.ToString(), "{FFFB8EE3-9FFB-4C58-9CB4-301C1C710F89}"});
 
       // act
       var result = command.Run();
@@ -232,10 +240,11 @@ namespace Revolver.Test
       Assert.That(result.Status, Is.EqualTo(CommandStatus.Failure));
 
       testItem.Reload();
-      Assert.That(testItem[Cmd.ItemPageEvents.TrackingFieldName], Is.Not.StringContaining("{FFFB8EE3-9FFB-4C58-9CB4-301C1C710F89}"));
+      var trackingFieldValue = testItem[Cmd.ItemPageEvents.TrackingFieldName].ToLower();
+      Assert.That(trackingFieldValue, Is.Not.StringContaining("{FFFB8EE3-9FFB-4C58-9CB4-301C1C710F89}"));
 
       // Ensure the valid ID was added
-      Assert.That(testItem[Cmd.ItemPageEvents.TrackingFieldName], Is.StringContaining("{C2D9DFBC-E465-45FD-BA21-0A06EBE942D6}"));
+      Assert.That(trackingFieldValue, Is.StringContaining(LoginGoalId.ToString("D")));
     }
 
     [Test]
@@ -247,14 +256,14 @@ namespace Revolver.Test
       using (new EditContext(testItem))
       {
         testItem[Cmd.ItemPageEvents.TrackingFieldName] =
-          "<tracking><event id=\"{C8BF254A-9CCC-4E16-9009-82B7CD33E4BE}\" name=\"Error\" /></tracking>";
+          $"<tracking><event id=\"{ErrorPageEventId}\" name=\"Error\" /></tracking>";
       }
 
       var initialFieldValue = testItem[Cmd.ItemPageEvents.TrackingFieldName];
 
       var command = CreateCommand(testItem);
       command.Add = true;
-      command.PageEventIds = new List<string>(new[] { "{C8BF254A-9CCC-4E16-9009-82B7CD33E4BE}" });
+      command.PageEventIds = new List<string>(new[] { ErrorPageEventId.ToString() });
 
       // act
       var result = command.Run();
@@ -274,7 +283,7 @@ namespace Revolver.Test
       using (new EditContext(testItem))
       {
         testItem[Cmd.ItemPageEvents.TrackingFieldName] =
-          "<tracking><event id=\"{C8BF254A-9CCC-4E16-9009-82B7CD33E4BE}\" name=\"Error\" /></tracking>";
+          $"<tracking><event id=\"{ErrorPageEventId}\" name=\"Error\" /></tracking>";
       }
 
       var command = CreateCommand(testItem);
@@ -297,22 +306,23 @@ namespace Revolver.Test
       using (new EditContext(testItem))
       {
         testItem[Cmd.ItemPageEvents.TrackingFieldName] =
-          "<tracking><event id=\"{C8BF254A-9CCC-4E16-9009-82B7CD33E4BE}\" name=\"Error\" /></tracking>";
+          $"<tracking><event id=\"{ErrorPageEventId}\" name=\"Error\" /></tracking>";
       }
 
       var command = CreateCommand(testItem);
       command.Remove = true;
-      command.PageEventIds = new List<string>(new[] { "{C8BF254A-9CCC-4E16-9009-82B7CD33E4BE}" });
+      command.PageEventIds = new List<string>(new[] { ErrorPageEventId.ToString() });
 
       // act
       var result = command.Run();
 
       // assert
       Assert.That(result.Status, Is.EqualTo(CommandStatus.Success));
-      Assert.That(result.Message, Is.StringMatching("Removed page event {C8BF254A-9CCC-4E16-9009-82B7CD33E4BE}"));
+      Assert.That(result.Message.ToLower(), Is.StringMatching($"removed page event {ErrorPageEventId:B}"));
 
       testItem.Reload();
-      Assert.That(testItem[Cmd.ItemPageEvents.TrackingFieldName], Is.Not.StringContaining("{C8BF254A-9CCC-4E16-9009-82B7CD33E4BE}"));
+      var trackingFieldValue = testItem[Cmd.ItemPageEvents.TrackingFieldName].ToLower();
+      Assert.That(trackingFieldValue, Is.Not.StringContaining(ErrorPageEventId.ToString()));
     }
 
     [Test]
@@ -324,24 +334,25 @@ namespace Revolver.Test
       using (new EditContext(testItem))
       {
         testItem[Cmd.ItemPageEvents.TrackingFieldName] =
-          "<tracking><event id=\"{C8BF254A-9CCC-4E16-9009-82B7CD33E4BE}\" name=\"Error\" /><event id=\"{BF6B8EE3-9FFB-4C58-9CB4-301C1C710F89}\" name=\"Opportunity\" /></tracking>";
+          $"<tracking><event id=\"{ErrorPageEventId}\" name=\"Error\" /><event id=\"{LoginGoalId}\" name=\"Login\" /></tracking>";
       }
 
       var command = CreateCommand(testItem);
       command.Remove = true;
-      command.PageEventIds = new List<string>(new[] { "{C8BF254A-9CCC-4E16-9009-82B7CD33E4BE}", "{BF6B8EE3-9FFB-4C58-9CB4-301C1C710F89}" });
+      command.PageEventIds = new List<string>(new[] { ErrorPageEventId.ToString(), LoginGoalId.ToString() });
 
       // act
       var result = command.Run();
 
       // assert
       Assert.That(result.Status, Is.EqualTo(CommandStatus.Success));
-      Assert.That(result.Message, Is.StringContaining("Removed page event {C8BF254A-9CCC-4E16-9009-82B7CD33E4BE}"));
-      Assert.That(result.Message, Is.StringContaining("Removed page event {BF6B8EE3-9FFB-4C58-9CB4-301C1C710F89}"));
+      Assert.That(result.Message.ToLower(), Is.StringContaining($"removed page event {ErrorPageEventId:B}"));
+      Assert.That(result.Message.ToLower(), Is.StringContaining($"removed page event {LoginGoalId:B}"));
 
       testItem.Reload();
-      Assert.That(testItem[Cmd.ItemPageEvents.TrackingFieldName], Is.Not.StringContaining("{C8BF254A-9CCC-4E16-9009-82B7CD33E4BE}"));
-      Assert.That(testItem[Cmd.ItemPageEvents.TrackingFieldName], Is.Not.StringContaining("{BF6B8EE3-9FFB-4C58-9CB4-301C1C710F89}"));
+      var trackingFieldValue = testItem[Cmd.ItemPageEvents.TrackingFieldName].ToLower();
+      Assert.That(trackingFieldValue, Is.Not.StringContaining(ErrorPageEventId.ToString()));
+      Assert.That(trackingFieldValue, Is.Not.StringContaining(LoginGoalId.ToString()));
     }
 
     [Test]
@@ -353,7 +364,7 @@ namespace Revolver.Test
       using (new EditContext(testItem))
       {
         testItem[Cmd.ItemPageEvents.TrackingFieldName] =
-          "<tracking><event id=\"{C8BF254A-9CCC-4E16-9009-82B7CD33E4BE}\" name=\"Error\" /></tracking>";
+          $"<tracking><event id=\"{ErrorPageEventId}\" name=\"Error\" /></tracking>";
       }
 
       var command = CreateCommand(testItem);
@@ -378,12 +389,12 @@ namespace Revolver.Test
       using (new EditContext(testItem))
       {
         testItem[Cmd.ItemPageEvents.TrackingFieldName] =
-          "<tracking><event id=\"{C8BF254A-9CCC-4E16-9009-82B7CD33E4BE}\" name=\"Error\" /></tracking>";
+          $"<tracking><event id=\"{ErrorPageEventId}\" name=\"Error\" /></tracking>";
       }
 
       var command = CreateCommand(testItem);
       command.Remove = true;
-      command.PageEventIds = new List<string>(new[] { "{C8BF254A-9CCC-4E16-9009-82B7CD33E4BE}", "{FFFB8EE3-9FFB-4C58-9CB4-301C1C710F89}" });
+      command.PageEventIds = new List<string>(new[] { ErrorPageEventId.ToString(), "{FFFB8EE3-9FFB-4C58-9CB4-301C1C710F89}" });
 
       // act
       var result = command.Run();
@@ -392,7 +403,7 @@ namespace Revolver.Test
       Assert.That(result.Status, Is.EqualTo(CommandStatus.Failure));
 
       testItem.Reload();
-      Assert.That(testItem[Cmd.ItemPageEvents.TrackingFieldName], Is.Not.StringContaining("{C8BF254A-9CCC-4E16-9009-82B7CD33E4BE}"));
+      Assert.That(testItem[Cmd.ItemPageEvents.TrackingFieldName], Is.Not.StringContaining(ErrorPageEventId.ToString()));
       Assert.That(testItem[Cmd.ItemPageEvents.TrackingFieldName], Is.Not.StringContaining("{FFFB8EE3-9FFB-4C58-9CB4-301C1C710F89}"));
     }
 
@@ -405,7 +416,7 @@ namespace Revolver.Test
       using (new EditContext(testItem))
       {
         testItem[Cmd.ItemPageEvents.TrackingFieldName] =
-          "<tracking><event id=\"{C8BF254A-9CCC-4E16-9009-82B7CD33E4BE}\" name=\"Error\" /></tracking>";
+          $"<tracking><event id=\"{ErrorPageEventId}\" name=\"Error\" /></tracking>";
       }
 
       var initialFieldValue = testItem[Cmd.ItemPageEvents.TrackingFieldName];

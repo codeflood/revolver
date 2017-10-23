@@ -97,7 +97,7 @@ namespace Revolver.Core.Commands
     public override void Help(HelpDetails details)
     {
       details.AddExample("-n < (echo -i -f file.txt) (echo $current$)");
-      details.AddExample("-s , 1,2,3,4 (touch -t document $current$)");
+      details.AddExample("-s , 1,2,3,4 (create -t document $current$)");
       details.AddExample("-s | < (gf -f multilist) (ga -a name $current$)");
     }
   }

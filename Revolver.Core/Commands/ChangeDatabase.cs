@@ -23,7 +23,7 @@ namespace Revolver.Core.Commands
         else
           return new CommandResult(CommandStatus.Failure, "Failed to find database '" + DatabaseName + "'");
       }
-      catch (Exception ex)
+      catch (Exception)
       {
         return new CommandResult(CommandStatus.Failure, "Failed to find database '" + DatabaseName + "'");
       }

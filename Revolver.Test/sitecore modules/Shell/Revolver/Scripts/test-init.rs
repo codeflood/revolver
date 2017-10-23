@@ -7,5 +7,5 @@ set testfolder test-$1$
 find -a name $testfolder$ -so > if ($~$ != 0) (rm $testfolder$)
 
 # create test folder
-touch -t (common/folder) $testfolder$
+create -t (common/folder) $testfolder$
 cd $testfolder$
