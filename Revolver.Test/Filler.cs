@@ -59,8 +59,8 @@ namespace Revolver.Test
       Assert.That(output.Status, Is.EqualTo(CommandStatus.Success));
 
       var spaceCount = output.Message.Count(x => x == ' ');
-      Assert.That(spaceCount, Is.GreaterThanOrEqualTo(5));
-      Assert.That(spaceCount, Is.LessThanOrEqualTo(10));
+      Assert.That(spaceCount, Is.GreaterThanOrEqualTo(4));
+      Assert.That(spaceCount, Is.LessThanOrEqualTo(9));
     }
 
     [Test]

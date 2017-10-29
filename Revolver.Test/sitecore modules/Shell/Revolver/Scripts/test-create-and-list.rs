@@ -4,7 +4,7 @@ test-init create-and-list
 
 # create several items
 set salt < (random 10000)
-create-t (sample/sample item) alpha$salt$
+create -t (sample/sample item) alpha$salt$
 create -t (sample/sample item) beta$salt$
 create -t (sample/sample item) gamma$salt$
 
