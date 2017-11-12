@@ -14,11 +14,12 @@ created: 20170405T193941:636270179812330000
 field: {5777540D-336C-402B-8666-98CC83C49CF5}
 name: Script
 key: script
-content-length: 42
+content-length: 62
 
 @echooff
 set-prompt
 alias csearch search
+alias touch create
 ----field----
 field: {41F14C52-ED01-41CB-8C35-297FB7A70C59}
 name: Usage
