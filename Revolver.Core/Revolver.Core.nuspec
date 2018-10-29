@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>codeflood.Revolver.Core.SC9.0</id>
+    <version>3.2.0</version>
+    <authors>Alistair Deneys</authors>
+    <owners>codeflood</owners>
+    <licenseUrl>https://raw.githubusercontent.com/codeflood/revolver/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/codeflood/revolver/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>
+Revolver is a command line and scripting tool for Sitecore. It saves developers and administors time by allowing them to script common and repetative actions
+
+This package is for solutions built against Sitecore version 9.0.
+This package only contains the Core DLL to allow custom commands to be built. Revolver must be installed on the target Sitecore instance to make use of the custom command.    
+.</description>
+    <releaseNotes />
+    <copyright>Copyright 2016</copyright>
+    <tags>sitecore revolver script</tags>
+  </metadata>
+  <files>
+    <file src="bin\9.0\Revolver.Core.dll" target="lib\net462"/>
+  </files>
+</package>
